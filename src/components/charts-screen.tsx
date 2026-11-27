@@ -310,6 +310,7 @@ export function ChartsScreen() {
       )}
       <FeedbackBox page="charts" />
     </main>
+    </>
   );
 }
 
