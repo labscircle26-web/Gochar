@@ -926,6 +926,48 @@ function SkyScreen() {
   );
 }
 
+function RahuLine({
+  sky,
+  ayanamsa,
+  node,
+  navamsa,
+}: {
+  sky: SkySnapshot;
+  ayanamsa: AyanamsaId;
+  node: NodeMode;
+  navamsa: boolean;
+}) {
+  const rahu = sky.grahas.find((graha) => graha.id === "rahu");
+  const ketu = sky.grahas.find((graha) => graha.id === "ketu");
+  if (!rahu || !ketu) return null;
+
+  const rahuSign = navamsa ? navamsaSign(rahu.lon) : signIndex(rahu.lon);
+  const ketuSign = navamsa ? navamsaSign(ketu.lon) : signIndex(ketu.lon);
+
+  return (
+    <section className="mx-auto mt-2 max-w-xl border border-[rgb(240_193_78_/_0.3)] bg-card px-3 py-2.5" aria-label="Rahu and Ketu nodal axis">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-seal">Rahu · Ketu axis</p>
+        <p className="text-[10px] text-muted">
+          {node === "true" ? "True node" : "Mean node"} · {AYANAMSA_LABEL[ayanamsa]} · {navamsa ? "Navamsa" : "Rashi"}
+        </p>
+      </div>
+      <div className="mt-2 grid grid-cols-2 divide-x divide-line">
+        <div className="min-w-0 pr-3">
+          <p className="text-xs font-semibold text-seal">Rahu</p>
+          <p className="mt-0.5 font-display text-xl leading-tight">{RASHIS[rahuSign]?.name}</p>
+          <p className="mt-0.5 text-xs tabular-nums text-muted">{formatDms(degInSign(rahu.lon), true)}</p>
+        </div>
+        <div className="min-w-0 pl-3 text-right">
+          <p className="text-xs font-semibold text-seal">Ketu</p>
+          <p className="mt-0.5 font-display text-xl leading-tight">{RASHIS[ketuSign]?.name}</p>
+          <p className="mt-0.5 text-xs tabular-nums text-muted">{formatDms(degInSign(ketu.lon), true)}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function viewState(instant: Date, now: Date, live: boolean): string {
   const skew = instant.getTime() - now.getTime();
   if (live || Math.abs(skew) < 90_000) return "LIVE";
