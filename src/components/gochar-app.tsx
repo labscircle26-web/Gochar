@@ -579,35 +579,34 @@ function SkyScreen() {
       <header className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex min-w-max flex-col items-start">
           <GocharMark />
-
-        </div>
-        <div className="flex shrink-0 items-center gap-1.5">
-          <button
-            type="button"
-            className="gochar-edit inline-flex h-10 items-center justify-center rounded-md border border-line bg-card px-2 text-[11px] font-medium leading-none text-ink sm:h-12 sm:px-3 sm:text-sm"
-            onClick={openEditor}
-          >
-            Edit time / place
-          </button>
-          <button
-            type="button"
-            className="live-beacon inline-flex h-10 shrink-0 items-center justify-center rounded-md bg-seal px-3 text-sm font-semibold text-seal-ink sm:h-12 sm:px-5"
-            onClick={() => {
-              followNow.current = true;
-              setLive(true);
-              setInstant(new Date());
-              setViewLagna(null);
-              setPicked(null);
-            }}
-          >
-            Now
-          </button>
         </div>
       </header>
       {board?.notice ? <p className="mt-4 border border-line bg-card px-4 py-3 text-sm">{board.notice}</p> : null}
 
       <div className="gochar-toolbar">
-      <div className="gochar-controls mt-4 grid grid-cols-2 items-center gap-2">
+      <div className="gochar-toolbar-actions">
+        <button
+          type="button"
+          className="gochar-edit inline-flex h-10 items-center justify-center rounded-md border border-line bg-card px-2 text-[11px] font-medium leading-none text-ink sm:h-12 sm:px-3 sm:text-sm"
+          onClick={openEditor}
+        >
+          Edit time / place
+        </button>
+        <button
+          type="button"
+          className="live-beacon inline-flex h-10 shrink-0 items-center justify-center rounded-md bg-seal px-3 text-sm font-semibold text-seal-ink sm:h-12 sm:px-5"
+          onClick={() => {
+            followNow.current = true;
+            setLive(true);
+            setInstant(new Date());
+            setViewLagna(null);
+            setPicked(null);
+          }}
+        >
+          Now
+        </button>
+      </div>
+      <div className="gochar-controls gochar-toolbar-primary mt-4 grid grid-cols-2 items-center gap-2">
         <GoldChoice
           label="Chart Style"
           value={settings.chart}
@@ -628,10 +627,10 @@ function SkyScreen() {
         />
       </div>
 
-      <div className="gochar-controls mt-2 grid grid-cols-2 items-center gap-2">
+      <div className="gochar-controls gochar-toolbar-secondary mt-2 grid grid-cols-2 items-center gap-2">
         <Link
           to="/charts"
-          className="inline-flex h-12 w-full items-center justify-center rounded-md bg-seal px-3 text-sm font-semibold text-seal-ink"
+          className="gochar-mobile-birth-link inline-flex h-12 w-full items-center justify-center rounded-md bg-seal px-3 text-sm font-semibold text-seal-ink"
         >
           Birth charts
         </Link>
