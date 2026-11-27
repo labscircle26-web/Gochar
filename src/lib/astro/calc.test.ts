@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { computeSky, houseFrom, type PanchangCache } from "./calc.ts";
+import { bodyLongitude, computeSky, houseFrom, signIndex, type PanchangCache } from "./calc.ts";
 
 test("whole-sign houses are always counted from the selected ascendant sign", () => {
   assert.equal(houseFrom(0, 0), 1);
@@ -65,4 +65,20 @@ test("speed cache is not reused when the selected date moves backwards", () => {
 
   const sky = computeSky(earlier, 31.6, 74.8, "Asia/Kolkata", "lahiri", "true", cache);
   assert.ok(sky.grahas.every((graha) => graha.speed !== 777));
+});
+
+test("mean Rahu and Ketu move from Aquarius/Leo to Capricorn/Cancer on the December 2026 ingress", () => {
+  const beforeIngress = new Date("2026-12-05T00:00:00.000Z");
+  const afterIngress = new Date("2026-12-06T00:00:00.000Z");
+
+  const rahuBefore = bodyLongitude("rahu", beforeIngress, "lahiri", "mean");
+  const ketuBefore = bodyLongitude("ketu", beforeIngress, "lahiri", "mean");
+  const rahuAfter = bodyLongitude("rahu", afterIngress, "lahiri", "mean");
+  const ketuAfter = bodyLongitude("ketu", afterIngress, "lahiri", "mean");
+
+  assert.equal(signIndex(rahuBefore), 10, "Rahu remains in Aquarius before the ingress");
+  assert.equal(signIndex(ketuBefore), 4, "Ketu remains in Leo before the ingress");
+  assert.equal(signIndex(rahuAfter), 9, "Rahu enters Capricorn after the ingress");
+  assert.equal(signIndex(ketuAfter), 3, "Ketu enters Cancer after the ingress");
+  assert.ok(Math.abs(((ketuAfter - rahuAfter + 360) % 360) - 180) < 1e-9);
 });
