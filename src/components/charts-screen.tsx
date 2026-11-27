@@ -23,6 +23,7 @@ import { AshtakavargaPanel } from "@/components/ashtakavarga-panel";
 import { useSectionSwipe } from "@/lib/swipe";
 import { loadActiveId, loadProfiles, saveActiveId, saveProfiles, type BirthProfile } from "@/lib/astro/library";
 import { formatStamp, zonedToUtc } from "@/lib/astro/time";
+import { DesktopSidebar } from "@/components/desktop-sidebar";
 
 const field = "h-12 w-full rounded-md border border-line bg-card px-3 text-base text-ink";
 const btn = "inline-flex h-12 items-center justify-center rounded-md border border-line bg-card px-4 text-sm font-medium text-ink";
@@ -145,7 +146,9 @@ export function ChartsScreen() {
   const lagnaSign = natal ? signIndex(natal.sky.lagna) : 0;
 
   return (
-    <main className="mx-auto min-h-screen max-w-3xl px-4 py-6">
+    <>
+    <DesktopSidebar active="charts" />
+    <main className="charts-page min-h-screen w-full px-4 py-6">
       <div className="flex items-end justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-seal">Saved</p>
@@ -202,6 +205,8 @@ export function ChartsScreen() {
               drishti.setNodes(nodes);
             }}
           />
+          <div className="charts-profile-overview">
+          <div className="charts-profile-chart">
           <div className="mx-auto mt-3 max-w-xl border border-line bg-card p-2">
             <KundliChart
               style={active.chart}
@@ -237,6 +242,8 @@ export function ChartsScreen() {
               sav={bindus?.sarva[picked] ?? null}
             />
           )}
+          </div>
+          <div className="charts-profile-details">
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
             <Fact label="Lagna" value={`${RASHIS[lagnaSign]?.name} ${formatDms(natal.sky.lagna % 30, true)}`} />
             <Fact
@@ -257,6 +264,8 @@ export function ChartsScreen() {
               note="Natal bindus for this birth chart. The grahas below are where they stand now, at the birth place, scored on these bindus."
             />
           ) : null}
+          </div>
+          </div>
           {moon ? (
             <DashaBoard key={`${active.id}-${natal.birth.toISOString()}`} birth={natal.birth} moonLon={moon.lon} timeZone={active.tz} now={now} />
           ) : null}
