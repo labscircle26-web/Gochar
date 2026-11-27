@@ -2,11 +2,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { developerEmails, isDeveloperEmail } from "./access.server.ts";
 
-test("fallback allowlist accepts only the configured owner", () => {
+test("developer access is disabled until an explicit allowlist is configured", () => {
   delete process.env.GOCHAR_DEVELOPER_EMAILS;
-  assert.deepEqual(developerEmails(), ["harmanbirs109@gmail.com"]);
-  assert.equal(isDeveloperEmail("harmanbirs109@gmail.com"), true);
-  assert.equal(isDeveloperEmail("Harmanbirs109@gmail.com"), true);
+  assert.deepEqual(developerEmails(), []);
+  assert.equal(isDeveloperEmail("harmanbirs109@gmail.com"), false);
   assert.equal(isDeveloperEmail("dev@example.com"), false);
   assert.equal(isDeveloperEmail(null), false);
 });

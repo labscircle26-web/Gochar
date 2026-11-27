@@ -10,6 +10,14 @@ const rawDatabaseUrl =
 const databaseUrl =
   rawDatabaseUrl && rawDatabaseUrl.trim() ? rawDatabaseUrl : undefined;
 
+if (
+  typeof process !== "undefined" &&
+  process.env.VERCEL_ENV === "production" &&
+  !databaseUrl
+) {
+  throw new Error("DATABASE_URL is required for Gochar production; refusing to start with an ephemeral database.");
+}
+
 /**
  * Active backend: real **Neon** when `DATABASE_URL` is set (deployed / configured
  * sandbox), otherwise a local embedded **PGLite** (Postgres compiled to WASM) so

@@ -50,8 +50,10 @@ const developerGate = createMiddleware({ type: "function" })
     const { assertSameSiteRequest } = await import("@/lib/auth/isolation.server");
     const { getCookie } = await import("@tanstack/react-start/server");
     const { readDeveloperSession } = await import("./password.server");
+    const { isDeveloperEmail } = await import("./access.server");
     assertSameSiteRequest();
-    const session = readDeveloperSession(getCookie("gochar_dev")) ?? readDeveloperSession(context.developerToken);
+    const candidate = readDeveloperSession(getCookie("gochar_dev")) ?? readDeveloperSession(context.developerToken);
+    const session = candidate && isDeveloperEmail(candidate.email) ? candidate : null;
     return next({
       context: {
         signedIn: Boolean(session),
@@ -246,8 +248,6 @@ export const deleteBook = createServerFn({ method: "POST" })
     const { getSql } = await import("@/lib/db");
     const sql = await getSql();
     await sql.query("delete from astrology_book where id = $1", [data.id]);
-    const { removeBookFile } = await import("./storage.server");
-    removeBookFile(data.id);
     return { ok: true };
   });
 
@@ -266,8 +266,9 @@ export const reindexBook = createServerFn({ method: "POST" })
     const stored = await sql.query<Record<string, unknown>>(`select ${CARD_SQL} from astrology_book where id = $1`, [data.id]);
     if (!stored[0]) throw new Error("That book was not found.");
     await sql.query("update astrology_book set status = 'extracting', error = null, updated_at = now() where id = $1", [data.id]);
-    enqueueBookIndex(data.id);
-    return rowCard({ ...stored[0], status: "extracting", error: null });
+    await enqueueBookIndex(data.id);
+    const fresh = await sql.query<Record<string, unknown>>(`select ${CARD_SQL} from astrology_book where id = $1`, [data.id]);
+    return rowCard(fresh[0] ?? stored[0]);
   });
 
 export const searchBooks = createServerFn({ method: "POST" })
@@ -302,9 +303,7 @@ export const readBook = createServerFn({ method: "POST" })
     const rows = await sql.query<{ file_name: string; pdf: unknown }>("select file_name, pdf from astrology_book where id = $1", [data.id]);
     const row = rows[0];
     if (!row) throw new Error("That book was not found.");
-    const { readBookFile } = await import("./storage.server");
-    const stored = readBookFile(data.id);
-    const bytes = stored ?? toBytes(row.pdf);
+    const bytes = toBytes(row.pdf);
     return { fileName: row.file_name, pdfBase64: Buffer.from(bytes).toString("base64") };
   });
 
@@ -380,15 +379,13 @@ export const beginBookUpload = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     forbid(context.authorized);
     const { getSql } = await import("@/lib/db");
-    const { beginBookFile, bookFile } = await import("./storage.server");
     const sql = await getSql();
     const id = crypto.randomUUID();
-    beginBookFile(id, data.byteSize);
     await sql.query(
       `insert into astrology_book
-        (id, title, author, language, category, edition, notes, file_name, byte_size, status, storage_path)
-       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,'uploaded',$10)`,
-      [id, data.title, data.author, data.language, data.category, data.edition, data.notes, data.fileName, data.byteSize, bookFile(id)],
+        (id, title, author, language, category, edition, notes, file_name, byte_size, status, pdf, storage_path)
+       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,'uploading',null,null)`,
+      [id, data.title, data.author, data.language, data.category, data.edition, data.notes, data.fileName, data.byteSize],
     );
     return { id, received: 0 };
   });
@@ -409,13 +406,26 @@ export const writeBookChunk = createServerFn({ method: "POST" })
     const bytes = Uint8Array.from(Buffer.from(data.pdfBase64, "base64"));
     if (bytes.byteLength > CHUNK_LIMIT) throw new Error("Upload chunk is too large.");
     const { getSql } = await import("@/lib/db");
-    const { appendBookChunk } = await import("./storage.server");
     const sql = await getSql();
-    const rows = await sql.query<{ byte_size: number }>("select byte_size from astrology_book where id = $1", [data.id]);
-    const declared = Number(rows[0]?.byte_size ?? 0);
-    if (!declared) throw new Error("That upload was not found.");
-    const received = appendBookChunk(data.id, data.offset, bytes, declared);
-    return { received };
+    const rows = await sql.query<{ received: number }>(
+      `update astrology_book
+       set pdf = coalesce(pdf, decode('', 'hex')) || $2::bytea, updated_at = now()
+       where id = $1
+         and coalesce(octet_length(pdf), 0) = $3
+         and coalesce(octet_length(pdf), 0) + octet_length($2::bytea) <= byte_size
+       returning octet_length(pdf) as received`,
+      [data.id, Buffer.from(bytes), data.offset],
+    );
+    if (rows[0]) return { received: Number(rows[0].received) };
+    const current = await sql.query<{ byte_size: number; received: number }>(
+      "select byte_size, coalesce(octet_length(pdf), 0) as received from astrology_book where id = $1",
+      [data.id],
+    );
+    if (!current[0]) throw new Error("That upload was not found.");
+    const received = Number(current[0].received);
+    if (received !== data.offset) throw new Error(`Resume this upload from byte ${received}.`);
+    if (received + bytes.byteLength > Number(current[0].byte_size)) throw new Error("The upload is larger than the file that was started.");
+    throw new Error("The PDF chunk could not be stored. Please retry.");
   });
 
 export const finishBookUpload = createServerFn({ method: "POST" })
@@ -428,19 +438,19 @@ export const finishBookUpload = createServerFn({ method: "POST" })
   .handler(async ({ context, data }): Promise<BookCard> => {
     forbid(context.authorized);
     const { getSql } = await import("@/lib/db");
-    const { readBookFile, storedBookSize } = await import("./storage.server");
     const { enqueueBookIndex } = await import("./library.server");
     const sql = await getSql();
-    const rows = await sql.query<Record<string, unknown>>(`select ${CARD_SQL} from astrology_book where id = $1`, [data.id]);
+    const rows = await sql.query<Record<string, unknown>>(`select ${CARD_SQL}, pdf from astrology_book where id = $1`, [data.id]);
     const row = rows[0];
     if (!row) throw new Error("That upload was not found.");
-    const size = storedBookSize(data.id);
+    const file = toBytes(row.pdf);
+    const size = file.byteLength;
     if (size !== Number(row.byte_size)) throw new Error(`Upload interrupted at ${size} of ${row.byte_size} bytes. Retry to continue.`);
-    const file = readBookFile(data.id);
-    if (!file || new TextDecoder().decode(file.subarray(0, 5)) !== "%PDF-") throw new Error("That file is not a PDF.");
+    if (new TextDecoder().decode(file.subarray(0, 5)) !== "%PDF-") throw new Error("That file is not a PDF.");
     await sql.query("update astrology_book set status = 'extracting', error = null, updated_at = now() where id = $1", [data.id]);
-    enqueueBookIndex(data.id);
-    return rowCard({ ...row, status: "extracting", error: null });
+    await enqueueBookIndex(data.id);
+    const fresh = await sql.query<Record<string, unknown>>(`select ${CARD_SQL} from astrology_book where id = $1`, [data.id]);
+    return rowCard(fresh[0] ?? row);
   });
 
 export const bookUploadProgress = createServerFn({ method: "POST" })
@@ -452,8 +462,14 @@ export const bookUploadProgress = createServerFn({ method: "POST" })
   })
   .handler(async ({ context, data }) => {
     forbid(context.authorized);
-    const { storedBookSize } = await import("./storage.server");
-    return { received: storedBookSize(data.id) };
+    const { getSql } = await import("@/lib/db");
+    const sql = await getSql();
+    const rows = await sql.query<{ received: number }>(
+      "select coalesce(octet_length(pdf), 0) as received from astrology_book where id = $1",
+      [data.id],
+    );
+    if (!rows[0]) throw new Error("That upload was not found.");
+    return { received: Number(rows[0].received) };
   });
 
 export const BOOK_CATEGORIES = CATEGORIES;

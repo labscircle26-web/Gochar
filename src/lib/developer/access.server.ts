@@ -1,9 +1,7 @@
 /** Server-only developer allowlist. Never import this from a client component. */
 
-const FALLBACK = "harmanbirs109@gmail.com";
-
 export function developerEmails(): string[] {
-  const raw = process.env.GOCHAR_DEVELOPER_EMAILS?.trim() || FALLBACK;
+  const raw = process.env.GOCHAR_DEVELOPER_EMAILS?.trim() ?? "";
   return [...new Set(raw.split(",").map((item) => item.trim().toLowerCase()).filter(Boolean))];
 }
 

@@ -74,18 +74,18 @@ export async function getSessionUser(
  * Resolve the current user id for a server function, or throw when unauthorized.
  * Prefer `authMiddleware` (`./middleware`), which calls this for you.
  * - Auth enabled -> the verified session user id; throws
- *   `UnauthorizedError` when signed out. Works in the sandbox preview too (real
- *   sign-in via the baked preview client).
- * - Auth disabled (`VITE_AUTH_ENABLED=false`) + `DATABASE_URL` set -> throw (fail
- *   closed): one shared dev user on a real database would let every visitor
- *   read/write everyone's rows.
+ *   `UnauthorizedError` when signed out. Sandbox previews use the sandbox OAuth
+ *   client; Vercel deployments require their own configured provider credentials.
+ * - Auth disabled / no real authentication method + `DATABASE_URL` set -> throw
+ *   (fail closed): one shared dev user on a real database would expose every
+ *   visitor to everyone else's rows.
  * - Auth disabled + no database -> the shared dev user id.
  */
 export async function requireUserId(bearerToken?: string): Promise<string> {
   if (!authConfigured && !gateIdentityEnabled()) {
     if (databaseConfigured) {
       throw new Error(
-        "Auth is disabled (VITE_AUTH_ENABLED=false) but DATABASE_URL is set — " +
+        "No real authentication method is configured while DATABASE_URL is set — " +
           "refusing to fall back to the shared dev user against a real database.",
       );
     }

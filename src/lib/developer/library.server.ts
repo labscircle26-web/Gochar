@@ -15,29 +15,28 @@ export type StoredPage = { page: number; source: string; body: string };
 
 const running = new Set<string>();
 
-export function enqueueBookIndex(id: string): void {
+export async function enqueueBookIndex(id: string): Promise<void> {
   if (running.has(id)) return;
   running.add(id);
-  void (async () => {
+  try {
+    const { getSql } = await import("@/lib/db");
+    const sql = await getSql();
+    // PDF bytes live in Postgres so every serverless instance reads the same
+    // durable source; never depend on instance-local filesystem state.
+    const bytes = await bytesFromRow(sql, id);
+    await indexBookPdf(sql, id, bytes);
+  } catch (error) {
     try {
       const { getSql } = await import("@/lib/db");
-      const { readBookFile } = await import("./storage.server.ts");
       const sql = await getSql();
-      const bytes = readBookFile(id) ?? (await bytesFromRow(sql, id));
-      await indexBookPdf(sql, id, bytes);
-    } catch (error) {
-      try {
-        const { getSql } = await import("@/lib/db");
-        const sql = await getSql();
-        const message = error instanceof Error ? error.message : "The PDF could not be processed.";
-        await sql.query("update astrology_book set status = 'failed', error = $2, updated_at = now() where id = $1", [id, message.slice(0, 500)]);
-      } catch {
-        /* the processing row stays failed on the next status read */
-      }
-    } finally {
-      running.delete(id);
+      const message = error instanceof Error ? error.message : "The PDF could not be processed.";
+      await sql.query("update astrology_book set status = 'failed', error = $2, updated_at = now() where id = $1", [id, message.slice(0, 500)]);
+    } catch {
+      /* the processing row stays failed on the next status read */
     }
-  })();
+  } finally {
+    running.delete(id);
+  }
 }
 
 export async function indexBookPdf(sql: Sql, id: string, bytes: Uint8Array): Promise<void> {

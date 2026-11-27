@@ -1,20 +1,26 @@
 import { createHmac, scryptSync, timingSafeEqual } from "node:crypto";
 
 const SALT = "f47880154b773f89f606b24889623447";
-const HASH = "c98239a623ccae1889e04ee958ee030be82b4f9d2ee00f5d30f20c4cdb73d7d1";
-const SESSION_KEY = "87a51d0203fa538edd4a1eb2bc0ba13d49999280e98bedf1c767457659a3295b";
+
+function sessionKey(): string | null {
+  const value = process.env.GOCHAR_DEVELOPER_SESSION_SECRET?.trim();
+  return value && Buffer.byteLength(value) >= 32 ? value : null;
+}
 
 export function developerPasswordMatches(password: string): boolean {
+  const configured = process.env.GOCHAR_DEVELOPER_PASSWORD?.trim();
+  if (!configured || !password) return false;
   const supplied = scryptSync(password, SALT, 32);
-  const override = process.env.GOCHAR_DEVELOPER_PASSWORD?.trim();
-  const expected = override ? scryptSync(override, SALT, 32) : Buffer.from(HASH, "hex");
-  return supplied.length === expected.length && timingSafeEqual(supplied, expected);
+  const expected = scryptSync(configured, SALT, 32);
+  return timingSafeEqual(supplied, expected);
 }
 
 export function signDeveloperSession(email: string, remember: boolean): { token: string; maxAge: number } {
   const maxAge = remember ? 60 * 60 * 24 * 30 : 60 * 60 * 12;
   const body = Buffer.from(JSON.stringify({ email: email.toLowerCase(), exp: Date.now() + maxAge * 1000 })).toString("base64url");
-  const sig = createHmac("sha256", SESSION_KEY).update(body).digest("base64url");
+  const key = sessionKey();
+  if (!key) throw new Error("GOCHAR_DEVELOPER_SESSION_SECRET must be configured.");
+  const sig = createHmac("sha256", key).update(body).digest("base64url");
   return { token: `${body}.${sig}`, maxAge };
 }
 
@@ -24,7 +30,9 @@ export function readDeveloperSession(token: string | null | undefined): { email:
   if (dot <= 0) return null;
   const body = token.slice(0, dot);
   const sig = token.slice(dot + 1);
-  const expected = createHmac("sha256", SESSION_KEY).update(body).digest("base64url");
+  const key = sessionKey();
+  if (!key) return null;
+  const expected = createHmac("sha256", key).update(body).digest("base64url");
   const left = Buffer.from(sig);
   const right = Buffer.from(expected);
   if (left.length !== right.length || !timingSafeEqual(left, right)) return null;
