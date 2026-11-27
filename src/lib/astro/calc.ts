@@ -100,28 +100,37 @@ function meanNodeTropical(date: Date): number {
 }
 
 function trueNodeTropical(date: Date): number {
-  const later = new Date(date.getTime() + 10 * 60 * 1000);
-  const a = EclipticGeoMoon(date);
-  const b = EclipticGeoMoon(later);
-  const xyz = (lonDeg: number, latDeg: number, dist: number) => {
+  // Estimate the Moon's instantaneous orbital plane with a symmetric
+  // one-hour velocity difference to avoid a forward-only chord bias.
+  const halfStep = 60 * 60 * 1000;
+  const center = EclipticGeoMoon(date);
+  const before = EclipticGeoMoon(new Date(date.getTime() - halfStep));
+  const after = EclipticGeoMoon(new Date(date.getTime() + halfStep));
+  const xyz = (lonDeg: number, latDeg: number, dist: number): [number, number, number] => {
     const lon = lonDeg * DEG;
     const lat = latDeg * DEG;
-    return {
-      x: dist * Math.cos(lat) * Math.cos(lon),
-      y: dist * Math.cos(lat) * Math.sin(lon),
-      z: dist * Math.sin(lat),
-    };
+    const cosLat = Math.cos(lat);
+    return [
+      dist * cosLat * Math.cos(lon),
+      dist * cosLat * Math.sin(lon),
+      dist * Math.sin(lat),
+    ];
   };
-  const p = xyz(a.lon, a.lat, a.dist);
-  const q = xyz(b.lon, b.lat, b.dist);
-  const vx = q.x - p.x;
-  const vy = q.y - p.y;
-  const vz = q.z - p.z;
-  const hx = p.y * vz - p.z * vy;
-  const hy = p.z * vx - p.x * vz;
-  const hz = p.x * vy - p.y * vx;
-  const lon = norm(Math.atan2(hx, -hy) / DEG);
-  return hz < 0 ? norm(lon + 180) : lon;
+  const p = xyz(center.lon, center.lat, center.dist);
+  const a = xyz(before.lon, before.lat, before.dist);
+  const b = xyz(after.lon, after.lat, after.dist);
+  const vx = b[0] - a[0];
+  const vy = b[1] - a[1];
+  const vz = b[2] - a[2];
+  let hx = p[1] * vz - p[2] * vy;
+  let hy = p[2] * vx - p[0] * vz;
+  const hz = p[0] * vy - p[1] * vx;
+  if (Math.hypot(hx, hy) < 1e-18) throw new Error("The Moon's orbital node is undefined at this instant.");
+  if (hz < 0) {
+    hx = -hx;
+    hy = -hy;
+  }
+  return norm(Math.atan2(hx, -hy) / DEG);
 }
 
 export function tropicalAscendant(date: Date, latitude: number, longitude: number): number {
@@ -302,7 +311,10 @@ export function computeSky(
   const placeKey = `${latitude.toFixed(4)}|${longitude.toFixed(4)}|${timeZone}|${ayanamsaId}|${nodeMode}`;
   const dayKey = `${parts.year}-${parts.month}-${parts.day}`;
   const stored = cache && cache.placeKey === placeKey ? cache : null;
-  const speedsFresh = !!stored && date.getTime() - stored.speedAt < 60_000 && stored.speeds.length === 8;
+  const speedsFresh =
+    !!stored &&
+    Math.abs(date.getTime() - stored.speedAt) <= 60_000 &&
+    stored.speeds.length === 9;
 
   const grahas: GrahaPosition[] = PLANETS.map(({ id, body }, index) => {
     const place = tropicalPlace(body, date);
@@ -317,7 +329,7 @@ export function computeSky(
   });
 
   const nodeTropical = (when: Date) => (nodeMode === "mean" ? meanNodeTropical(when) : trueNodeTropical(when));
-  const rahuSpeed = speedsFresh ? stored.speeds[6]! : dailySpeed((when) => siderealAt(nodeTropical(when), when), date);
+  const rahuSpeed = speedsFresh ? stored.speeds[7]! : dailySpeed((when) => siderealAt(nodeTropical(when), when), date);
   const rahuLon = siderealAt(nodeTropical(date), date);
   grahas.push({ id: "rahu", lon: rahuLon, lat: 0, speed: rahuSpeed, retro: rahuSpeed < 0 });
   grahas.push({
@@ -376,7 +388,7 @@ export function computeSky(
     cache.karanaEnds = karanaEnds;
     if (!speedsFresh) {
       cache.speedAt = now;
-      cache.speeds = [...grahas.slice(0, 6).map((graha) => graha.speed), rahuSpeed, rahuSpeed];
+      cache.speeds = [...grahas.map((graha) => graha.speed), rahuSpeed, rahuSpeed];
     }
   }
 

@@ -20,6 +20,7 @@ import {
 import { guessCity } from "@/lib/astro/cities";
 import {
   ayanamsaDegrees,
+  bodyLongitude,
   computeSky,
   degInSign,
   houseFrom,
@@ -28,11 +29,11 @@ import {
   norm,
   padaOf,
   signIndex,
-  tropicalAscendant,
   type PanchangCache,
   type SkySnapshot,
 } from "@/lib/astro/calc";
 import { formatDms, formatSpeed } from "@/lib/astro/format";
+import { getLiveNodeEphemeris, type LiveNodeEphemeris } from "@/lib/astro/ephemeris";
 import { aspectsOnSign, dignityOf, isCombust, warsOf } from "@/lib/astro/reading";
 import {
   dateInputValue,
@@ -221,7 +222,6 @@ function SkyScreen() {
   const [place, setPlace] = useState<PlaceValue>(shared?.place ?? seeded.place);
   const [guessed, setGuessed] = useState(shared ? false : seeded.guessed);
   const [instant, setInstant] = useState(() => shared?.instant ?? new Date());
-  const [chartInstant, setChartInstant] = useState(instant);
   const [horizon, setHorizon] = useState(instant);
   const [now, setNow] = useState(() => new Date());
   const [live, setLive] = useState(shared === null);
@@ -250,6 +250,8 @@ function SkyScreen() {
   });
   const [fromCache, setFromCache] = useState(() => loadCachedSky() !== null);
   const [skyError, setSkyError] = useState<string | null>(null);
+  const [jplNode, setJplNode] = useState<LiveNodeEphemeris | null>(null);
+  const [jplNodeStatus, setJplNodeStatus] = useState<"loading" | "ready" | "offline" | "not-applicable">("loading");
   const [settings, setSettings] = useState<Settings>(() => {
     return (
       readJson(SETTINGS_KEY, isSettings) ?? {
@@ -262,11 +264,38 @@ function SkyScreen() {
   });
   const viewAyanamsa = shared?.ayanamsa ?? settings.ayanamsa;
   const viewNode = shared?.node ?? settings.node;
+  const jplBucket = Math.floor(instant.getTime() / (5 * 60_000)) * (5 * 60_000);
+
+  useEffect(() => {
+    let cancel = false;
+    if (viewNode !== "true") {
+      setJplNode(null);
+      setJplNodeStatus("not-applicable");
+      return;
+    }
+    setJplNodeStatus("loading");
+    const timer = window.setTimeout(() => {
+      getLiveNodeEphemeris({ data: new Date(jplBucket).toISOString() })
+        .then((value) => {
+          if (cancel) return;
+          setJplNode(value);
+          setJplNodeStatus("ready");
+        })
+        .catch(() => {
+          if (cancel) return;
+          setJplNode(null);
+          setJplNodeStatus("offline");
+        });
+    }, 350);
+    return () => {
+      cancel = true;
+      window.clearTimeout(timer);
+    };
+  }, [jplBucket, viewNode]);
 
   const skyCache = useRef<PanchangCache | null>(null);
   const skySavedAt = useRef(0);
   const followNow = useRef(shared === null);
-  const lagnaLocked = useRef(false);
   const drishti = useDrishti("gochar-drishti");
 
   useEffect(() => {
@@ -282,7 +311,6 @@ function SkyScreen() {
       if (!followNow.current) return;
       const when = new Date();
       setInstant(when);
-      if (!lagnaLocked.current) setChartInstant(when);
       timer = window.setTimeout(arm, Math.max(50, 1000 - (Date.now() % 1000)));
     };
     arm();
@@ -343,7 +371,7 @@ function SkyScreen() {
 
   const zoneOk = isValidTimeZone(place.tz);
   const coordsOk = place.lat >= -89 && place.lat <= 89 && place.lon >= -180 && place.lon <= 180;
-  const parts = zoneOk ? utcToZonedParts(chartInstant, place.tz) : null;
+  const parts = zoneOk ? utcToZonedParts(instant, place.tz) : null;
   const transitParts = zoneOk ? utcToZonedParts(instant, place.tz) : null;
 
   useEffect(() => {
@@ -379,7 +407,6 @@ function SkyScreen() {
           speeds: [],
         };
         const next = computeSky(instant, place.lat, place.lon, place.tz, viewAyanamsa, viewNode, skyCache.current);
-        next.lagna = norm(tropicalAscendant(chartInstant, place.lat, place.lon) - ayanamsaDegrees(chartInstant, viewAyanamsa));
         if (cancel) return;
         setSky(next);
         setFromCache(false);
@@ -396,7 +423,35 @@ function SkyScreen() {
       cancel = true;
       window.clearTimeout(timer);
     };
-  }, [instant, chartInstant, place.lat, place.lon, place.tz, viewAyanamsa, viewNode, zoneOk, coordsOk]);
+  }, [instant, place.lat, place.lon, place.tz, viewAyanamsa, viewNode, zoneOk, coordsOk]);
+
+  const displaySky = useMemo(() => {
+    if (!sky || viewNode !== "true" || !jplNode) return sky;
+    const sampledAt = new Date(jplNode.sampledAt);
+    if (
+      !Number.isFinite(sampledAt.getTime()) ||
+      Math.floor(sampledAt.getTime() / (5 * 60_000)) * (5 * 60_000) !== jplBucket
+    ) return sky;
+
+    const localAtSample = bodyLongitude("rahu", sampledAt, viewAyanamsa, "true");
+    const jplSidereal = norm(jplNode.tropicalLongitude - ayanamsaDegrees(sampledAt, viewAyanamsa));
+    let correction = jplSidereal - localAtSample;
+    if (correction > 180) correction -= 360;
+    if (correction < -180) correction += 360;
+    const localRahu = sky.grahas.find((graha) => graha.id === "rahu");
+    if (!localRahu) return sky;
+    const correctedRahu = norm(localRahu.lon + correction);
+    return {
+      ...sky,
+      grahas: sky.grahas.map((graha) =>
+        graha.id === "rahu"
+          ? { ...graha, lon: correctedRahu }
+          : graha.id === "ketu"
+            ? { ...graha, lon: norm(correctedRahu + 180) }
+            : graha,
+      ),
+    };
+  }, [sky, viewNode, jplNode, jplBucket, viewAyanamsa]);
 
   function openEditor() {
     if (!parts) return;
@@ -425,8 +480,6 @@ function SkyScreen() {
     }
     setLive(false);
     followNow.current = false;
-    lagnaLocked.current = true;
-    setChartInstant(when);
     setInstant(when);
     setPlace(editor.place);
     setGuessed(editor.guessed);
@@ -436,23 +489,23 @@ function SkyScreen() {
     setEditor(null);
   }
 
-  const lagnaSign = sky ? signIndex(sky.lagna) : 0;
+  const lagnaSign = displaySky ? signIndex(displaySky.lagna) : 0;
   const rashi = RASHIS[lagnaSign];
-  const chart = sky ? groupSigns(sky, settings.division) : null;
+  const chart = displaySky ? groupSigns(displaySky, settings.division) : null;
   const eclipseMinute = Math.floor(instant.getTime() / 60000);
   const eclipses = useMemo(
     () => eclipseDots(new Date(eclipseMinute * 60000), viewAyanamsa, settings.division),
     [eclipseMinute, viewAyanamsa, settings.division],
   );
-  const chartLagnaLon = sky
+  const chartLagnaLon = displaySky
     ? settings.division === "navamsa"
       ? null
-      : sky.lagna
+      : displaySky.lagna
     : null;
-  const sun = sky?.grahas.find((graha) => graha.id === "sun");
+  const sun = displaySky?.grahas.find((graha) => graha.id === "sun");
 
   async function saveChart() {
-    if (!sky || saving) return;
+    if (!displaySky || saving) return;
     setSaving(true);
     setSaveNote(null);
     try {
@@ -461,8 +514,8 @@ function SkyScreen() {
         `${settings.division === "navamsa" ? "Navamsa" : "Rashi"} · ${settings.chart === "north" ? "North" : "South"} Indian`,
         formatStamp(instant, place.tz),
         place.label,
-        `${AYANAMSA_LABEL[viewAyanamsa]} · ${formatDms(sky.ayanamsa)} · ${viewNode === "true" ? "True" : "Mean"} Rahu ${RASHIS[signIndex(sky.grahas.find((graha) => graha.id === "rahu")?.lon ?? 0)]?.name}`,
-        ...sky.grahas.map((graha) => `${GRAHA_ABBR[graha.id]}${graha.retro ? "R" : ""} ${RASHIS[signIndex(graha.lon)]?.abbr} ${formatDms(degInSign(graha.lon), true)}`),
+        `${AYANAMSA_LABEL[viewAyanamsa]} · ${formatDms(displaySky.ayanamsa)} · ${viewNode === "true" ? "True" : "Mean"} Rahu ${RASHIS[signIndex(displaySky.grahas.find((graha) => graha.id === "rahu")?.lon ?? 0)]?.name}`,
+        ...displaySky.grahas.map((graha) => `${GRAHA_ABBR[graha.id]}${graha.retro ? "R" : ""} ${RASHIS[signIndex(graha.lon)]?.abbr} ${formatDms(degInSign(graha.lon), true)}`),
       ];
       const picture = await renderChartPng(nodes, lines);
       const framed = downloadBlockedHere();
@@ -483,11 +536,11 @@ function SkyScreen() {
   }
 
   const occupants =
-    picked !== null && sky
-      ? sky.grahas.filter((graha) => (settings.division === "navamsa" ? navamsaSign(graha.lon) : signIndex(graha.lon)) === picked)
+    picked !== null && displaySky
+      ? displaySky.grahas.filter((graha) => (settings.division === "navamsa" ? navamsaSign(graha.lon) : signIndex(graha.lon)) === picked)
       : [];
   const pickedNote =
-    picked !== null && sky
+    picked !== null && displaySky
       ? `${picked + 1} ${RASHIS[picked]?.name ?? ""} · lord ${GRAHA_NAME[SIGN_LORD[picked]!]}${
           occupants.length
             ? ` · ${occupants
@@ -594,7 +647,7 @@ function SkyScreen() {
         <span className="h-px min-w-0 flex-1 bg-gradient-to-l from-transparent to-[rgb(240_193_78_/_0.4)]" />
       </p>
       <div className="kundli-frame mx-auto mt-1 max-w-xl p-2">
-        {sky && chart && rashi ? (
+        {displaySky && chart && rashi ? (
           <KundliChart
             style={settings.chart}
             lagnaSign={viewLagna ?? chart.lagnaSign}
@@ -625,18 +678,29 @@ function SkyScreen() {
           <p className="px-4 py-16 text-center text-sm text-muted">{skyError ?? "Reading the sidereal sky…"}</p>
         )}
       </div>
-      {sky ? <RahuLine sky={sky} ayanamsa={viewAyanamsa} node={viewNode} navamsa={settings.division === "navamsa"} /> : null}
-      {sky && planetId && <PlanetPanel sky={sky} id={planetId} division={settings.division} lagnaSign={viewLagna ?? chart?.lagnaSign ?? lagnaSign} nodes={drishti.nodes} onClose={() => setPlanetId(null)} />}
-      {sky && chart && <SkyFacts sky={sky} division={settings.division} lagnaSign={viewLagna ?? chart.lagnaSign} open={factsOpen} onToggle={() => setFactsOpen((current) => !current)} />}
+      {displaySky ? (
+        <RahuLine
+          sky={displaySky}
+          ayanamsa={viewAyanamsa}
+          node={viewNode}
+          navamsa={settings.division === "navamsa"}
+          lagnaSign={chart?.lagnaSign ?? lagnaSign}
+          source={viewNode === "mean" ? "Calculated mean lunar node" : jplNodeStatus === "ready" ? "NASA/JPL Horizons true-node reference" : jplNodeStatus === "offline" ? "Astronomy Engine fallback · Horizons unavailable" : "Astronomy Engine · checking NASA/JPL Horizons"}
+          updatedAt={viewNode === "true" ? jplNode?.retrievedAt ?? null : null}
+        />
+      ) : null}
+      {displaySky && planetId && <PlanetPanel sky={displaySky} id={planetId} division={settings.division} lagnaSign={viewLagna ?? chart?.lagnaSign ?? lagnaSign} nodes={drishti.nodes} onClose={() => setPlanetId(null)} />}
+      {displaySky && chart && <SkyFacts sky={displaySky} division={settings.division} lagnaSign={viewLagna ?? chart.lagnaSign} open={factsOpen} onToggle={() => setFactsOpen((current) => !current)} />}
       <TransitTimeline
         instant={instant}
         now={now}
         timeZone={place.tz}
         onSeek={(when) => {
-          lagnaLocked.current = true;
           followNow.current = false;
           setLive(false);
           setInstant(when);
+          setViewLagna(null);
+          setPicked(null);
         }}
       />
       <UpcomingTransits from={horizon} now={now} timeZone={place.tz} ayanamsa={viewAyanamsa} node={viewNode} nodes={drishti.nodes} />
@@ -818,7 +882,7 @@ function SkyScreen() {
         </div>
       )}
 
-      {sky && rashi && chart && (
+      {displaySky && rashi && chart && (
         <div className="mt-8 grid min-w-0 grid-cols-1 gap-4 *:min-w-0">
           <div className="min-w-0 border border-line bg-card p-4">
             <p className="text-xs font-semibold uppercase tracking-widest text-seal">Lagna</p>
@@ -828,17 +892,17 @@ function SkyScreen() {
               <span className="tabular-nums"> · {formatDms(degInSign(sky.lagna), true)}</span>
             </p>
             <p className="mt-1 break-words text-sm text-muted">
-              {NAKSHATRAS[nakshatraIndex(sky.lagna)]} · pada {padaOf(sky.lagna)} · lord {GRAHA_NAME[SIGN_LORD[lagnaSign]!]}
+              {NAKSHATRAS[nakshatraIndex(displaySky.lagna)]} · pada {padaOf(displaySky.lagna)} · lord {GRAHA_NAME[SIGN_LORD[lagnaSign]!]}
             </p>
           </div>
-          <PanchangStrip sky={sky} timeZone={place.tz} instant={instant} />
+          <PanchangStrip sky={displaySky} timeZone={place.tz} instant={instant} />
           <div className="flex flex-wrap gap-2">
             <button
               type="button"
               className={btn}
               onClick={() =>
                 void copyText(
-                  [`Lagna ${formatDms(sky.lagna)}`, ...sky.grahas.map((graha) => `${GRAHA_NAME[graha.id]} ${formatDms(graha.lon)}${graha.retro ? " R" : ""}`)].join("\n"),
+                  [`Lagna ${formatDms(displaySky.lagna)}`, ...displaySky.grahas.map((graha) => `${GRAHA_NAME[graha.id]} ${formatDms(graha.lon)}${graha.retro ? " R" : ""}`)].join("\n"),
                   "Degrees copied.",
                 )
               }
@@ -852,8 +916,8 @@ function SkyScreen() {
                 void copyText(
                   [
                     "Graha\tRashi\tDegree\tNakshatra\tPada",
-                    `Lagna\t${RASHIS[signIndex(sky.lagna)]?.name}\t${formatDms(degInSign(sky.lagna), true)}\t${NAKSHATRAS[nakshatraIndex(sky.lagna)]}\t${padaOf(sky.lagna)}`,
-                    ...sky.grahas.map(
+                    `Lagna\t${RASHIS[signIndex(displaySky.lagna)]?.name}\t${formatDms(degInSign(sky.lagna), true)}\t${NAKSHATRAS[nakshatraIndex(displaySky.lagna)]}\t${padaOf(displaySky.lagna)}`,
+                    ...displaySky.grahas.map(
                       (graha) =>
                         `${GRAHA_NAME[graha.id]}\t${RASHIS[signIndex(graha.lon)]?.name}\t${formatDms(degInSign(graha.lon), true)}\t${NAKSHATRAS[nakshatraIndex(graha.lon)]}\t${padaOf(graha.lon)}`,
                     ),
@@ -873,18 +937,18 @@ function SkyScreen() {
             </button>
           </div>
           {actionNote && <p className="text-sm text-muted">{actionNote}</p>}
-          <GrahaTable sky={sky} sunLon={sun?.lon ?? 0} lagnaSign={lagnaSign} />
-          <ShadbalaTable sky={sky} when={instant} timeZone={place.tz} title="Shadbala" />
+          <GrahaTable sky={displaySky} sunLon={sun?.lon ?? 0} lagnaSign={lagnaSign} />
+          <ShadbalaTable sky={displaySky} when={instant} timeZone={place.tz} title="Shadbala" />
           <AshtakavargaPanel
-            chart={ashtakavarga(sky.grahas, sky.lagna)}
+            chart={ashtakavarga(displaySky.grahas, displaySky.lagna)}
             lagnaSign={lagnaSign}
             transits={SAPTA.flatMap((id) => {
-              const graha = sky.grahas.find((item) => item.id === id);
+              const graha = displaySky.grahas.find((item) => item.id === id);
               return graha ? [{ id, sign: signIndex(graha.lon) }] : [];
             })}
             note="These bindus belong to the chart at the time above. Move the time to read an earlier or later transit."
           />
-          {warsOf(sky.grahas).length > 0 && <p className="text-sm text-muted">Graha yuddha: {warsOf(sky.grahas).join("; ")}.</p>}
+          {warsOf(displaySky.grahas).length > 0 && <p className="text-sm text-muted">Graha yuddha: {warsOf(displaySky.grahas).join("; ")}.</p>}
         </div>
       )}
 
@@ -931,11 +995,17 @@ function RahuLine({
   ayanamsa,
   node,
   navamsa,
+  lagnaSign,
+  source,
+  updatedAt,
 }: {
   sky: SkySnapshot;
   ayanamsa: AyanamsaId;
   node: NodeMode;
   navamsa: boolean;
+  lagnaSign: number;
+  source: string;
+  updatedAt: string | null;
 }) {
   const rahu = sky.grahas.find((graha) => graha.id === "rahu");
   const ketu = sky.grahas.find((graha) => graha.id === "ketu");
@@ -943,6 +1013,8 @@ function RahuLine({
 
   const rahuSign = navamsa ? navamsaSign(rahu.lon) : signIndex(rahu.lon);
   const ketuSign = navamsa ? navamsaSign(ketu.lon) : signIndex(ketu.lon);
+  const rahuHouse = houseFrom(rahuSign, lagnaSign);
+  const ketuHouse = houseFrom(ketuSign, lagnaSign);
 
   return (
     <section className="mx-auto mt-2 max-w-xl border border-[rgb(240_193_78_/_0.3)] bg-card px-3 py-2.5" aria-label="Rahu and Ketu nodal axis">
@@ -950,16 +1022,17 @@ function RahuLine({
         <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-seal">Rahu · Ketu axis</p>
         <p className="text-[10px] text-muted">
           {node === "true" ? "True node" : "Mean node"} · {AYANAMSA_LABEL[ayanamsa]} · {navamsa ? "Navamsa" : "Rashi"}
+          <span className="block">{source}{updatedAt ? ` · checked ${new Date(updatedAt).toLocaleTimeString()}` : ""}</span>
         </p>
       </div>
       <div className="mt-2 grid grid-cols-2 divide-x divide-line">
         <div className="min-w-0 pr-3">
-          <p className="text-xs font-semibold text-seal">Rahu</p>
+          <p className="text-xs font-semibold text-seal">Rahu · House {rahuHouse}</p>
           <p className="mt-0.5 font-display text-xl leading-tight">{RASHIS[rahuSign]?.name}</p>
           <p className="mt-0.5 text-xs tabular-nums text-muted">{formatDms(degInSign(rahu.lon), true)}</p>
         </div>
         <div className="min-w-0 pl-3 text-right">
-          <p className="text-xs font-semibold text-seal">Ketu</p>
+          <p className="text-xs font-semibold text-seal">Ketu · House {ketuHouse}</p>
           <p className="mt-0.5 font-display text-xl leading-tight">{RASHIS[ketuSign]?.name}</p>
           <p className="mt-0.5 text-xs tabular-nums text-muted">{formatDms(degInSign(ketu.lon), true)}</p>
         </div>
@@ -1031,7 +1104,7 @@ function PlanetPanel({
   nodes: NodeDrishti;
   onClose: () => void;
 }) {
-  const graha = sky.grahas.find((item) => item.id === id);
+  const graha = displaySky.grahas.find((item) => item.id === id);
   const sun = sky.grahas.find((item) => item.id === "sun");
   if (!graha) return null;
   const rashi = signIndex(graha.lon);
