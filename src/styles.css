@@ -623,3 +623,18 @@
     margin-top: 1rem;
   }
 }
+
+/* Keep the larger page masthead on mobile only; desktop uses the sidebar brand. */
+@media (min-width: 900px) {
+  .gochar-mark {
+    display: none;
+  }
+
+  .gochar-page > header {
+    justify-content: flex-end;
+  }
+
+  .gochar-page > header > div:first-child {
+    display: none;
+  }
+}
