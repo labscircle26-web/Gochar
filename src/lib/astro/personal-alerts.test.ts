@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { crossesAngularBoundary } from "./personal-alerts.ts";
+import { crossesAngularBoundary } from "./personal-alerts-math.ts";
 
 test("personal transit crossing detects Aries wraparound in direct motion", () => {
   assert.equal(crossesAngularBoundary(359.8, 0.2, 0), true);
