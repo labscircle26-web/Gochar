@@ -1,0 +1,41 @@
+UI Correction: Precisely Position Drishti Eye Indicators
+
+Refer to the attached screenshot. The current Drishti eye indicators are incorrectly positioned near the bottom corners of the Kundli.
+
+Fix their positioning. Do not redesign the Kundli or change the Drishti calculation logic.
+
+1. Correct Indicator Positioning
+
+- Move each eye + count indicator directly next to the endpoint of its corresponding Drishti line.
+- The indicator must visually identify the exact house where that Drishti is falling.
+- Do not place indicators at fixed chart corners, bottom edges, or arbitrary positions.
+- Calculate indicator positions dynamically from the actual Drishti line endpoint and receiving-house coordinates.
+- Maintain a small, consistent gap between the line endpoint and eye indicator.
+
+2. Dynamic Positioning
+
+- Indicators must move automatically when chart dimensions change.
+- Support North Indian, South Indian and Rashi chart layouts.
+- Support different screen sizes and mobile orientations.
+- Recalculate positions when the chart is resized or its layout changes.
+- Do not use hardcoded screen coordinates.
+
+3. Multiple Drishti Indicators
+
+- If multiple selected planets aspect the same house, show one eye indicator with the combined count.
+- Position it beside that house's receiving point.
+- If different Drishti lines terminate at different positions within the same house, group them into one indicator near the receiving area without obscuring the chart.
+- Preserve the correct count of distinct selected aspecting planets.
+
+4. Visual Requirements
+
+- Keep the eye icon and number compact.
+- Maintain the existing gold styling.
+- Ensure indicators do not overlap planetary symbols, house numbers, or chart borders.
+- Make indicators clickable, preserving their existing expand/collapse functionality.
+
+5. Final Verification
+
+Test all chart layouts on mobile and desktop. Verify that every eye indicator stays attached visually to the correct Drishti destination when changing planets, selecting multiple planets, switching charts, or resizing the screen.
+
+Expected result: Eye indicators should appear exactly beside the Drishti line endings, making it immediately obvious which house is receiving each planetary aspect.

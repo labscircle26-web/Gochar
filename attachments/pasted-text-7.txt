@@ -1,0 +1,59 @@
+UI Update: Replace Chart Selection Buttons with Two Dropdowns
+
+Refer to the attached screenshot.
+
+Replace the four existing chart selection buttons (North, South, Rashi, Navamsa) with two dropdown buttons.
+
+1. First Dropdown — Chart Layout
+
+Label: Chart Style
+
+Options:
+
+- North Indian
+- South Indian
+
+This dropdown controls the visual layout of the Kundli.
+
+2. Second Dropdown — Chart Type
+
+Label: Chart Type
+
+Options:
+
+- Rashi
+- Navamsa
+
+This dropdown controls which chart is displayed.
+
+3. Visual Design
+
+- Both dropdowns must use exactly the same design language as the existing Save Chart and Aspects / Drishti controls.
+- Use matching background, border, corner radius, typography, height and dropdown arrow.
+- Place both dropdowns horizontally in one row.
+- Give them balanced widths.
+- Maintain the existing premium dark and gold/ivory design language.
+- Do not retain the old four-button layout.
+
+4. Functionality
+
+- Selecting North Indian or South Indian changes the Kundli layout.
+- Selecting Rashi or Navamsa changes the chart being displayed.
+- Changing either dropdown must preserve the other selection.
+- Both dropdowns must work independently.
+- Preserve all existing chart calculations, planetary placements, Drishti overlays and eye indicators.
+- Ensure saved charts and their selections continue to work correctly.
+
+5. Responsive Behaviour
+
+- Keep both dropdowns side by side on mobile and desktop wherever space permits.
+- Prevent text clipping and overlapping.
+- Match the dimensions and alignment of the existing Save Chart and Aspects / Drishti buttons.
+
+Expected layout:
+
+[ Chart Style ▼ ]  [ Chart Type ▼ ]
+
+[ Save Chart ]     [ Aspects / Drishti ▼ ]
+
+Do not modify unrelated sections or redesign the Kundli itself.

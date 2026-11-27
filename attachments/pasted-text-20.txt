@@ -1,0 +1,39 @@
+Fix the Developer button in the Gochar header.
+
+Currently, the Developer text label is not visible inside the button.
+
+Requirements:
+
+1. Display the word Developer clearly beside the developer icon.
+2. Use "display: inline-flex", "align-items: center", and a suitable "gap".
+3. Ensure the button has sufficient width and horizontal padding.
+4. Prevent the text from being hidden by "overflow: hidden", clipping, zero width, or responsive CSS.
+5. Set "white-space: nowrap" on the label.
+6. Use a visible champagne-gold or ivory text colour with sufficient contrast against the existing dark background.
+7. Check parent containers for restrictive width, flex shrinking, positioning or z-index issues.
+8. Preserve the existing button position, size, gold border and Gochar theme as closely as possible.
+9. Verify visibility on both mobile and desktop.
+
+Example styling (adapt to the actual component):
+
+.developer-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: auto;
+  min-width: max-content;
+  padding: 8px 13px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.developer-button__label {
+  display: inline-block;
+  visibility: visible;
+  opacity: 1;
+  white-space: nowrap;
+  color: #edc451;
+}
+
+Inspect the actual DOM and computed styles to identify the cause instead of merely adding CSS blindly. Do not change Developer login functionality.

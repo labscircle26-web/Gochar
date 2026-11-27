@@ -1,0 +1,428 @@
+GOCHAR — DEVELOPER CONSOLE + ASTROLOGY KNOWLEDGE & PREDICTION ENGINE
+
+Build a complete Astrology Knowledge and Prediction System inside the existing Gochar application.
+
+This is a substantial new feature. First inspect the complete existing project architecture, authentication, database schema, Cloudflare R2 integration, existing astronomical calculation engine and current Birth Charts implementation.
+
+Do not rebuild existing components unnecessarily.
+
+Preserve the existing Gochar design: midnight navy, champagne gold, warm yellow accents, ivory typography and celestial atmosphere.
+
+PART 1 — DEVELOPER SECTION
+
+1. Developer Login
+
+Add a small, elegant Developer entry near the existing Gochar heading in the top header.
+
+Design:
+
+- Small gold developer icon.
+- Text: Developer.
+- Subtle border and dark translucent background.
+- Match existing header buttons.
+- Do not make it visually dominant.
+
+When clicked, open a dedicated Developer Login screen or modal.
+
+Authentication requirements:
+
+- Only authorized developer accounts can access the Developer Console.
+- Use secure server-side authentication.
+- Use existing authentication infrastructure where appropriate.
+- Create a separate developer role/permission.
+- Never rely on a frontend-only password or hidden URL for security.
+- Never expose service-role keys, database credentials or R2 secrets to the browser.
+- Protect every developer API endpoint with server-side authorization.
+- Add logout and session expiration.
+- Do not allow ordinary users to access developer functionality.
+
+Do not create a public developer registration option.
+
+2. Developer Dashboard
+
+After successful authentication, open a dedicated Developer Console.
+
+Create these sections:
+
+1. Astrology PDF Library
+2. PDF Processing Status
+3. Knowledge Search
+4. Prediction Reader
+5. Prediction Maker
+6. Prediction Testing
+7. Calculation Diagnostics
+8. System Settings
+
+Use a premium dark navy and gold dashboard consistent with Gochar.
+
+PART 2 — ASTROLOGY PDF LIBRARY
+
+3. Upload and Manage Astrology Books
+
+Create a private PDF library where I can upload astrology books directly from my phone or computer.
+
+Allow:
+
+- Upload PDF.
+- Multiple PDF uploads.
+- Book title.
+- Author name.
+- Language.
+- Book category.
+- Edition/publication information.
+- Optional notes.
+- Replace PDF.
+- Delete PDF.
+- View PDF.
+- View processing status.
+
+Suggested categories:
+
+- Classical Vedic Astrology
+- Houses and Bhavas
+- Planetary Interpretations
+- Mahadasha and Antardasha
+- Gochar and Transit
+- Yogas
+- Divisional Charts
+- Ashtakavarga
+- Nakshatras
+- Predictive Astrology
+- Other References
+
+Display each book as a clean library card with:
+
+- Book title.
+- Author.
+- PDF size.
+- Number of pages.
+- Processing status.
+- Upload date.
+- Actions.
+
+4. Storage and Processing Architecture
+
+Use existing infrastructure.
+
+- Store original PDFs in a private Cloudflare R2 bucket.
+- Store metadata and processing information in Supabase.
+- Never expose public R2 object URLs.
+- Use authenticated upload/download operations.
+- Extract PDF text on the server.
+- Preserve page numbers and chapter headings.
+- Divide extracted text into meaningful searchable chunks.
+- Store chunk text, book ID, page number, chapter and relevant metadata in Supabase.
+- Create searchable indexes for efficient retrieval.
+- Keep original PDFs available for viewing and reference.
+
+Support:
+
+- Normal text-based PDFs.
+- Scanned PDFs where possible, using OCR as a separate processing step.
+- Multiple languages where extraction support exists.
+- Large PDF files through background processing.
+
+Do not load entire PDFs into browser memory.
+
+5. PDF Processing Status
+
+Show clear processing states:
+
+- Uploaded
+- Extracting text
+- OCR required
+- Indexing
+- Ready
+- Failed
+
+If processing fails, show the error and allow retry.
+
+Do not mark a PDF as ready until its text has been successfully extracted and indexed.
+
+PART 3 — PREDICTION READER BOT
+
+6. Create a Smart Prediction Reader
+
+The Prediction Reader is responsible for finding and understanding relevant information inside the uploaded astrology books.
+
+It must not invent classical rules.
+
+Capabilities:
+
+- Search across all uploaded books.
+- Search by house, planet, sign and Nakshatra.
+- Search by Mahadasha and Antardasha.
+- Search by planetary conjunctions.
+- Search by aspects and Drishti.
+- Search by transit combinations.
+- Search by divisional charts.
+- Search by specific astrological conditions.
+
+Example:
+
+If I search:
+
+"10th lord placed in 11th house during Saturn Mahadasha"
+
+The reader should:
+
+1. Search the uploaded PDF knowledge library.
+2. Retrieve relevant passages.
+3. Show book title and page number.
+4. Display the original extracted passage.
+5. Separate classical references from generated explanations.
+6. Show when no reliable matching passage is found.
+
+Create a chat-like interface inside the Developer Console.
+
+Include:
+
+- Search field.
+- Ask question input.
+- Book filters.
+- Search results.
+- Source references.
+- Page references.
+- Expandable original passages.
+
+The Reader must never pretend that a statement came from a book if it cannot locate a supporting passage.
+
+PART 4 — PREDICTION MAKER BOT
+
+7. Build the Personalized Prediction Maker
+
+This is the main user-facing prediction system.
+
+Inside Birth Charts, make all 12 houses selectable.
+
+When someone taps a house, automatically generate a personalized interpretation using:
+
+A. Natal Birth Chart
+
+- Selected house.
+- House sign.
+- House lord.
+- House lord's placement.
+- Occupying planets.
+- Planetary aspects.
+- Planetary dignity.
+- Retrograde and combustion status.
+- Relevant yogas.
+- Planetary strength.
+
+B. Current Dasha
+
+- Mahadasha lord.
+- Antardasha lord.
+- Their natal placements.
+- Their house ownership.
+- Their connections with the selected house.
+- Relevant Dasha combinations.
+
+C. Current Gochar
+
+- Current planetary positions.
+- Transits through relevant houses.
+- Transit aspects to natal planets.
+- Transit aspects to the selected house and its lord.
+- Relevant Saturn, Jupiter, Rahu and Ketu influences.
+- Upcoming important transit changes.
+
+D. Additional Supporting Factors
+
+- Ashtakavarga.
+- Relevant divisional charts.
+- Relevant natural significators.
+- Relevant yogas.
+
+Only include calculations that are actually supported by the existing engine.
+
+Do not invent missing data.
+
+8. Prediction Generation Logic
+
+IMPORTANT: The Prediction Maker must use a deterministic calculation and rule-matching system.
+
+Do not require a paid AI API.
+
+The system should:
+
+1. Receive the selected house and user's birth-chart data.
+2. Retrieve verified astronomical and astrological calculations from the existing engine.
+3. Identify applicable rules.
+4. Retrieve supporting interpretations from the PDF knowledge base.
+5. Evaluate supporting and conflicting indications.
+6. Organize findings into structured prediction sections.
+7. Generate readable text using interpretation templates.
+8. Include source references wherever available.
+
+The system must distinguish:
+
+- Natal promise.
+- Current Dasha influence.
+- Current transit influence.
+- Short-term changes.
+- Long-term tendencies.
+
+Do not treat a single planetary placement as sufficient to make a prediction.
+
+Do not present contradictory indications as certain outcomes.
+
+9. Prediction Output Design
+
+When a user taps the 10th house, show a premium prediction panel.
+
+Use this structure:
+
+10th House — Career, Profession and Status
+
+1. Natal House Analysis
+2. 10th Lord Analysis
+3. Planetary Occupants and Aspects
+4. Mahadasha Influence
+5. Antardasha Influence
+6. Current Gochar Influence
+7. Combined Interpretation
+8. Supporting Factors
+9. Challenging Factors
+10. Upcoming Timing Windows
+11. Classical References
+
+The interpretation should explain why each conclusion was reached.
+
+Include expandable sections:
+
+- View calculations.
+- View supporting rules.
+- View original book passages.
+- View book and page references.
+
+Make the reading understandable to ordinary users without oversimplifying the astrology.
+
+PART 5 — ALL 12 HOUSE PREDICTIONS
+
+Create a reusable house prediction system.
+
+1st House — Personality, identity, health and life direction.
+
+2nd House — Wealth, savings, family and speech.
+
+3rd House — Courage, communication, siblings and efforts.
+
+4th House — Home, property, education and mother.
+
+5th House — Education, intelligence, creativity and children.
+
+6th House — Debts, competition, obstacles and disputes.
+
+7th House — Marriage, relationships and partnerships.
+
+8th House — Transformation, longevity and sudden developments.
+
+9th House — Fortune, higher education, dharma and spirituality.
+
+10th House — Career, profession, reputation and status.
+
+11th House — Income, gains, networks and fulfilment.
+
+12th House — Expenses, foreign residence, isolation and liberation.
+
+Use the same prediction engine for every house, with house-specific rules and relevant significators.
+
+PART 6 — PREDICTION TESTING LAB
+
+Create a Developer-only testing environment.
+
+I should be able to:
+
+- Select a test birth chart.
+- Select any house.
+- Change MD and AD test periods.
+- Select a historical or future transit date.
+- Run a prediction.
+- Inspect every calculation.
+- Inspect matched rules.
+- Inspect retrieved PDF passages.
+- See why a rule was included or excluded.
+- Compare predictions across different dates.
+- Identify missing knowledge-base coverage.
+- Save test results.
+
+This is important because I want to verify prediction quality before releasing it to users.
+
+PART 7 — PERFORMANCE AND COST CONTROL
+
+- Do not read every PDF from R2 on every prediction.
+- Extract and index PDF content once.
+- Retrieve only relevant passages.
+- Cache reusable interpretation results.
+- Recalculate transit-dependent information when timestamps change.
+- Keep calculations server-side where appropriate.
+- Avoid unnecessary paid AI services.
+- Do not add external API dependencies without approval.
+
+PART 8 — IMPORTANT SAFETY AND ACCURACY RULES
+
+- Existing astronomical calculations are the source of truth for planetary positions.
+- Never let the prediction engine independently guess planetary positions.
+- Do not change the existing Lagna or birth-chart calculation logic.
+- Keep natal birth data separate from the changing Gochar timestamp.
+- Distinguish source-backed classical rules from newly created interpretations.
+- Store book/page provenance for retrieved passages.
+- Do not invent citations or page numbers.
+- Do not make guaranteed predictions about marriage, death, disease, wealth or other life outcomes.
+- Present astrology as a traditional interpretive system, not scientifically established certainty.
+
+PART 9 — IMPLEMENTATION ORDER
+
+Implement in phases. Do not attempt everything in one uncontrolled change.
+
+Phase 1:
+
+- Developer login.
+- Developer Console.
+- PDF upload.
+- Private R2 storage.
+- Supabase metadata.
+
+Phase 2:
+
+- PDF text extraction.
+- OCR support where possible.
+- Searchable knowledge database.
+- Prediction Reader.
+
+Phase 3:
+
+- Rule-based Prediction Maker.
+- 10th house prediction first.
+- Source references and calculation explanations.
+
+Phase 4:
+
+- Expand to all 12 houses.
+- Add Dasha and Gochar integration.
+- Add Prediction Testing Lab.
+
+Phase 5:
+
+- Performance optimization.
+- Security testing.
+- Mobile and desktop testing.
+- Production build and regression testing.
+
+Before every phase:
+
+- Inspect the latest repository code and recent changes.
+- Work on a separate development branch.
+- Do not directly push to production main.
+- Run relevant tests and production build.
+- Report changed files, database migrations, security considerations and test results.
+
+Do not claim any feature is working until it has actually been implemented and tested.
+
+FINAL DESIGN GOAL:
+
+The Developer Console should feel like a professional private research laboratory for Vedic astrology.
+
+The user-facing prediction experience should feel like a premium personalized astrology reader, seamlessly integrated into the existing Gochar Birth Chart section.

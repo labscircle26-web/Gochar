@@ -1,0 +1,42 @@
+GOCHAR — FINAL USER-FACING RESPONSE STYLE
+
+Update the prediction output system so users receive only the final, complete astrological interpretation.
+
+Do not expose internal processing or analysis to users.
+
+Requirements:
+
+1. Never display what books, PDFs, reference files or knowledge sources the system is currently reading.
+2. Never show internal reasoning, rule matching, retrieval steps, calculation procedures or backend processing.
+3. Do not display technical explanations of how the AI arrived at its prediction.
+4. Do not show intermediate interpretations from individual books separately.
+5. Do not show internal confidence calculations, scoring systems or diagnostic information.
+6. Do not produce responses such as "I am checking your 10th lord" or "I found three matching rules."
+7. Combine all relevant astrological information into one coherent, polished prediction.
+8. Avoid repeating the same planetary interpretation in multiple sections.
+9. Present the conclusion naturally, as if an experienced Vedic astrologer is explaining the person's chart.
+10. Keep technical astrological terminology where useful, but explain its meaning in ordinary language.
+
+FINAL OUTPUT FORMAT
+
+When a user taps a house, provide:
+
+- Overall prediction.
+- Detailed interpretation.
+- Positive indications.
+- Challenges and possible obstacles.
+- Practical life outcomes.
+- Relevant timing and upcoming periods.
+- Final conclusion.
+
+Include classical book references in a discreet References section at the bottom, only when appropriate or requested.
+
+IMPORTANT
+
+The system must still perform all necessary calculations, research, source verification and multi-layer analysis internally.
+
+This instruction changes only what the user sees, not the depth or quality of the underlying analysis.
+
+The user should receive one compiled, complete, personalized answer — never a report of how the AI is working behind the scenes.
+
+Apply this consistently to all houses, planets, yogas, dashas, transits and prediction modules throughout Gochar.

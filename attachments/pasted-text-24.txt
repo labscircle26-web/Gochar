@@ -1,0 +1,28 @@
+Investigate the PDF processing failure in Developer → PDF Library.
+
+The uploaded PDF "Nadi Jyotish" (1023 KB) shows FAILED status with 0 extracted text pages.
+
+Before making any changes, I want a technical diagnosis only.
+
+Please investigate and report:
+
+1. What exactly caused the processing failure?
+2. Did the PDF upload successfully to storage?
+3. Is the backend able to access and read the uploaded PDF?
+4. Is native PDF text extraction working?
+5. Is OCR configured, installed, and operational?
+6. Is the OCR service failing because of missing credentials, unsupported language, configuration, API errors, or another issue?
+7. Are there database errors while saving extracted text?
+8. Are there any Cloudflare Worker, R2, timeout, memory, or request-size limitations involved?
+9. Provide the exact error message and relevant backend logs.
+10. Identify the specific component or function responsible.
+
+Important:
+
+- Do not modify any code or configuration yet.
+- Do not retry processing automatically.
+- Do not mark the document as completed manually.
+- Do not guess the cause.
+- Distinguish confirmed findings from possibilities.
+
+Conclude with the root cause and the minimum changes required to fix it.

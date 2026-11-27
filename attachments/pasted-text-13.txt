@@ -1,0 +1,57 @@
+Upcoming Celestial Events — Combine Time Filters into One Dropdown
+
+Modify the Upcoming Celestial Events popup.
+
+1. Remove Four Separate Time Buttons
+
+Completely remove the four existing time-range buttons:
+
+- 24 Hours
+- 7 Days
+- 30 Days
+- 90 Days
+
+Replace them with ONE dropdown button labelled Time Range.
+
+2. Time Range Dropdown Options
+
+When opened, show:
+
+- Next 24 Hours
+- Next 7 Days
+- Next 30 Days
+- Next 90 Days
+
+Default selection: Next 24 Hours.
+
+Only one time range can be selected at a time.
+
+3. Final Popup Layout
+
+Upcoming Celestial Events
+
+[ Select Graha: Sun ▼ ]
+
+[ Time Range: Next 24 Hours ▼ ]
+
+---
+
+Upcoming events for the selected Graha and time range, sorted from nearest to farthest.
+
+4. Functionality
+
+- Both dropdowns must work independently.
+- Changing Graha updates the planetary event list.
+- Changing Time Range updates the displayed date range.
+- Apply changes immediately without requiring another Apply button.
+- Preserve accurate event calculations and countdowns.
+- Both dropdowns must use the same connected-dropdown design as the rest of the application.
+
+5. Mobile Design
+
+- Stack the two dropdowns vertically.
+- Make both full-width within the popup.
+- Maintain consistent heights, spacing and golden accents.
+- Prevent clipping and horizontal overflow.
+
+Do not change event calculations, planetary images or other popup functionality.

@@ -1,0 +1,42 @@
+Drishti Correction: One Line Per Receiving House
+
+Currently, when multiple planets occupy the same house, the application draws separate Drishti lines toward each planet.
+
+Change this behaviour.
+
+Required behaviour
+
+- Draw only ONE Drishti line per receiving house, regardless of how many planets occupy that house.
+- If a selected planet aspects a house containing Jupiter, Saturn and Moon together, draw just one line toward that house.
+- The line should terminate at the receiving house's designated Drishti endpoint, not at individual planetary symbols.
+- The line should visually represent the aspect falling on the entire house.
+
+Multiple Aspecting Planets
+
+If multiple selected planets aspect the same receiving house:
+
+- Still display only one visual Drishti line for that house.
+- Combine the contributing planets into that single line's visual representation.
+- Preserve the existing planet-specific colours or use a tasteful combined animated energy effect.
+- The eye indicator must continue showing the number of distinct selected planets aspecting that house.
+
+Important Distinction
+
+For example:
+
+- Mars aspects the 4th house.
+- Jupiter and Saturn are both positioned inside the 4th house.
+- Result: ONE Drishti line from Mars to the 4th house, not two lines toward Jupiter and Saturn separately.
+
+If Mars, Jupiter and Saturn all cast valid aspects on the same house, the result must still be ONE visual line, with the eye counter showing 3.
+
+Technical Requirements
+
+- Group aspect connections by receiving house before rendering SVG lines.
+- Deduplicate lines using the receiving house as the grouping key.
+- Keep individual aspect calculations and contributing-planet information intact.
+- Do not change the actual Drishti calculations or numerical counts.
+- Preserve the eye indicator's existing positioning and click functionality.
+- Apply this behaviour to North, South, Rashi and Navamsa charts wherever supported.
+
+Expected result: One receiving house = one Drishti line. The eye counter indicates how many selected planets are influencing that house.

@@ -1,0 +1,53 @@
+UI Enhancement: Premium Gochar Header Design
+
+Refer to the attached screenshot. Redesign the existing Gochar title at the top-left to give it a distinctive visual identity that matches the application's premium celestial astrology theme.
+
+1. Typography
+
+- Use an elegant, premium editorial serif font.
+- Give the title refined proportions and carefully balanced letter spacing.
+- Maintain its existing top-left position.
+- Make it visually distinctive without making it excessively large.
+
+2. Celestial Styling
+
+Introduce subtle decorative details:
+
+- A delicate champagne-gold accent or fine ornamental underline.
+- A very subtle celestial glow around the typography.
+- Tiny star-like highlights or constellation-inspired detailing.
+- A refined gradient using ivory and soft champagne-gold tones.
+
+3. Design Direction
+
+The header should communicate:
+
+- Ancient Vedic astrology.
+- Modern astronomical intelligence.
+- Premium celestial aesthetics.
+
+Avoid:
+
+- Cartoon-style planets.
+- Excessive glowing effects.
+- Large decorative graphics.
+- Heavy borders or background boxes.
+- Generic startup-style typography.
+
+4. Animation
+
+Optionally introduce a very subtle animation:
+
+- A gentle passing light across the title.
+- Occasional soft star twinkle near the lettering.
+
+Keep animations slow, elegant and lightweight. Respect reduced-motion settings.
+
+5. Layout Preservation
+
+- Keep the Live button exactly where it is.
+- Do not change the chart dropdowns or other controls.
+- Preserve header responsiveness on mobile and desktop.
+- Ensure the title remains clearly readable.
+
+Creative direction: Make the Gochar wordmark look like the identity of a premium Vedic astronomy application, not simply a page heading. Give it a memorable visual signature while keeping the overall interface clean and sophisticated.

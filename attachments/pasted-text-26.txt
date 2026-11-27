@@ -1,0 +1,237 @@
+GOCHAR — IMPLEMENT CLASSICAL CAREER PREDICTION ENGINE
+
+I am providing three reference documents:
+
+1. Bhrigu Samhita – Libra Ascendant Career References.
+2. Phaladeepika – Career, Profession, 10th House and Job Change.
+3. Gochar Career Prediction Engine Methodology.
+
+Your task is to integrate these documents into Gochar's actual astrology analysis and prediction system.
+
+This is a backend intelligence upgrade, not simply a PDF upload or a new informational page.
+
+PHASE 1 — INGEST THE KNOWLEDGE INTO THE SYSTEM
+
+Read all three documents completely.
+
+Do not leave them as files that the AI has to rediscover manually every time.
+
+Integrate their contents into the existing persistent knowledge architecture.
+
+Requirements:
+
+- Extract individual astrological rules and combinations.
+- Preserve original book names, chapter references and verse numbers.
+- Separate Bhrigu Samhita rules from Phaladeepika rules.
+- Identify which rules are specific to Libra Ascendant and which apply generally.
+- Create searchable structured knowledge entries.
+- Make the extracted material accessible to the prediction engine.
+- Preserve the ability to add more astrology books in the future.
+
+Do not store the entire knowledge base only inside a system prompt or application memory.
+
+PHASE 2 — BUILD THE CAREER ANALYSIS ENGINE
+
+Whenever a user taps the 10th house in the birth chart, activate a detailed career analysis.
+
+Do not simply retrieve generic descriptions of the 10th house.
+
+Analyze the person's actual horoscope.
+
+Use this order:
+
+1. Ascendant and 10th-house sign.
+2. 10th-house lord, dignity, placement and strength.
+3. Planets occupying the 10th house.
+4. Planetary aspects on the 10th house and 10th lord.
+5. 10th lord's Navamsa sign and the ruler of that Navamsa.
+6. Related 2nd, 6th, 7th, 9th, 11th and 12th houses.
+7. Natural career significators.
+8. D9 confirmation.
+9. D10 professional analysis.
+10. Current Mahadasha, Antardasha and relevant sub-periods.
+11. Current and future transits.
+12. Combined conclusion.
+
+Apply the original Phaladeepika livelihood method, particularly Chapter V, rather than relying only on planet-in-house interpretations.
+
+Do not confuse the Navamsa lord of the natal 10th lord with the D10 chart's 10th lord.
+
+PHASE 3 — CAREER AND PROFESSION PREDICTION
+
+The system must identify possible occupational categories using multiple combinations.
+
+Analyze:
+
+- Government and administrative work.
+- Private employment.
+- Business and entrepreneurship.
+- Management and leadership.
+- Education and research.
+- Finance, accounting and banking.
+- Engineering and technical work.
+- Healthcare and medicine.
+- Communication, writing and media.
+- Technology and software.
+- Consulting and advisory work.
+- Manufacturing and operations.
+- Agriculture and property-related work.
+- Foreign employment and remote work.
+- Research, investigation and confidential work.
+
+These are modern occupational categories. Map them to classical planetary and vocational significations cautiously.
+
+Give the strongest 2–4 occupational directions with explanations. Do not force a single job title.
+
+PHASE 4 — JOB CHANGE AND CAREER TIMING
+
+Build a separate timing analysis.
+
+Distinguish:
+
+- Getting the first job.
+- Changing employer.
+- Promotion.
+- Salary increase.
+- Transfer or relocation.
+- Starting a business.
+- Business expansion.
+- Career interruption.
+- Resignation or unemployment.
+- Foreign employment.
+
+Use the following combination:
+
+Natal promise + Dasha activation + transit trigger.
+
+Check the 10th lord, 6th lord, 2nd lord, 11th lord, 7th lord and relevant 3rd, 4th, 8th and 12th-house connections.
+
+Calculate actual Mahadasha and Antardasha dates.
+
+Use transits to refine the timing, not to manufacture events that are unsupported by the natal chart.
+
+Do not predict an exact job-change date without correctly calculated Dasha dates and transit positions.
+
+PHASE 5 — LIBRA ASCENDANT SPECIAL ANALYSIS
+
+Use the supplied Bhrigu Samhita document as a dedicated Libra reference.
+
+For Libra:
+
+- 10th house: Cancer.
+- 10th lord: Moon.
+
+Support detailed combinations, including:
+
+- Moon in all 12 houses.
+- Every planet in the 10th.
+- Moon's conjunctions and aspects.
+- Exalted Moon in Taurus in the 8th.
+- Exalted Moon conjunct Mars.
+- Mercury in Cancer in the 10th.
+- Relevant Dasha and transit activation.
+
+The Libra examples must not become fixed interpretations for every Libra native. Use each person's actual degrees, planetary strength, aspects, D9 and D10.
+
+PHASE 6 — INTERNET RESEARCH AND CLASSICAL SOURCE VALIDATION
+
+Use these additional online references to expand and verify the prediction methodology:
+
+Phaladeepika Chapter V:
+https://www.wisdomlib.org/hinduism/book/phaladeepika-by-mantreswara-text-and-translation/d/doc1621577.html
+
+Phaladeepika Chapter XV:
+https://www.wisdomlib.org/hinduism/book/phaladeepika-by-mantreswara-text-and-translation/d/doc1621587.html
+
+Phaladeepika Chapter XX:
+https://www.wisdomlib.org/hinduism/book/phaladeepika-by-mantreswara-text-and-translation/d/doc1621592.html
+
+Phaladeepika Chapter XXVI:
+https://www.wisdomlib.org/hinduism/book/phaladeepika-by-mantreswara-text-and-translation/d/doc1621598.html
+
+BPHS Chapter 21 — Karma Bhava:
+https://enjoylearningsanskrit.com/scriptures/parashara/chapter-21/
+
+BPHS Chapter 6 — Divisional charts and Dashamsha:
+https://vedicpupil.in/library/books/brihat-parashara-hora-shastra/chapter-6
+
+Verify the Sanskrit verses and English translations where possible.
+
+Do not copy large copyrighted book translations into the application. Create concise structured summaries with source references.
+
+Do not blindly accept online interpretations as classical rules. Distinguish original textual rules, modern astrological interpretations and Gochar's own synthesis.
+
+PHASE 7 — OUTPUT WHEN A USER TAPS THE 10TH HOUSE
+
+The prediction should have these sections:
+
+1. Career overview.
+2. Professional personality and working style.
+3. Most suitable career directions.
+4. Employment versus business potential.
+5. Strength of the 10th house and its lord.
+6. Planetary combinations and aspects.
+7. D9 and D10 confirmation.
+8. Career challenges and obstacles.
+9. Promotion and salary-growth potential.
+10. Job-change possibilities.
+11. Current Mahadasha and Antardasha effects.
+12. Important upcoming career periods.
+13. Transit-based timing.
+14. Classical references supporting the conclusion.
+
+Give detailed explanations, not just one-line planetary descriptions.
+
+Clearly separate positive, challenging and mixed indicators.
+
+If the chart does not contain sufficient information, state what is missing rather than inventing it.
+
+PHASE 8 — TECHNICAL IMPLEMENTATION
+
+Before coding, inspect the existing Gochar architecture.
+
+Use deterministic backend calculations for:
+
+- House ownership.
+- Planetary degrees.
+- Navamsa.
+- Dashamsha.
+- Planetary aspects.
+- Planetary strength.
+- Vimshottari Dasha.
+- Transit calculations.
+
+Use AI for interpretation and synthesis after these calculations are available.
+
+Keep all calculations reproducible using the selected ayanamsha and chart settings.
+
+Preserve existing chart, transit, Ashtakvarga, Shadbala and other features.
+
+Ensure the system uses persistent storage and works after deployment or restart.
+
+PHASE 9 — TESTING
+
+Test the following:
+
+1. All 12 Ascendants.
+2. All nine planets in the 10th house.
+3. Different 10th-lord placements.
+4. Different Navamsa-lord profession combinations.
+5. Strong and weak 10th lords.
+6. Benefic and malefic aspects.
+7. D9 and D10 combinations.
+8. Multiple Mahadasha and Antardasha combinations.
+9. Career change versus promotion versus transfer.
+10. The supplied Libra Ascendant example.
+
+Verify that all source references are retrievable and the prediction is based on the actual chart.
+
+FINAL REQUIREMENT
+
+Do not just create another career interpretation page.
+
+Integrate a reusable, chart-aware Career Prediction Engine into Gochar's actual analysis system.
+
+When a person taps the 10th house, the engine should combine classical knowledge, calculated horoscope data, Dasha periods and transits to produce an individualized career prediction.
+
+First inspect the existing code and report the implementation plan. Then implement, test and verify the complete integration.

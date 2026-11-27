@@ -1,0 +1,51 @@
+GOCHAR — TRANSIT-FIRST PREDICTION INTEGRATION
+
+Upgrade the prediction engine so it ALWAYS considers current and upcoming planetary transits before generating any astrological prediction.
+
+Do not generate predictions using natal chart placements or Dasha alone.
+
+For every house, planet, yoga, career, marriage, finance, health or other prediction, follow this methodology:
+
+1. Natal chart: Establish the person's underlying life potential and promises.
+2. Dasha: Identify the currently active Mahadasha, Antardasha and relevant sub-periods.
+3. Current transits: Calculate the actual positions of all nine Vedic planets using the current date and selected ayanamsha.
+4. Transit interaction: Examine how transiting planets influence:
+   - Relevant natal houses.
+   - Relevant house lords.
+   - Natal planets.
+   - Dasha lords.
+   - Relevant divisional charts where applicable.
+5. Upcoming transits: Identify significant upcoming planetary sign changes, conjunctions, aspects and retrograde periods.
+6. Timing: Combine natal promise, Dasha activation and transit triggers to identify periods when an event is more or less likely.
+7. Final prediction: Combine everything into one coherent personalized interpretation.
+
+TRANSIT RULES
+
+- Consider Jupiter, Saturn, Rahu, Ketu, Mars, Venus, Mercury, Sun and Moon.
+- Apply traditional Vedic planetary aspects correctly.
+- Consider retrograde and direct motion.
+- Distinguish temporary transit effects from permanent natal promises.
+- Check transits from both Ascendant and Moon where relevant.
+- Do not treat every transit as equally important.
+- Give greater weight to transits activating relevant natal houses, lords and Dasha periods.
+- Use actual astronomical positions and dates, not assumed or outdated transit data.
+
+TIMING OUTPUT
+
+Where possible, provide:
+
+- Current planetary influence.
+- Upcoming favourable periods.
+- Challenging periods.
+- Potential event windows.
+- Important transit dates and their expected effects.
+
+Never claim that an event is guaranteed solely because of a transit.
+
+IMPORTANT
+
+Transit analysis is mandatory for every prediction, not an optional additional section.
+
+If reliable current transit calculations are unavailable, disclose that limitation rather than inventing planetary positions.
+
+Keep all calculations and analysis internal. Show users only the final combined prediction, not the behind-the-scenes processing.

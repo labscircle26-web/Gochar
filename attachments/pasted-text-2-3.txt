@@ -1,0 +1,58 @@
+UI Enhancement: Edit Time / Place Popup Modal
+
+Change the behaviour of the existing Edit time / place button.
+
+Currently, clicking it should open a popup modal instead of displaying editable settings directly on the page.
+
+1. Popup Window
+
+When the user clicks Edit time / place:
+
+- Open a centered modal popup.
+- Display all existing editable time and location settings inside it.
+- Preserve the existing input fields and functionality.
+- Use the application's premium dark theme with subtle champagne-gold accents.
+
+2. Modal Header
+
+- Add a suitable title: Edit Time & Location.
+- Add an X (close) button in the top-right corner.
+- The X button must cancel editing and close the popup.
+- Closing without applying must discard temporary changes and preserve the previously applied settings.
+
+3. Apply Button
+
+Add a prominent golden Apply button at the bottom of the popup.
+
+When clicked:
+
+- Validate the entered date, time and location.
+- Apply the updated settings.
+- Recalculate planetary positions and transit information using the updated values.
+- Refresh the Kundli and Drishti overlays accordingly.
+- Close the popup after successful application.
+
+4. Important Behaviour
+
+- Opening the popup should populate fields with the currently applied settings.
+- Editing fields must not immediately change the live chart.
+- Only Apply commits the changes.
+- X cancels all unapplied changes.
+- Prevent accidental loss of previously applied settings.
+- Do not reset saved birth charts or unrelated preferences.
+
+5. Responsive Design
+
+- Desktop: centered modal with appropriate width.
+- Mobile: comfortably sized popup that fits the screen, with internal scrolling if necessary.
+- Keep Apply accessible at the bottom.
+- Keep X visible at the top-right.
+- Prevent background scrolling while the modal is open.
+
+6. Final Testing
+
+Test opening, editing, applying, cancelling, reopening and validating invalid inputs.
+
+Preserve all existing time, timezone, geolocation and astronomical calculation functionality.
+
+Do not redesign the entire page. Only change the Edit time / place interaction into a proper Apply/Cancel modal workflow.

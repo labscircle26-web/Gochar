@@ -1,0 +1,341 @@
+PHALADEEPIKA — CAREER, PROFESSION, 10TH HOUSE & EMPLOYMENT TIMING
+A structured reference for Gochar's astrology knowledge library
+
+SOURCE AND METHOD
+Primary source: Mantreswara, Phaladeepika, English translation by Panditabhushana V. Subrahmanya Sastri, revised/enlarged second edition, 1950.
+This file is an original, structured paraphrase of the career-relevant rules, not a verbatim reproduction of the English translation. Chapter and sloka references are supplied so the source can be checked. Historical occupational examples are translated into modern occupational categories only as interpretive equivalents; they are not exact predictions of modern job titles.
+
+IMPORTANT INTERPRETIVE RULE
+Do not predict employment, promotion, unemployment or job change from one placement alone. Combine: (1) 10th house and its lord, (2) planets occupying or influencing the 10th, (3) 10th-lord Navamsa and its dispositor, (4) natural 10th-house significators, (5) strength/affliction and house condition, (6) relevant Mahadasha/Antardasha, and (7) transit triggers. Give stronger conclusions only when several independent factors agree.
+
+CONTENTS
+1. The 10th house: what it signifies
+2. Phaladeepika's core livelihood method
+3. Profession from the Navamsa lord of the 10th lord
+4. Each planet placed in the 10th house
+5. How to judge the strength of the 10th house
+6. Career-related yogas and status combinations
+7. Dasha and Antardasha rules relevant to employment
+8. Transit rules relevant to career timing
+9. Libra Ascendant application framework
+10. Suggested Gochar prediction workflow
+11. Source map and verification notes
+
+------------------------------------------------------------
+1. THE 10TH HOUSE: WHAT IT SIGNIFIES
+------------------------------------------------------------
+Phaladeepika, Chapter I, Sloka 15, includes the following among the significations of the 10th house:
+- Trade and professional activity.
+- Position, rank, status and authority.
+- Honour, recognition, reputation and public standing.
+- Work, action, occupation and livelihood.
+- Achievement, success, command and responsibility.
+- Conduct and the manner in which a person carries out duties.
+
+For career analysis, the 10th house should therefore be read as more than a job title. It includes the person's work, professional standing, responsibility, public reputation and ability to achieve or complete undertakings.
+
+The 6th house is relevant to service, employment conditions, co-workers, competition, duties, disputes and overcoming rivals. The 2nd and 11th houses help assess earnings and income; the 7th can be relevant to trade, clients, contracts and independent business. These are supporting houses in a modern applied career assessment and should not replace the book's direct 10th-house rules.
+
+Natural significators of the 10th house: Chapter XV, Sloka 17, names Jupiter, the Sun, Mercury and Saturn as the 10th-house karakas. Treat them as supporting indicators, not substitutes for the actual 10th lord and house.
+
+------------------------------------------------------------
+2. PHALADEEPIKA'S CORE LIVELIHOOD METHOD
+------------------------------------------------------------
+Chapter V, Sloka 1, gives a specific method:
+
+A. Compare the strength of the Ascendant and Moon as reference points. The book considers the 10th from the stronger reference when judging the source of livelihood/wealth.
+
+B. It also considers the 10th from the Ascendant, Moon and Sun, taking account of which reference is stronger.
+
+C. The kind of profession is judged through the lord of the Navamsa occupied by the 10th lord. In practical terms: identify the 10th lord, calculate its Navamsa sign, identify the lord of that Navamsa, and interpret that planet's occupational significations.
+
+D. Do not stop at the Navamsa-lord label. Chapter V, Sloka 9, says the strength of the Navamsa lord matters: a strong Navamsa lord supports easier or more substantial acquisition, while a weak one limits the result. The 10th sign and the Navamsa occupied by the 10th lord are also used in considering the place where livelihood is obtained. The verse distinguishes earning in one's own region from earning away from one's place of origin according to lordship, occupation/aspect and sign quality.
+
+Operational checklist:
+1. Find D1 Lagna, Moon and Sun.
+2. Compare their strength using the chart's chosen strength system; do not choose the strongest reference by guesswork.
+3. Locate the relevant 10th house and its lord.
+4. Calculate the exact Navamsa occupied by the 10th lord.
+5. Identify the Navamsa lord and assess its dignity, house, strength, conjunctions and aspects.
+6. Cross-check the actual 10th house, 10th lord, 10th-house karakas and Dasha before naming a profession.
+
+------------------------------------------------------------
+3. PROFESSION FROM THE NAVAMSA LORD OF THE 10TH LORD
+------------------------------------------------------------
+Phaladeepika, Chapter V, Slokas 2–8. The following is a modernized, interpretive grouping of the traditional occupational examples.
+
+SUN NAVAMSA (Sloka 2)
+Traditional categories include service under a ruler or respected authority, metals, medicines, trees/fruit-bearing produce, and religious or mantra-related activity. Modern occupational families to test against the full chart: government, administration, public authority, leadership, regulated institutions, metallurgy/materials, healthcare/pharmaceuticals, agriculture/forestry and religious or institutional work. The verse also lists unethical income sources; these should be treated as historical cautions about misuse of authority or irregular conduct, not as a deterministic accusation.
+
+MOON NAVAMSA (Sloka 3)
+Traditional categories include water-derived goods, pearls/corals, agriculture, cattle/livestock, pilgrimage-related activity, clothing and service. Modern occupational families: liquids, food/agriculture, farming and animal husbandry, hospitality, travel or pilgrimage services, textiles, garments, retail and care/service work.
+
+MARS NAVAMSA (Sloka 4)
+Traditional categories include metals, battle, cooking, land, gold, weapons and daring/adventurous activity. Modern occupational families: engineering, machinery, metalwork, defence, police/security, surgery/emergency work, construction, land/property, manufacturing, kitchens/food operations and high-risk technical work. The exact field depends on dignity, aspects and the rest of the horoscope.
+
+MERCURY NAVAMSA (Sloka 5)
+Traditional categories include poetry, writing, clerical/scribe work, scriptures, astrology, calculation, learning and priestly or advisory activity. Modern occupational families: writing, publishing, documentation, accounting, data, commerce, communication, education, analytics, software/information work, astrology, consulting and administrative coordination.
+
+JUPITER NAVAMSA (Sloka 6)
+Traditional categories include religious institutions, royal or institutional favour, Puranas and sacred learning, scriptures, moral instruction, teaching and lending. Modern occupational families: education, teaching, law, policy, advising, finance/credit, institutional leadership, ethics/compliance, religious institutions and knowledge-based professions.
+
+VENUS NAVAMSA (Sloka 7)
+Traditional categories include women-related patronage/service, livestock, horses/elephants, music and performance, silver, scents, milk, ornaments, silk and poetry. Modern occupational families: arts, music, performance, design, fashion, beauty, luxury goods, jewellery, textiles, hospitality, entertainment, lifestyle products and client-facing creative work.
+
+SATURN NAVAMSA (Sloka 8)
+Traditional categories include roots/fruits, physical labour, carrying loads, servants, agriculture, woodwork, sculpture and manual trades. Modern occupational families: agriculture, food supply chains, logistics, manufacturing, construction, crafts, woodworking, mining/material handling, maintenance, operations and labour-intensive work. The quality and status of the work must be judged from Saturn's strength and associations, not from the Navamsa label alone.
+
+STRENGTH AND PLACE (Sloka 9)
+A strong lord of the Navamsa occupied by the 10th lord supports more effortless or substantial livelihood results; a weak one reduces the ease or amount of gain. The verse also connects earning in one's own land versus elsewhere with the 10th sign, the 10th lord's Navamsa, and whether the relevant signs are occupied/aspected by their lords or by other planets.
+
+------------------------------------------------------------
+4. EACH PLANET PLACED IN THE 10TH HOUSE
+------------------------------------------------------------
+Phaladeepika, Chapter VIII, gives individual results for planets in the 10th house. The notes below summarize the text's broad indications. They are general placement results; for a real chart, modify them by sign, house lordship, dignity, strength, aspects, conjunctions and Dasha.
+
+SUN IN THE 10TH (Chapter VIII, Sloka 4)
+The text associates the Sun in the 10th with authority, recognition, wealth, intelligence, strength, vehicles and fame. Interpret as leadership, visibility, government or institutional authority, command and public responsibility. Judge whether the Sun is strong, afflicted, combusting other planets, and how it relates to the 10th lord.
+
+MOON IN THE 10TH (Chapter VIII, Sloka 7)
+The text associates the Moon in the 10th with good acts and support to virtuous people. Interpret as public-facing service, responsiveness, care, adaptability and work connected with public needs. Waxing/waning condition and lunar strength should be checked; do not treat every Moon placement identically.
+
+MARS IN THE 10TH (Chapter VIII, Sloka 10)
+The text gives a powerful, commanding and forceful result, with praise from important people, while also warning of harshness/cruelty. Interpret as drive, courage, command, engineering/technical work, operations, defence, competition and decisive action. Check whether this force is disciplined or becomes conflict, impatience or workplace friction.
+
+MERCURY IN THE 10TH (Chapter VIII, Sloka 13)
+The text gives success in undertakings, learning, strength, intelligence, happiness, good conduct and truthfulness. Interpret as communication, analysis, commerce, writing, calculation, administration, teaching, technology and intellectual work. Evaluate Mercury's sign, dignity, associations and whether it is combust or afflicted.
+
+JUPITER IN THE 10TH (Chapter VIII, Sloka 16)
+The text gives right conduct, virtue, wealth and favour from authority. Interpret as teaching, advising, law, ethics, finance, institutional leadership, policy and respected professional status. Its ability to deliver depends on actual strength and functional lordship.
+
+VENUS IN THE 10TH (Chapter VIII, Sloka 19)
+The text gives broad recognition, friends and being happily employed/in a respected position. Interpret as popularity, client relations, creative work, design, arts, luxury, diplomacy, hospitality and professional relationships. Judge dignity, combustion, conjunctions and the 10th lord.
+
+SATURN IN THE 10TH (Chapter VIII, Sloka 23)
+The text associates Saturn with high responsibility or authority, ministerial/administrative roles, agriculture, courage, wealth and reputation. Interpret as structured work, administration, systems, long-term effort, operations, infrastructure and responsibility. Saturn often requires assessment of delay, duty and sustained effort as well as eventual status. Note the textual caution in Chapter XVI discussed below: the book has a separate group statement about Rahu, Saturn and Ketu in the 10th, so Saturn should not be called uniformly favourable from one verse alone.
+
+RAHU IN THE 10TH (Chapter VIII, Sloka 27)
+The text associates Rahu with fame, fearlessness and involvement in other people's affairs/business, while warning about conduct. Modern interpretive possibilities include unusual or non-traditional career paths, public visibility, foreign-linked or large-scale networks, unconventional work and strong ambition. These are interpretive possibilities, not a direct list of modern occupations. Check Rahu's dispositor and conjunctions carefully.
+
+KETU IN THE 10TH (Chapter VIII, Sloka 32)
+The text describes obstacles to virtuous action, energetic or bold behaviour and notoriety/renown. Interpret as non-linear professional direction, detachment from conventional status, specialised or solitary work, sudden redirection, or a reputation that can be mixed. Judge Ketu through its dispositor and associated planets; avoid a fixed prediction of failure.
+
+IMPORTANT CONTRAST WITH CHAPTER XVI
+Chapter XVI, Slokas 27–28, also gives broader 10th-house rules: a benefic in the 10th, together with a strong 10th lord in a Kendra/Trikona in own or exaltation dignity, or the Lagna lord in the 10th, supports honour, reputation and virtuous public action. Sun or Mars in the 10th with a well-placed 10th lord can support major, courageous undertakings.
+
+The 1950 English translation also contains a group caution about Rahu, Saturn and Ketu in the 10th in the same broader discussion. This sits uneasily beside the individual Saturn-in-10th result in Chapter VIII. Gochar must preserve this difference rather than flatten it into a single unconditional result: inspect dignity, lordship, associations, benefic support and the rest of the horoscope.
+
+------------------------------------------------------------
+5. HOW TO JUDGE THE STRENGTH OF THE 10TH HOUSE
+------------------------------------------------------------
+Phaladeepika, Chapter XV, especially Slokas 1–6 and 17–19, gives a systematic method for assessing any Bhava.
+
+A. HOUSE OCCUPATION AND ASPECTS
+A house is supported when it is occupied or aspected by benefics or its own lord, and is free from harmful malefic association/aspect. Results become mixed when benefic and malefic influences are mixed. A strong lord alone does not remove the need to inspect the house itself.
+
+B. SUPPORTING POSITIONS
+The text considers the house's trinal positions and the 2nd, 4th, 7th and 10th from it. Benefic or lordly support in these positions strengthens the Bhava; contrary malefic occupation/aspect weakens it. For a 10th-house analysis, assess the corresponding support positions from the 10th as part of the classical method.
+
+C. CONDITION OF THE HOUSE LORD
+A house lord in the 6th, 8th or 12th, or in debility, combustion or an enemy sign, is a warning factor, particularly when it lacks benefic aspect or conjunction. A benefic aspect can mitigate or restore some support. Multiple agreeing conditions are more persuasive than one isolated affliction.
+
+D. KARAKAS
+The 10th-house natural karakas named in Chapter XV, Sloka 17, are Jupiter, Sun, Mercury and Saturn. Assess their strength and relevance, but do not treat them as the functional 10th lord.
+
+E. ASHTAKAVARGA
+Phaladeepika has separate chapters on Ashtakavarga and transit. Use relevant bindu support as an additional timing/strength check only if Gochar's calculation engine has reliable planetary and house data. Do not invent scores when the source chart lacks them.
+
+------------------------------------------------------------
+6. CAREER-RELATED YOGAS AND STATUS COMBINATIONS
+------------------------------------------------------------
+A. STRONG 10TH HOUSE AND LORD (Chapter XVI, Sloka 27)
+A benefic occupying the 10th, with a strong 10th lord in a Kendra or Trikona in own or exaltation dignity, is described as supporting public respect, reputation, virtuous conduct and high status. A strong Lagna lord in the 10th is also described as a major status indicator.
+
+B. SUN OR MARS IN THE 10TH (Chapter XVI, Sloka 28)
+Sun or Mars in the 10th can support power, influence and major undertakings when the 10th lord is also well placed. The 10th lord's condition is the deciding modifier; do not declare leadership from Sun/Mars alone.
+
+C. AMALA YOGA (Chapter VI, Slokas 19–20)
+The text defines Amala Yoga when benefic planets occupy the 10th house counted from the Lagna or from the Moon. It describes the result as favourable for reputation, prosperity, prudence and public standing. The engine must test the exact 10th-from-Lagna and 10th-from-Moon conditions separately and identify which one is satisfied. Do not declare Amala Yoga merely because a benefic aspects the 10th or is placed in another nearby house.
+
+D. RESULTS DEPEND ON STRENGTH
+The same placement may produce a more constructive result when the planet is strong, dignified and benefically supported, and a more difficult or unstable result when weak, combust, debilitated, in an enemy sign or afflicted. Chapter XV's house-strength rules must qualify all yoga statements.
+
+------------------------------------------------------------
+7. DASHA AND ANTARDASHA RULES RELEVANT TO EMPLOYMENT
+------------------------------------------------------------
+Phaladeepika, Chapter XIX, Slokas 2–3, gives the Vimshottari sequence and planetary years:
+Sun 6 years; Moon 10; Mars 7; Rahu 18; Jupiter 16; Saturn 19; Mercury 17; Ketu 7; Venus 20. The cycle totals 120 years. Use the native's birth nakshatra and remaining nakshatra balance to calculate the starting Mahadasha accurately.
+
+Chapter XX, Slokas 1–14 and 21–22, provides house-lord Dasha principles.
+
+10TH LORD DASHA — STRONG (Chapter XX, Sloka 11)
+When the 10th lord is strong, its Dasha is associated with completing undertakings already begun, professional success, reputation, establishment in a stable position, respect and favourable professional developments. This is a direct and especially relevant career timing rule.
+
+10TH LORD DASHA — WEAK (Chapter XX, Sloka 19)
+When the 10th lord is weak, the text describes failure of undertakings, loss of honour, trouble and adverse developments. The software must determine weakness from dignity, placement, combustion, aspects and other strength conditions rather than assuming weakness from house position alone.
+
+6TH LORD DASHA — STRONG (Chapter XX, Sloka 7)
+A strong 6th lord's Dasha is associated with overcoming enemies through bold effort, strength and prosperity. In a modern employment reading, this can support competitive examinations, workplace competition, resolving disputes, defeating professional rivals or handling difficult duties. It does not by itself guarantee a new job.
+
+11TH LORD DASHA — STRONG (Chapter XX, Sloka 12)
+A strong 11th lord's Dasha is associated with inflow of wealth and prosperity. Use it as a potential income/gains period, especially when linked with the 10th lord or career significators.
+
+GENERAL Dasha QUALITY (Chapter XX, Sloka 14 and 21–22)
+Planets in own, exalted or friendly signs, retrograde as described by the text, or placed in good houses, are treated more favourably than planets in debility, enemy signs, combustion or the 6th/8th/12th. The Dasha results also incorporate the planet's house lordships, occupation, conjunctions, aspects and profession indications from earlier chapters. Vargottama placement is separately noted as supportive.
+
+JOB CHANGE: HOW TO APPLY THE BOOK WITHOUT OVERCLAIMING
+Phaladeepika does not offer a single universal formula named "job change". Use the rules above to assess whether a period activates (a) the 10th lord/profession, (b) the 6th house/service and competition, (c) the 11th house/gains, and (d) difficult or transformative houses affecting continuity. A change prediction should require more than one agreeing Dasha/Antardasha and transit factor. Distinguish promotion, transfer, employer change, business start, temporary interruption and loss of employment rather than calling every career event a job change.
+
+------------------------------------------------------------
+8. TRANSIT RULES RELEVANT TO CAREER TIMING
+------------------------------------------------------------
+Phaladeepika, Chapter XXVI, Slokas 1–3 onwards, emphasizes transit results counted from the natal Moon (Janma Rasi) and discusses Vedha obstructions. It is therefore important to keep two different calculations separate:
+(1) transit through the natal 10th house from the Ascendant; and
+(2) transit through the 10th from the natal Moon.
+Do not merge these as if they were the same rule.
+
+A. GENERAL FAVOURABLE TRANSIT POSITIONS FROM THE MOON (Chapter XXVI, Sloka 2)
+The text lists the following positions as generally favourable when counted from the natal Moon:
+- Sun: 3rd, 6th and 10th.
+- Moon: 1st, 3rd, 6th, 7th and 10th.
+- Jupiter: 2nd, 5th, 7th and 9th.
+- Mars and Saturn: 3rd and 6th.
+- Mercury: 2nd, 4th, 6th, 8th and 10th.
+- All planets: 11th.
+- Venus: positions other than 6th, 7th and 10th.
+- Rahu and Ketu: treated similarly to the Sun in this general rule.
+
+B. SPECIFIC CAREER-RELATED TRANSITS FROM THE NATAL MOON
+These are the book's individual transit interpretations, not universal modern guarantees:
+- Sun through the 10th from the Moon: completion of a major undertaking; through the 11th: new position, honour, wealth and recognition (Chapter XXVI, Sloka 11).
+- Mars through the 10th from the Moon: risk of failure in efforts, questionable conduct or exhaustion; through the 11th: financial gain (Sloka 16).
+- Mercury through the 10th from the Moon: the sequence in Sloka 17 gives general happiness; through the 9th: impediments; through the 11th: prosperity.
+- Jupiter through the 10th from the Moon: the text gives a caution about danger to position/property; through the 11th: new position and honour may arise (Sloka 20).
+- Venus through the 10th from the Moon: the text warns of quarrels; through the 11th: safety (Sloka 21).
+- Saturn through the 10th from the Moon: the text warns of loss of honour and possible illness; through the 11th: happiness, wealth and honour (Sloka 23).
+
+C. VEDHA AND CONFIRMATION
+The chapter discusses Vedha obstruction for transit results. A software prediction should check the corresponding Vedha condition where required and avoid presenting a favourable transit as certain when its stated obstruction is active.
+
+D. TRANSIT IS A TRIGGER, NOT THE WHOLE PREDICTION
+A job change should not be announced solely because Jupiter, Saturn or another planet crosses the 10th. First establish the natal promise and Dasha activation, then use transits to narrow the timing. Distinguish a transit from the Ascendant-based natal 10th from a transit counted from Moon.
+
+------------------------------------------------------------
+9. LIBRA ASCENDANT APPLICATION FRAMEWORK
+------------------------------------------------------------
+This section applies the book's general methods to Libra rising. The house-sign mapping is standard whole-sign Vedic astrology calculation; it is not presented as a special Libra-only verse in Phaladeepika.
+
+For Libra Ascendant:
+- 10th house is Cancer.
+- 10th lord is Moon.
+- The Moon's sign, house, dignity, Navamsa, paksha bala, aspects, conjunctions and dispositor are central to career assessment.
+- The 10th-house karakas named by Phaladeepika remain Jupiter, Sun, Mercury and Saturn.
+- The Moon's Navamsa lord is used in the Chapter V livelihood method to derive occupational themes.
+
+IF THE 10TH LORD MOON IS IN TAURUS IN THE 8TH HOUSE WITH MARS
+Treat this as a worked interpretation framework, not an automatic prediction:
+1. Moon in Taurus is exalted by sign, which is an important dignity factor. Check exact degree, paksha bala, aspects, conjunction strength and the condition of Venus as dispositor.
+2. The Moon is still placed in the 8th house from Libra Lagna. Chapter XV warns that a house lord in the 6th/8th/12th can weaken the house it owns, especially if the lord lacks benefic support. However, exaltation and benefic aspects must be weighed; do not declare career destruction from the 8th-house placement alone.
+3. The 8th-house connection can be interpreted as work involving change, restructuring, confidential matters, research, risk, crisis response, shared resources, insurance, taxation, investigation or other complex systems. These are modern interpretive extensions from 8th-house themes, not a direct occupation list from Chapter V.
+4. Mars is conjunct the 10th lord. For Libra rising Mars owns the 2nd and 7th houses; this links career themes with wealth, speech, clients, agreements, partnerships and public dealings. The result depends on Mars's exact degree, condition, aspects and dispositor. Do not call the conjunction automatically beneficial or harmful.
+5. Assess whether the 10th house Cancer receives benefic or malefic aspects, whether its lord is protected, and whether the 10th-house karakas are strong.
+6. During Moon Mahadasha/Antardasha, career matters may be activated because Moon is the 10th lord; the outcome still depends on its overall strength and connections. During Mars periods, examine the conjunction and Mars's lordships. Do not issue timing without actual Dasha dates and current transits.
+7. D10 should be used as a secondary professional confirmation chart only when birth time is reliable. Phaladeepika discusses divisional charts and Dasamsa as part of varga assessment; do not let D10 override the D1 promise without justification.
+
+CAREER THEMES TO TEST, NOT ASSUME
+- Research, investigation, audit, compliance, tax, insurance or risk-related fields.
+- Work connected to other people's money, shared assets, confidential information or sensitive records.
+- Crisis management, troubleshooting, diagnostics, restructuring and transformation projects.
+- Client, partnership or contract-linked professions due to Mars's 7th-house ownership.
+- Earnings and commercial negotiation themes due to Mars's 2nd-house ownership.
+A prediction engine should rank these only after checking Navamsa, aspects, D10, strength and Dasha rather than presenting all as simultaneous certainties.
+
+------------------------------------------------------------
+10. SUGGESTED GOCHAR PREDICTION WORKFLOW
+------------------------------------------------------------
+When a user taps the 10th house, the engine should follow this sequence:
+
+STEP 1 — NATAL 10TH HOUSE
+Return sign, house occupants, aspects, house strength, and 10th lord's exact placement. Identify any missing birth-time uncertainty.
+
+STEP 2 — 10TH LORD
+Evaluate sign dignity, house, combustion, retrogression, planetary war if applicable, paksha bala for Moon, Shadbala, conjunctions, aspects and dispositor.
+
+STEP 3 — PROFESSION METHOD (PHALADEEPIKA V)
+Calculate the 10th lord's Navamsa and Navamsa lord. Use that planet's occupational categories as primary career themes, modified by D1 and natural significators.
+
+STEP 4 — PLANETS IN THE 10TH (PHALADEEPIKA VIII)
+Use the relevant planet's general 10th-house description, but modify it for functional lordship, sign, dignity, associations and aspects. Do not simply paste a generic planet result.
+
+STEP 5 — HOUSE STRENGTH (PHALADEEPIKA XV–XVI)
+Assess the 10th house, its lord, benefic/malefic support, natural karakas, and agreement among multiple conditions. Label the result strong, mixed or weak with a reason.
+
+STEP 6 — CAREER PROMISE AND STATUS
+Separate profession type, employment versus independent practice, reputation, authority, stability, income and workplace competition. Use 6th/7th/2nd/11th houses as supporting houses.
+
+STEP 7 — DASHA ACTIVATION (PHALADEEPIKA XIX–XX)
+Check Mahadasha and Antardasha lords, their houses and lordships, strength, associations and relation to 10th/6th/11th houses. Give a time window only when dates have been computed from the birth data.
+
+STEP 8 — TRANSIT TIMING (PHALADEEPIKA XXVI)
+Check transits from natal Moon and natal Ascendant separately. Include Vedha where the rule requires it. Use transits to time or trigger an already-promised event, not create a career promise on their own.
+
+STEP 9 — OUTPUT WITH CONFIDENCE
+Return:
+- Main career strengths.
+- Likely occupational families (ranked, not an unfiltered list).
+- Employment/service/business tendencies.
+- Professional reputation and authority.
+- Stability versus change tendencies.
+- Dasha/Antardasha timing windows.
+- Transit support or obstruction.
+- Factors supporting the prediction and factors reducing confidence.
+- Source chapter/sloka references for each classical rule.
+
+Do not predict an exact employer, job title, salary or guaranteed date unless the chart and data genuinely support a narrow claim. Use words such as likely, possible or stronger period where uncertainty remains.
+
+------------------------------------------------------------
+11. SOURCE MAP AND VERIFICATION NOTES
+------------------------------------------------------------
+Primary bibliographic record / complete text and contents:
+Wisdomlib edition page (1950 Sastri translation):
+https://www.wisdomlib.org/hinduism/book/phaladeepika-by-mantreswara-text-and-translation
+
+Chapter V — Profession and Livelihood:
+https://www.wisdomlib.org/hinduism/book/phaladeepika-by-mantreswara-text-and-translation/d/doc1621577.html
+Key references: V.1–9.
+
+Chapter VIII — Effects of Sun and other planets in the 12 houses:
+https://www.wisdomlib.org/hinduism/book/phaladeepika-by-mantreswara-text-and-translation/d/doc1621580.html
+Key references: VIII.4 (Sun), VIII.7 (Moon), VIII.10 (Mars), VIII.13 (Mercury), VIII.16 (Jupiter), VIII.19 (Venus), VIII.23 (Saturn), VIII.27 (Rahu), VIII.32 (Ketu).
+
+Chapter IX — Effects of signs as Ascendant:
+https://www.wisdomlib.org/hinduism/book/phaladeepika-by-mantreswara-text-and-translation/d/doc1621581.html
+Key reference: IX.7 describes Libra rising in general terms, including commercial skill; this is not a full career prediction.
+
+Chapter XV — Method of studying Bhava results:
+https://www.wisdomlib.org/hinduism/book/phaladeepika-by-mantreswara-text-and-translation/d/doc1621587.html
+Key references: XV.1–6 (house strength and affliction), XV.17 (natural house significators).
+
+Chapter XVI — General effects of the 12 Bhavas:
+https://www.wisdomlib.org/hinduism/book/phaladeepika-by-mantreswara-text-and-translation/d/doc1621588.html
+Key references: XVI.27–28 (10th-house status and leadership combinations); also note group caution in the 10th-house discussion.
+
+Chapter XIX — Dasas and their effects:
+https://www.wisdomlib.org/hinduism/book/phaladeepika-by-mantreswara-text-and-translation/d/doc1621591.html
+Key references: XIX.2–3 (Vimshottari order and periods).
+
+Chapter XX — Dasas of house lords and their Bhuktis:
+https://www.wisdomlib.org/hinduism/book/phaladeepika-by-mantreswara-text-and-translation/d/doc1621592.html
+Key references: XX.7 (6th lord Dasha), XX.11 (10th lord Dasha), XX.12 (11th lord Dasha), XX.14 and XX.21–22 (strength and application of Dasha results).
+
+Chapter XXVI — Transits of planets:
+https://www.wisdomlib.org/hinduism/book/phaladeepika-by-mantreswara-text-and-translation/d/doc1621598.html
+Key references: XXVI.1–3 (transits from Moon and Vedha), XXVI.11 (Sun), XXVI.16–17 (Mars and Mercury), XXVI.20 (Jupiter), XXVI.21 (Venus), XXVI.23 (Saturn).
+
+Digitized 1950 English edition at IGNCA:
+https://ignca.gov.in/Asi_data/6945.pdf
+
+TEXT QUALITY NOTE
+The Wisdomlib online transcription explicitly warns that portions of the OCR have not been proofread. The digitized 1950 edition should be consulted for disputed or unclear passages. Some translated statements are historically framed and may appear severe or inconsistent across chapters. Preserve chapter/sloka references and record textual tensions rather than forcing contradictory verses into one rigid rule.
+
+END OF REFERENCE

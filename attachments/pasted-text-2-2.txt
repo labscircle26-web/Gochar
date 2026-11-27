@@ -1,0 +1,77 @@
+New Section: Ashtakavarga
+
+Add a complete Ashtakavarga section immediately below the existing Shadbala section on the same page.
+
+Do not create a separate page or move the existing Shadbala section.
+
+1. Ashtakavarga Overview
+
+Display:
+
+- Sarvashtakavarga (SAV).
+- Individual Bhinnashtakavarga (BAV).
+- Total bindus for each zodiac sign.
+- Sign-wise distribution in a clear visual format.
+
+2. Bhinnashtakavarga (BAV)
+
+Provide individual planetary Ashtakavarga calculations for:
+
+- Sun
+- Moon
+- Mars
+- Mercury
+- Jupiter
+- Venus
+- Saturn
+
+Users should be able to select a planet and inspect its 12-sign bindu distribution.
+
+3. Sarvashtakavarga (SAV)
+
+Display the combined bindu distribution across all 12 zodiac signs.
+
+Include:
+
+- Individual sign totals.
+- Total bindus.
+- A visual comparison of stronger and weaker signs.
+- A traditional North Indian-style Ashtakavarga chart if compatible with the existing design.
+
+4. Transit Integration
+
+Since this application focuses on Gochar, make Ashtakavarga useful for live transit analysis.
+
+When a planet transits a particular zodiac sign:
+
+- Identify the sign it currently occupies.
+- Display the relevant BAV bindu score for that planet in that sign.
+- Display the corresponding SAV score.
+- Show how the bindu score relates to the current transit.
+
+Allow users to inspect historical and future transit signs using the existing transit functionality.
+
+5. Design
+
+- Follow the existing Shadbala section's visual language.
+- Keep both sections on the same page.
+- Use clean tables, charts and expandable details.
+- Maintain mobile responsiveness.
+- Avoid overcrowding.
+
+6. Calculation Accuracy
+
+- Implement authentic classical Vedic Ashtakavarga calculations.
+- Use the correct planetary contribution rules (BAV).
+- Calculate SAV by correctly aggregating the seven planetary BAV systems.
+- Follow the application's existing zodiac, birth-chart and ayanamsa conventions.
+- Do not use fabricated bindu values or placeholder calculations.
+- Validate calculations against reliable traditional reference examples.
+
+7. Testing
+
+Verify all seven BAV calculations, all 12 sign totals, SAV aggregation, and the live transit integration.
+
+Preserve existing Shadbala calculations and functionality.
+
+Important: This must be a functional astronomical/astrological calculation section, not merely a visual UI addition.

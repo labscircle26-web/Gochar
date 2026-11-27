@@ -1,0 +1,43 @@
+UI Bug Fix: Upcoming Celestial Events — Filter Buttons Clipped
+
+Refer to the attached screenshot.
+
+There are four filter buttons underneath the "Upcoming Celestial Events" heading, but they are getting cut off horizontally inside the popup.
+
+1. Fix Filter Button Layout
+
+- Ensure all four filter buttons are completely visible.
+- Keep them inside the popup's content boundaries.
+- Do not allow buttons to extend beyond the modal.
+- Use a responsive grid or properly sized flex layout.
+- If necessary, arrange them in a 2×2 grid on mobile.
+- Maintain consistent button heights, widths, gaps and alignment.
+- Preserve their existing labels and filtering functionality.
+
+2. Fix Modal Content Overflow
+
+- Ensure the modal never exceeds the available mobile screen width.
+- Set appropriate horizontal padding.
+- Prevent child elements from forcing the modal wider than its viewport.
+- Allow vertical scrolling for the event list.
+- Avoid horizontal scrolling unless genuinely necessary.
+- Ensure event cards and their text fit within the popup.
+
+3. Preserve Existing Design
+
+- Keep the existing dark background and gold accents.
+- Preserve the heading and close button.
+- Do not redesign the event cards or change event calculations.
+- Maintain the current visual style on desktop.
+
+4. Mobile Testing
+
+Test on narrow Android screens:
+
+- All four filter buttons must be fully visible.
+- No clipped text or buttons.
+- No horizontal overflow.
+- Event cards must remain within the popup.
+- Close button must remain accessible.
+
+Important: Fix the actual responsive layout and container sizing. Do not simply reduce font sizes to hide the problem.

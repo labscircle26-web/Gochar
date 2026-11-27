@@ -1,0 +1,134 @@
+Feature: Interactive Aspects / Drishti Overlay
+
+Implement a new dropdown control called "Aspects / Drishti" inside both the Live Transit chart and Birth Chart sections.
+
+The purpose is to let users select one or multiple planets and visually see their planetary Drishti through animated aspect lines.
+
+1. Dropdown Control
+
+Add a premium, easily accessible dropdown button labelled:
+
+Aspects / Drishti
+
+When opened, display a multi-select planet list containing:
+
+- Sun
+- Moon
+- Mars
+- Mercury
+- Jupiter
+- Venus
+- Saturn
+- Rahu
+- Ketu
+
+Requirements:
+
+- Allow selection of multiple planets simultaneously.
+- Use checkboxes or selectable planet rows.
+- Show a checkmark beside selected planets.
+- Provide Select All and Clear All options.
+- Keep the dropdown open while users select multiple planets.
+- Display selected planets in the button or a small selection indicator.
+- Make the control work on mobile and desktop.
+
+2. Dynamic Drishti Aspect Lines
+
+Whenever a user selects a planet, immediately display its Drishti aspect lines on the chart.
+
+The aspect lines must:
+
+- Originate visually from the selected planet's actual position.
+- Extend toward every house or planetary position receiving its Drishti.
+- Follow the correct astrological aspect rules.
+- Clearly identify the receiving house and any natal or transiting planets being influenced.
+- Update automatically when planetary positions or selected birth charts change.
+
+If multiple planets are selected, display all their corresponding aspect lines simultaneously.
+
+Do not draw arbitrary lines or connect planets simply for decoration. Every line must represent a mathematically and astrologically valid aspect.
+
+3. Animated Energy / Power Effect
+
+This is an important visual requirement.
+
+Make the aspect lines animated to create the impression of planetary energy being emitted from the source planet and travelling toward the receiving house or planet.
+
+Visual direction:
+
+- A subtle glowing line connecting the source planet to the receiving point.
+- Small luminous particles travelling along the line in the direction of the Drishti.
+- A gentle energy pulse originating from the selected planet.
+- A subtle glow when the energy reaches its receiving point.
+- Continuous but smooth animation.
+- Distinct visual identities for different planets, using a consistent planet-specific colour palette.
+- When multiple planets are selected, their aspect lines should remain visually distinguishable.
+
+The animation should feel celestial, sophisticated and premium, not like a gaming interface.
+
+Avoid excessive flashing, thick overlapping lines, or distracting effects.
+
+4. Birth Chart Integration
+
+Inside Birth Charts:
+
+- Selecting a planet should show its natal Drishti.
+- Draw aspect lines from its natal position to the appropriate houses and planets.
+- Multiple selections should show multiple planets' natal Drishti simultaneously.
+- Switching between saved birth charts must recalculate and redraw all aspects.
+- Changing the selected planets must immediately update the overlay.
+
+5. Live Transit Integration
+
+Inside Live Transit:
+
+- Selecting a planet should show its current transit Drishti.
+- Lines should originate from the planet's current astronomical position.
+- Receiving houses and planets should update as planetary positions change.
+- Keep the overlay synchronized with the existing live transit calculation engine.
+- Multiple selected planets must remain visible simultaneously.
+- Avoid recalculating the entire interface unnecessarily every second.
+
+6. Calculation Rules
+
+Use the application's existing astronomical calculation engine.
+
+Implement classical Parashari Graha Drishti as the default:
+
+- Sun: 7th aspect.
+- Moon: 7th aspect.
+- Mars: 4th, 7th and 8th aspects.
+- Mercury: 7th aspect.
+- Jupiter: 5th, 7th and 9th aspects.
+- Venus: 7th aspect.
+- Saturn: 3rd, 7th and 10th aspects.
+
+Rahu and Ketu must be included in the selection list. Their aspect rules should be configurable according to the selected Vedic tradition, rather than silently assuming every tradition uses the same rules.
+
+Clearly distinguish sign/house-based Graha Drishti from exact degree-based angular aspects. Do not invent aspect connections.
+
+7. Interaction and Performance
+
+- Clicking a selected planet again should deselect it and remove its lines.
+- Clear All should remove every aspect overlay.
+- The feature must not interfere with chart navigation, zooming, scrolling or existing interactions.
+- Animations should be lightweight using SVG, CSS or existing animation libraries.
+- Respect reduced-motion accessibility preferences.
+- Avoid memory leaks and duplicated animation loops.
+- Preserve the existing chart design and theme system.
+
+8. Final Testing
+
+Test the following:
+
+1. Selecting each planet individually.
+2. Selecting all nine planets together.
+3. Selecting multiple planets and checking overlapping aspects.
+4. Clearing all selections.
+5. Switching between different birth charts.
+6. Switching between Live Transit and Birth Chart.
+7. Confirming every line corresponds to a valid calculated Drishti.
+8. Checking animation smoothness on mobile and desktop.
+9. Confirming no existing chart functionality is broken.
+
+Final objective: The user should be able to open Aspects / Drishti, select any combination of planets, and instantly see those planets emitting animated Drishti energy lines toward their actual receiving houses and planets in both Live Transit and Birth Charts.

@@ -1,0 +1,97 @@
+UI Refinement: Remove Information Text & Standardize All Dropdowns
+
+Refer to the two attached screenshots.
+
+1. Remove Unnecessary Information Lines
+
+Screenshot 1 — Drishti dropdown
+
+Remove the small explanatory text at the bottom of the dropdown:
+
+"Whole-sign Parashari drishti. The seven grahas keep their classical aspects. Nodes follow the choice above, after Apply."
+
+Remove this entire text block.
+
+Keep:
+
+- Planet selection.
+- Select All.
+- Clear All.
+- Rahu and Ketu aspect options.
+- Apply button.
+
+Adjust the spacing so the dropdown becomes more compact.
+
+Screenshot 2 — Main Gochar screen
+
+Remove the informational text underneath the Edit time / place and Now buttons:
+
+"Lahiri ayanamsa 24° 13′ 42″. Sidereal longitude is the tropical ecliptic minus this ayanamsa. Geocentric positions from Astronomy Engine."
+
+Remove this entire informational line from the visible interface.
+
+Do not remove or modify the actual Lahiri ayanamsa or astronomical calculations. Only remove the displayed explanatory text.
+
+2. Fix Drishti Dropdown Appearance
+
+Currently, the Drishti dropdown looks like an independent floating window rather than a menu expanding from its button.
+
+Redesign its presentation so it looks physically connected to the Aspects / Drishti button.
+
+Requirements:
+
+- Open directly underneath its triggering button.
+- Align its right and left edges naturally with the button.
+- Remove unnecessary visual gaps between the button and dropdown.
+- Use matching borders and background treatment to create a connected appearance.
+- Keep a subtle shadow or elevation.
+- Ensure the dropdown appears above the Kundli without being clipped.
+- Maintain proper scrolling when the menu is taller than the available screen space.
+- Keep the Apply button accessible at the bottom.
+
+The open dropdown should visually feel like an extension of its parent button.
+
+3. Apply the Same Dropdown Design System Everywhere
+
+Standardize the appearance and behaviour of ALL dropdown controls:
+
+- Chart Style.
+- Chart Type.
+- Aspects / Drishti.
+- Any other dropdowns present in the application.
+
+Every dropdown should:
+
+- Open directly beneath its own triggering button.
+- Be visually connected to that button.
+- Have consistent borders, corner radii, shadows and spacing.
+- Use the existing dark and golden premium design language.
+- Have appropriate width based on its parent control and content.
+- Display above surrounding content using correct stacking order.
+- Close when the user clicks outside or presses Escape.
+- Remain usable on smaller mobile screens.
+
+Do not make every dropdown unnecessarily full-screen or excessively wide.
+
+4. Important Implementation Details
+
+- Use a consistent reusable dropdown component or styling system.
+- Ensure dropdown positioning is calculated relative to its trigger, not the entire page.
+- Prevent clipping caused by parent containers with overflow restrictions.
+- Maintain correct z-index.
+- Preserve existing dropdown functionality and selected values.
+- Do not alter any astronomical calculations or chart data.
+
+5. Final Audit
+
+Test every dropdown in its closed and expanded states on mobile and desktop.
+
+Verify that:
+
+1. Every dropdown opens directly from its button.
+2. No dropdown appears detached or misplaced.
+3. The Drishti dropdown remains usable with all nine planets.
+4. The two unwanted information lines are completely removed.
+5. No chart content or functionality is broken.
+
+Expected result: A consistent, premium dropdown experience throughout the application, with clean layouts and no unnecessary explanatory text.

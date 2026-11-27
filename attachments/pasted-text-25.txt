@@ -1,0 +1,36 @@
+Fix the confirmed PDF OCR failure in Gochar → Developer → PDF Library.
+
+Confirmed root cause
+
+The PDF is readable, but scanned pages contain no usable digital text. The current image extraction only supports paintImageXObject and ignores inline images, form objects, and certain JPEG bitmap formats.
+
+As a result, Tesseract receives no usable page images and zero text pages are stored.
+
+Required implementation
+
+1. Replace the limited image-extraction approach with reliable full-page PDF rendering.
+2. Render every page without usable digital text into a PNG or another format supported by Tesseract.
+3. Use a compatible PDF rendering solution that works in the existing server environment. Do not depend on the currently failing CanvasFillRule rendering path.
+4. Pass rendered page images directly to the existing local Tesseract installation.
+5. Support English, Hindi and Sanskrit OCR.
+6. Preserve page numbers and extracted text in the existing database structure.
+7. Keep native PDF text extraction as the first option. Run OCR only when necessary.
+8. Process large PDFs page by page to control memory consumption.
+9. Show processing progress and meaningful errors.
+10. Preserve existing PDF records and previously extracted content.
+
+Testing requirements
+
+Test with:
+
+- A normal digital-text PDF.
+- A scanned PDF.
+- A PDF containing embedded JPEG images.
+- A PDF containing inline images and form objects.
+- A multilingual Sanskrit/Hindi astrology PDF.
+
+Verify that Knowledge Search, Prediction Reader and Prediction Maker can access the extracted text.
+
+Important: Inspect the existing code before changing it. Fix the actual rendering-to-OCR pipeline, not just the status handling. Do not mark documents completed unless their text has actually been extracted and saved.
+
+After implementation, report the files changed, rendering method selected, and test results.

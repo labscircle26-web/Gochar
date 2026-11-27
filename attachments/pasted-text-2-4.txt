@@ -1,0 +1,104 @@
+Upcoming Celestial Events — Planet Filter Dropdown
+
+Replace the existing four filter buttons with a single dropdown control labelled Select Graha.
+
+1. Planet Dropdown
+
+The dropdown must contain all nine Grahas:
+
+1. Sun
+2. Moon
+3. Mars
+4. Mercury
+5. Jupiter
+6. Venus
+7. Saturn
+8. Rahu
+9. Ketu
+
+Default selection: Sun
+
+- Show Sun as the initially selected planet.
+- Display the selected planet's name and realistic planetary image.
+- Allow users to switch between planets.
+- Only one planet should be selected at a time.
+- Keep the dropdown visually connected to its triggering button.
+- Match the existing premium dark and gold design.
+
+2. Existing Four Time Filters
+
+Preserve the existing four time-range filters.
+
+They should remain available alongside the new Graha dropdown:
+
+- Next 24 Hours
+- Next 7 Days
+- Next 30 Days
+- Next 90 Days
+
+Make these compact and responsive so they fit properly inside the popup.
+
+The selected time range and selected Graha must work together.
+
+3. Individual Planet Movement Tracking
+
+When a user selects a Graha, show its upcoming movements and events only.
+
+For example, when Sun is selected:
+
+- Sun's upcoming sign entry.
+- Sun's Nakshatra changes.
+- Sun's Pada changes.
+- Sun's conjunctions.
+- Sun's combustion-related events involving other planets.
+- Other relevant calculated events.
+
+When Mars is selected, show corresponding Mars events instead.
+
+Apply the same logic to all nine Grahas.
+
+For Rahu and Ketu, include their sign, Nakshatra, Pada and retrograde-related movements where applicable.
+
+4. Event Filtering Logic
+
+- Show only events relevant to the selected Graha.
+- For conjunctions, include events involving the selected Graha.
+- Do not display unrelated planetary events.
+- Sort events by remaining time, nearest first.
+- Preserve exact astronomical event timestamps.
+- Update event lists immediately when the selected Graha or time range changes.
+
+5. Visual Presentation
+
+Each event should retain:
+
+- Realistic planetary image.
+- Event description.
+- Current and destination sign.
+- Nakshatra and Pada information where relevant.
+- Exact local date and time.
+- Live countdown.
+
+Use authentic astronomical photographs wherever possible rather than cartoon illustrations.
+
+6. Expected Popup Layout
+
+Upcoming Celestial Events
+
+[ Select Graha: Sun ▼ ]
+
+[ 24 Hours ] [ 7 Days ] [ 30 Days ] [ 90 Days ]
+
+---
+
+Sun's upcoming events, sorted by time remaining.
+
+7. Final Testing
+
+Test all nine Grahas, all four time ranges, conjunction filtering, event sorting and countdown updates.
+
+Ensure the dropdown and time filters fit comfortably on mobile screens without clipping.
+
+Preserve all existing astronomical calculations and event-generation logic.
+
+Important: This is a planet-specific transit tracker, not merely a visual filter. Selecting a Graha must dynamically change the actual upcoming event data.

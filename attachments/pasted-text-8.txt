@@ -1,0 +1,92 @@
+UI Refinements — Edit Time & Location and Main Gochar Screen
+
+Refer to both attached screenshots. Implement the following changes without modifying unrelated functionality.
+
+1. Remove Date/Time Adjustment Shortcut Buttons
+
+Inside the Edit Time & Location popup, completely remove all eight shortcut buttons:
+
+- -1y
+- -1mo
+- -1d
+- -1h
+- +1h
+- +1d
+- +1mo
+- +1y
+
+Keep the following fields and functionality unchanged:
+
+- Date selector.
+- Time selector.
+- Place.
+- Latitude.
+- Longitude.
+- Time zone.
+- Apply button.
+- Top-right X cancel button.
+
+After removing the eight buttons, adjust vertical spacing so the popup becomes shorter and cleaner.
+
+Do not remove or modify the actual date and time editing functionality.
+
+2. Remove Save Chart Button from Main Screen
+
+In the second screenshot, remove the existing Save Chart button completely from its current position.
+
+Do not remove the ability to save birth charts if that functionality is used elsewhere.
+
+3. Move and Resize Birth Charts Button
+
+Take the existing Birth charts button currently positioned at the top-right of the screen.
+
+- Move it into the exact position previously occupied by Save Chart.
+- Resize it to fit that position.
+- Make it compact and visually balanced.
+- Preserve its existing golden styling.
+- Preserve all existing birth chart management functionality.
+
+4. Relocate the Live Button
+
+Move the existing Live button, currently fixed near the bottom-right of the screen, into the top-right position currently occupied by the Birth charts button.
+
+Requirements:
+
+- Use the existing Live button and its existing functionality.
+- Do not create a duplicate Live button.
+- Maintain its golden styling.
+- Keep it compact and appropriately sized.
+- Preserve its Live mode toggle behaviour.
+- Remove its old bottom-right floating position after relocating it.
+
+5. Expected Main Screen Layout
+
+The top section should look like this:
+
+Header row:
+
+- Left: Gochar title.
+- Right: Live button.
+
+Second row:
+
+- Left: Chart Style dropdown.
+- Right: Chart Type dropdown.
+
+Third row:
+
+- Left: Birth Charts button (replacing Save Chart).
+- Right: Aspects / Drishti dropdown.
+
+The Kundli should remain directly underneath these controls.
+
+6. Final Verification
+
+- Test Birth Charts button and all its existing functions.
+- Test Live mode activation and deactivation.
+- Verify the Live button no longer floats at the bottom-right.
+- Verify the eight date/time shortcut buttons are gone.
+- Test the Edit Time & Location popup on mobile.
+- Check alignment, spacing and responsiveness.
+
+Important: Reuse existing buttons and handlers wherever possible. Do not duplicate functionality, remove saved-chart capabilities, or redesign the rest of the application.

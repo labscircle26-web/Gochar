@@ -1,0 +1,45 @@
+Fix: Desktop Public Access Issue — nakshatra.grok.me
+
+My astrology app is configured with Anyone with the link selected in Access settings, but desktop visitors see:
+
+"This app is private. This app created in Grok is not shared with you yet."
+
+On mobile, the public access setting appears correctly selected.
+
+Please investigate and fix the desktop-only publishing/access issue.
+
+1. Investigate
+
+- Verify the actual server-side sharing permission.
+- Check whether desktop and mobile resolve to the same app ID and published version.
+- Check whether desktop requests are receiving stale or incorrect access permissions.
+- Investigate cookies, authentication sessions, cached responses and CDN caching.
+- Check whether the public URL redirects to an incorrect or outdated publication.
+
+2. Fix
+
+- Ensure the published app's public access permission is consistently respected across desktop and mobile.
+- Ensure anyone with the link can access the published app without being individually invited.
+- Correct any incorrect permission checks or stale publication references, if identified.
+- Ensure changing access settings is properly saved and reflected on all devices.
+
+3. Testing
+
+Test:
+
+1. Desktop Chrome normal mode.
+2. Desktop Chrome Incognito without a Grok login.
+3. Desktop Firefox or another browser.
+4. Mobile browser.
+5. The same freshly copied public URL across all devices.
+
+Important restrictions
+
+- Do not change my app's source code or astrology calculations unnecessarily.
+- Do not change the access setting away from Anyone with the link.
+- Do not make the app private or restrict access to invited users.
+- Do not claim the issue is fixed without verifying public access from an unauthenticated desktop session.
+
+Expected result: nakshatra.grok.me should open directly on desktop and mobile for anyone with the link, without a Grok login or private-app warning.
+
+First identify the actual cause, then apply the appropriate publishing/access fix and report the test results.

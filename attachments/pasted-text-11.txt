@@ -1,0 +1,166 @@
+Feature Implementation: Upcoming Transits + Gochar Screen Layout Refinements
+
+Implement the Upcoming Transits feature and the following UI changes. Refer to the existing Gochar screen design and preserve its premium dark celestial theme.
+
+1. Upcoming Transits Button
+
+Add a compact golden-accented button immediately BELOW the Kundli transit chart.
+
+Label: Upcoming Transits
+
+The button should:
+
+- Display the nearest upcoming planetary or astrological event.
+- Show a live countdown, such as "Mars enters Capricorn · 18h 42m".
+- Automatically update as the event approaches.
+- Open the Upcoming Transits popup when clicked.
+
+Do not place this button above the Kundli or inside the chart.
+
+2. Realistic Planetary Images — Important
+
+Use original astronomical photographs or the closest possible realistic planetary imagery.
+
+Requirements:
+
+- Mars should look like the actual red planet.
+- Jupiter should show its real atmospheric bands.
+- Saturn should display its actual rings.
+- Venus should resemble its real cloud-covered appearance.
+- Mercury should have its realistic rocky surface.
+- Earth should use actual Earth imagery.
+- Sun should use realistic solar imagery.
+- Moon should use actual lunar surface imagery.
+- Rahu and Ketu should use tasteful celestial representations rather than pretending they are physical planets.
+
+Image quality requirements:
+
+- Prefer authentic NASA or other credible astronomical imagery where licensing permits.
+- Use realistic spherical planetary images with appropriate lighting and texture.
+- Maintain consistent image dimensions and quality.
+- Avoid cartoon planets, emojis, generic AI illustrations and flat icons.
+- Use realistic imagery in both the Upcoming Transits button and its expanded event list.
+- Optimize images for mobile performance and caching.
+
+If an authentic image is unavailable, use the most realistic available alternative.
+
+3. Upcoming Transits Popup
+
+Create a premium popup titled Upcoming Celestial Events.
+
+Display upcoming events in ascending order of remaining time, with the nearest event at the top and the farthest at the bottom.
+
+Include:
+
+- Planetary sign changes.
+- Nakshatra changes.
+- Nakshatra pada changes.
+- Retrograde beginnings.
+- Direct motion.
+- Planetary conjunctions.
+- Exact Drishti perfection.
+- Combustion beginnings and endings.
+- Solar and lunar eclipses.
+
+Each event should show:
+
+- Realistic planetary image.
+- Event name.
+- Current sign and destination sign, where applicable.
+- Exact date and local time.
+- Live countdown.
+- Relevant Nakshatra and pada information.
+
+Allow users to tap an event to see detailed astronomical information and its effects on the selected birth chart.
+
+Include filters and time ranges: 24 hours, 7 days, 30 days and 90 days.
+
+4. Header Button Changes
+
+Modify the existing top header controls.
+
+Currently, the top-right button is labelled Live.
+
+Change its label to:
+
+Now
+
+Preserve its existing functionality for returning to the current live transit time.
+
+Move the existing Edit time / place button from its current lower position to the top header area, placing it horizontally parallel to the Now button.
+
+Remove the existing Now button currently positioned beside Edit time / place.
+
+Important:
+
+- Reuse existing button handlers.
+- Do not create duplicate buttons.
+- Preserve the Edit Time & Location popup and its Apply/Cancel functionality.
+- Maintain balanced button dimensions and spacing.
+
+Expected header arrangement:
+
+[ Gochar ]       [ Edit time/place ] [ Now ]
+
+Adjust the layout intelligently to fit mobile screens without overcrowding the Gochar title.
+
+5. Small Transit Chart Section Header
+
+Add a very small, elegant section label immediately above the Kundli transit chart.
+
+Text:
+
+TRANSIT / GOCHAR
+
+Design:
+
+- Small uppercase typography.
+- Champagne-gold colour.
+- Subtle letter spacing.
+- No background box.
+- No large padding or margins.
+- Do not increase the overall vertical space of the page.
+- Keep it visually secondary to the Gochar main title.
+
+It should look like a subtle section identifier, not another large heading.
+
+6. Expected Final Screen Layout
+
+Top header:
+
+- Gochar title.
+- Edit time/place button.
+- Now button.
+
+Below header:
+
+- Chart Style and Chart Type dropdowns.
+- Birth Charts and Aspects / Drishti dropdowns.
+
+Then:
+
+- Small TRANSIT / GOCHAR label.
+- Kundli transit chart.
+- Upcoming Transits button.
+
+Then:
+
+- Existing transit date/time information.
+- Existing Lagna and other analytical sections.
+
+Remove the old Edit time/place and Now button positions after relocating them.
+
+7. Accuracy and Testing
+
+- Calculate upcoming events using the existing astronomical engine.
+- Use exact event timestamps rather than estimated dates.
+- Sort all events by actual remaining time.
+- Use the selected location and timezone for displayed local times.
+- Recalculate countdowns continuously.
+- Do not fabricate transit events.
+- Verify past events are never shown as upcoming.
+- Preserve all existing chart, Drishti, birth chart and live transit functionality.
+
+Before finishing, audit the complete mobile layout for spacing, alignment, image quality and performance.
+
+Do not redesign unrelated sections of the application.

@@ -1,0 +1,150 @@
+Grok — Project Enhancement & Implementation Task
+
+I want to enhance the existing astrology application. Implement the following improvements directly in the existing project.
+
+IMPORTANT: Before making any changes, inspect the entire existing codebase, understand its architecture, identify the relevant components, data flow, APIs, and existing calculations. Do not rebuild the application or replace working functionality. Preserve the existing UI identity and design language.
+
+1. Live Sky — Real-Time Transit Accuracy
+
+Significantly improve the accuracy and responsiveness of the Live Sky feature.
+
+- Display real-time planetary positions and transits with maximum practical astronomical accuracy.
+- Update the live transit calculations and displayed planetary positions every second.
+- Use a reliable astronomical ephemeris rather than approximate or hardcoded planetary positions.
+- Account correctly for:
+  - Date and exact time.
+  - User's geographical coordinates.
+  - Local timezone and UTC conversion.
+  - Planetary longitude and latitude.
+  - Retrograde and direct motion.
+  - Planetary speed and motion.
+- Ensure accurate calculations for all relevant celestial bodies already supported by the application.
+- Avoid accumulating timing drift. Synchronize calculations against the actual system clock.
+- Use interpolation where appropriate, without compromising astronomical accuracy.
+- Display sufficiently precise degrees, minutes, and seconds.
+- Ensure the interface updates smoothly without unnecessary full-page re-rendering or performance degradation.
+
+Important: Updating every second must not mean artificially changing planetary positions. Values must reflect actual calculated astronomical positions.
+
+2. Birth Charts — Support at Least 10 Charts
+
+Expand the Birth Chart section to support a minimum of 10 independently saved birth charts.
+
+Requirements:
+
+- Allow users to create and save at least 10 different birth charts.
+- Each chart must have its own:
+  - Name or person identifier.
+  - Date of birth.
+  - Exact birth time.
+  - Birthplace.
+  - Latitude and longitude.
+  - Timezone.
+- Allow users to edit, delete, and switch between saved charts.
+- Provide a clean chart selector.
+- Ensure selecting one chart loads its corresponding planetary positions, houses, and calculations.
+- Prevent information from one birth chart from accidentally overwriting another.
+- Persist saved charts using the application's existing storage/database architecture.
+- Maintain saved charts after refreshing or reopening the application.
+
+Do not impose an arbitrary limit below 10.
+
+3. Remove Ask AI Bar
+
+There is currently an Ask AI bar underneath:
+
+- Live Chart.
+- Birth Charts.
+
+Remove this bar completely from both sections.
+
+Requirements:
+
+- Remove the visible UI element.
+- Remove unnecessary spacing or empty containers left behind.
+- Ensure the layout adjusts naturally.
+- Do not accidentally remove or break any other AI functionality elsewhere in the application.
+
+4. Animated Backgrounds for Panchang Elements
+
+Improve the visual experience of the following Panchang elements:
+
+1. Vara
+2. Tithi
+3. Nakshatra
+4. Yoga
+5. Karana
+6. Sunrise
+
+Give each element its own subtle, beautiful animated background or visual object that represents its actual astrological or astronomical properties.
+
+Suggested visual directions:
+
+Vara
+
+- A celestial representation of the weekday's ruling planet.
+- Subtle planetary movement, glow, or orbital animation.
+
+Tithi
+
+- An animated lunar phase representation.
+- The illuminated portion of the Moon should correspond to the actual lunar phase.
+
+Nakshatra
+
+- A beautiful constellation or star-field animation.
+- Use the relevant Nakshatra's associated stars or constellation where practical.
+
+Yoga
+
+- Subtle cosmic alignment, celestial energy, or orbital geometry animation.
+- Keep the animation meaningful rather than decorative noise.
+
+Karana
+
+- An elegant celestial motion or geometric pattern representing the Karana's traditional properties.
+
+Sunrise
+
+- An animated sunrise with a gradually illuminating horizon, changing sky gradient, and rising Sun.
+- Base the displayed sunrise information on the actual calculated sunrise time and geographical location.
+
+Animation and Design Standards
+
+- Animations should feel premium, sophisticated, and smooth.
+- Use lightweight CSS, SVG, or existing animation libraries.
+- Avoid heavy video backgrounds or unnecessary large assets.
+- Keep text readable and maintain sufficient contrast.
+- Animations must work in both light and dark themes, if supported.
+- Respect reduced-motion accessibility settings.
+- Ensure animations do not interfere with scrolling, clicking, or other interactions.
+- Avoid excessive movement, flashing, or distracting effects.
+
+The six elements should have visually distinct identities, not six variations of the same animation.
+
+5. Final Quality Audit
+
+After implementation:
+
+1. Review every modified component.
+2. Check that existing Live Sky calculations still work.
+3. Verify that updates happen every second without timing drift.
+4. Test creating, saving, editing, switching, and deleting 10 different birth charts.
+5. Verify persistence after page refresh.
+6. Confirm Ask AI bars are completely removed from both specified sections.
+7. Test all six animations in available themes.
+8. Check mobile and desktop responsiveness.
+9. Check for console errors, memory leaks, unnecessary re-renders, and performance regressions.
+10. Run the project's existing tests, type checks, and production build.
+
+Development Rules
+
+- Preserve existing functionality.
+- Do not introduce duplicate calculation engines.
+- Reuse existing APIs, ephemeris libraries, and database infrastructure wherever appropriate.
+- Do not hardcode astronomical data that should be calculated dynamically.
+- Do not use simulated values to claim astronomical accuracy.
+- Avoid unnecessary dependency additions.
+- Keep changes modular and maintainable.
+
+Final requirement: Do not just describe the proposed changes. Implement them in the actual project, verify the results, and provide a concise report of what changed, what passed testing, and anything that remains incomplete.

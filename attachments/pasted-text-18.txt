@@ -1,0 +1,324 @@
+Gochar Landing Page — Careful UI Polish
+
+Use the attached screenshot as the exact visual baseline. Improve the existing Gochar landing page so it feels more professionally designed, refined and premium.
+
+This is a refinement of the existing design, NOT a redesign.
+
+The current midnight celestial background, champagne-gold accents, warm yellow controls, ivory text, serif Gochar heading and North Indian Kundli are the app's visual identity. Preserve them.
+
+1. First inspect the existing implementation
+
+Before making changes:
+
+- Find the main Gochar landing-page component.
+- Inspect its existing CSS, Tailwind classes, theme variables and responsive rules.
+- Identify how the Kundli SVG/canvas, dropdowns, particle background and timeline are rendered.
+- Reuse existing components and theme tokens wherever possible.
+- Do not introduce a second styling system or duplicate existing CSS.
+- Make small, targeted changes and inspect the result after each section.
+
+2. Header
+
+Preserve the existing Gochar heading, size and serif character.
+
+Refinements:
+
+- Improve letter spacing and alignment very slightly.
+- Keep the existing gold colour.
+- Use a subtle, restrained text glow.
+- Reduce distracting star particles immediately behind the heading.
+- Keep Edit time/place dark and Now gold.
+- Improve button borders, shadows and vertical alignment without changing their positions significantly.
+
+3. Chart controls
+
+Preserve the existing 2 × 2 layout:
+
+- Chart Style
+- Chart Type
+- Birth Charts
+- Aspects / Drishti
+
+Do not turn these into dark cards. Keep their existing recognizable warm golden appearance.
+
+Refinements:
+
+- Make the yellow/gold gradient smoother.
+- Reduce overly bright shadows.
+- Add a subtle border and inner highlight.
+- Improve label/value typography and spacing.
+- Align dropdown arrows consistently.
+- Ensure dropdown panels look connected to their trigger buttons.
+- Preserve existing selected states, dropdown behavior and functionality.
+
+4. TRANSIT / GOCHAR label
+
+Keep its present position directly above the Kundli.
+
+- Retain its champagne-gold colour.
+- Refine the character spacing.
+- Optionally add a very thin decorative line extending from it.
+- Do not increase its vertical footprint.
+
+5. Kundli chart
+
+This is the main visual focus.
+
+Preserve:
+
+- Exact chart geometry.
+- Square aspect ratio.
+- Existing North Indian diamond layout.
+- House placement and numbering.
+- Planet positions and labels.
+- Existing chart dimensions as closely as possible.
+
+Improve:
+
+- Slightly refine the outer border.
+- Improve contrast of planet abbreviations.
+- Make house numbers a little easier to read.
+- Highlight the Lagna marker ("Lg") with a restrained gold treatment.
+- Give planet labels enough spacing so they do not collide with chart lines.
+- Improve readability where multiple planets occupy the same house.
+- Keep the chart interior dark navy.
+
+Do not modify calculations or redraw the chart using a different geometry.
+
+6. Date/time and timeline — important layout requirement
+
+The selected date, month, year and time must remain above the golden slider line.
+
+Use this vertical order:
+
+1. Selected date and time, centered.
+2. "-10 YEARS" and "+10 YEARS" labels.
+3. Golden timeline line and circular slider handle.
+4. "NOW" indicator below the slider.
+
+The date/time must never appear below the line.
+
+Refinements:
+
+- Make the date/time slightly more readable.
+- Use ivory for the date and subtle champagne gold for the time.
+- Give the date display enough breathing room.
+- Make the year-range labels smaller and muted.
+- Keep the line thin and elegant.
+- Give the existing circular handle a more dimensional champagne-gold finish.
+- Keep the NOW indicator centered under the handle when the current time is selected.
+
+Do not change timeline range, drag sensitivity, timestamp mapping, planetary calculations or slider behavior.
+
+Important: Make the date/time position correct in the actual component layout. Do not use fragile absolute positioning that could overlap the chart or slider on smaller screens.
+
+7. Upcoming Transits card
+
+Preserve its existing placement and dark background with gold border.
+
+Improve:
+
+- Moon image clarity.
+- Heading and event-description hierarchy.
+- Spacing between image, text and countdown.
+- Countdown readability.
+- Border and shadow subtlety.
+
+Keep its existing event logic and click behavior. Do not add unnecessary decorative elements.
+
+8. Background particles
+
+The celestial background is important to the identity. Do not remove it or replace it.
+
+Make only a gentle refinement:
+
+- Reduce particle density by approximately 20%, where configurable.
+- Otherwise, reduce only the particle layer's opacity slightly.
+- Keep slow movement and the existing glow.
+- Avoid bright particles directly behind text and important chart labels.
+- Do not slow or disable unrelated animations.
+
+Do not apply reduced opacity to the entire page or its content.
+
+9. LIVE information
+
+Keep the existing information and LIVE functionality.
+
+Make the device/date/time text a little less prominent, while keeping LIVE legible and gold.
+
+10. Responsive behavior
+
+Test the existing design on narrow Android screens and desktop.
+
+- Preserve the 2 × 2 control grid where appropriate.
+- Keep the Kundli square and within the viewport.
+- Prevent text collisions.
+- Ensure date/time remains above the slider.
+- Keep the slider handle large enough for touch interaction.
+- Avoid horizontal scrolling.
+- Ensure dropdown menus are not clipped.
+
+11. Implementation and verification
+
+- Scope visual changes to the Gochar page.
+- Preserve existing theme compatibility.
+- Prefer existing colour variables and design tokens.
+- Do not hardcode a new colour palette.
+- Avoid unnecessary component replacements.
+- Do not change astronomical calculations, Lagna, chart structure, planetary positions, transit logic, timeline behavior or Upcoming Transit calculations.
+- Run the production build and relevant existing tests.
+- Review the final mobile screenshot against the supplied reference.
+
+---
+
+Specific CSS implementation guidance
+
+Use the following as a visual styling reference. Adapt the class names to the actual project structure. These are not instructions to create duplicate components.
+
+/* Scope all refinements to the Gochar page. */
+.gochar-page {
+  --gc-gold: var(--theme-gold, #edc451);
+  --gc-gold-soft: rgba(237, 196, 81, 0.28);
+  --gc-ivory: var(--theme-text, #eee7d8);
+  --gc-muted: #b9b3a8;
+}
+
+/* Keep the existing gold control identity. */
+.gochar-page .gochar-gold-control {
+  border: 1px solid rgba(255, 235, 171, 0.38);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition:
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+.gochar-page .gochar-gold-control:active {
+  filter: brightness(0.97);
+}
+
+/* Small section headings. */
+.gochar-page .gochar-section-label {
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gc-gold);
+}
+
+/* Kundli frame: subtle refinement, not a new card design. */
+.gochar-page .kundli-frame {
+  border: 1px solid rgba(237, 196, 81, 0.24);
+  background: linear-gradient(
+    145deg,
+    rgba(18, 24, 40, 0.88),
+    rgba(8, 13, 25, 0.96)
+  );
+}
+
+/* Selected date/time must precede the timeline track in the layout. */
+.gochar-page .gochar-date-time {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 5px;
+  margin: 0 0 18px;
+  color: var(--gc-ivory);
+  font-size: clamp(15px, 3.8vw, 17px);
+  line-height: 1.4;
+  text-align: center;
+}
+
+.gochar-page .gochar-date-time__time {
+  color: var(--gc-gold);
+}
+
+/* Timeline structure. Keep the handle's actual dynamic position
+   controlled by the existing timeline implementation. */
+.gochar-page .gochar-timeline {
+  position: relative;
+  padding-top: 2px;
+  padding-bottom: 4px;
+}
+
+.gochar-page .gochar-timeline-range {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  color: var(--gc-muted);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+
+.gochar-page .gochar-timeline-track {
+  position: relative;
+  height: 1px;
+  background: rgba(237, 196, 81, 0.48);
+  box-shadow: 0 0 5px rgba(237, 196, 81, 0.12);
+}
+
+.gochar-page .gochar-timeline-thumb {
+  /* Do not override the existing dynamic left/transform logic. */
+  box-shadow:
+    0 0 9px rgba(237, 196, 81, 0.36),
+    inset 0 1px 3px rgba(255, 255, 255, 0.65);
+}
+
+.gochar-page .gochar-timeline-now {
+  margin-top: 20px;
+  text-align: center;
+  color: var(--gc-gold);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+}
+
+/* Upcoming Transits: retain its dark-and-gold appearance. */
+.gochar-page .upcoming-transits-card {
+  border: 1px solid rgba(237, 196, 81, 0.45);
+  background: rgba(12, 17, 30, 0.94);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+  border-radius: 9px;
+}
+
+/* Apply opacity only to the decorative particle layer. */
+.gochar-page .celestial-particle-layer {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Small-screen protection. */
+@media (max-width: 480px) {
+  .gochar-page .gochar-date-time {
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+
+  .gochar-page .gochar-timeline-range {
+    margin-bottom: 19px;
+    font-size: 9px;
+  }
+
+  .gochar-page .gochar-gold-control {
+    min-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gochar-page .gochar-gold-control {
+    transition: none;
+  }
+}
+
+Important CSS integration rules:
+
+- Do not blindly paste this CSS if equivalent selectors already exist. Map the styles onto the real components.
+- If the existing timeline uses an SVG or native range input, preserve its existing positioning and interaction logic.
+- If the particle effect is canvas-based, adjust particle count or particle-layer opacity rather than applying opacity to the entire canvas containing other visual elements.
+- Do not apply the sample "background" or "border" if it overrides an existing theme variable that already provides the same styling.
+
+Final visual objective
+
+The user should immediately recognize the current screenshot. The page should simply feel more carefully finished: clearer Kundli, softer gold controls, better date/timeline hierarchy, cleaner spacing and a calmer celestial background.
+
+Make restrained improvements. Avoid dramatic changes.

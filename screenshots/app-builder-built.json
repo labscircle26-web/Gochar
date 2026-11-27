@@ -1,0 +1,40 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Gochar",
+      "hasCanvas": false,
+      "bodyTextLen": 1641,
+      "bodyTextHash": "e7e311a9766c2a52ffe0fac4e1ff044c678cccf1c04cf692f3a4926249e5e7d1",
+      "bodyTextPrefix": "Gochar BIRTH CHARTS KEEPER North South Rashi Navamsa Save chart ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Gochar",
+      "hasCanvas": false,
+      "bodyTextLen": 41,
+      "bodyTextHash": "d316df5bc193441d90bd97fc467b3e219ca76cc17763bc3bff6ab35e708948f8",
+      "bodyTextPrefix": "SIDEREAL Gochar Reading the sidereal sky…",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": true,
+  "baselineReasons": [
+    "mobile: body text collapsed (1641 -> 41 chars)"
+  ]
+}

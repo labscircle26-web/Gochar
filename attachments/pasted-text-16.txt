@@ -1,0 +1,136 @@
+New Feature: Interactive 20-Year Gochar Timeline Slider
+
+Add an interactive horizontal planetary transit timeline immediately BELOW the Live Transit Kundli chart.
+
+The timeline must allow users to explore planetary movements from 10 years in the past to 10 years in the future.
+
+1. Timeline Design
+
+Create a thin, elegant champagne-gold horizontal line stretching almost the entire width of the screen, from left edge to right edge.
+
+Design requirements:
+
+- A continuous thin golden line.
+- A circular golden slider handle positioned exactly in the middle by default.
+- The slider handle should have a premium metallic-gold appearance.
+- Add a subtle outer glow around the handle.
+- Use a smooth, refined interaction.
+- Keep the timeline compact so it does not consume excessive vertical space.
+
+The line should stretch across the available screen width with balanced side margins.
+
+2. Timeline Range
+
+The complete timeline must represent:
+
+- Leftmost position: 10 years before the current date.
+- Centre position: Current date and time.
+- Rightmost position: 10 years after the current date.
+
+The slider must start at the exact current date and time whenever the user activates the Now button.
+
+Show subtle labels:
+
+- Left: -10 Years
+- Centre: NOW
+- Right: +10 Years
+
+3. Real-Time Planetary Movement
+
+This is the most important functionality.
+
+When the user moves the circular slider handle left or right:
+
+- Calculate the corresponding date and time.
+- Update all nine planetary positions.
+- Animate planetary movement through zodiac signs.
+- Update planetary degrees.
+- Update Nakshatra and Pada.
+- Update house placements.
+- Update Drishti lines and eye counters.
+- Update relevant transit calculations.
+- Update all existing transit-dependent analytical sections.
+
+The displayed Kundli must always represent the exact date and time corresponding to the slider's current position.
+
+Do not merely change a displayed date while keeping planetary positions unchanged.
+
+4. Variable-Speed Navigation
+
+The timeline must respond naturally to how quickly and how far the user moves the slider.
+
+- Slow movement should allow precise date exploration.
+- Fast dragging should allow users to cover months and years quickly.
+- Larger movements should navigate correspondingly larger time intervals.
+- Planetary positions should update smoothly during dragging.
+- Avoid unnecessary rendering and expensive astronomical recalculations for every tiny pointer movement.
+- Use throttling or request-based calculation updates where appropriate.
+
+Do not impose a fixed playback speed on manual dragging.
+
+5. Planetary Animation
+
+As the slider moves:
+
+- Show planets changing their positions smoothly in the Kundli.
+- Show transitions between zodiac signs.
+- Update the Drishti aspect lines as planets move.
+- Preserve the existing animated Drishti energy effects.
+- Update eye counters according to the new planetary configuration.
+
+Use interpolated visual transitions between calculated positions, but always retain the correct astronomical position for the selected timestamp.
+
+6. Timeline Information
+
+Add a compact date display above or below the slider.
+
+Example:
+
+15 November 2026 · 10:30 AM
+
+The displayed date and time must update as the slider moves.
+
+Optionally show the year when the user drags across multiple years.
+
+7. Integration With Existing Controls
+
+- The Now button must immediately return the slider to the current date and time.
+- Edit Time / Place must continue functioning independently.
+- If the user changes the date through Edit Time / Place and applies it, synchronize the timeline position.
+- Existing chart style, chart type, birth chart selection and Drishti selection must remain functional.
+- Preserve the selected birth chart while navigating through time.
+
+8. Mobile Interaction
+
+- Support touch dragging.
+- Make the circular handle sufficiently large for comfortable finger interaction.
+- Prevent accidental page scrolling while dragging the handle.
+- Keep the timeline within the screen width.
+- Maintain smooth interaction on Android and desktop.
+
+9. Performance and Accuracy
+
+- Use the existing astronomical calculation engine.
+- Calculate positions for the exact selected timestamp.
+- Never approximate planetary positions by simply interpolating their longitudes.
+- Handle retrograde motion correctly.
+- Handle sign, Nakshatra and Pada boundaries accurately.
+- Avoid unnecessary recalculation of unrelated components.
+
+10. Final Visual Layout
+
+Expected arrangement:
+
+[ Existing Live Transit Kundli ]
+
+-10 YEARS ━━━━━━━━━━ ◉ ━━━━━━━━━━ +10 YEARS
+
+             NOW
+
+15 November 2026 · 10:30 AM
+
+[ Existing transit analytical sections ]
+
+The golden timeline should feel like a natural extension of the Kundli, with a sophisticated astronomical instrument aesthetic.
+
+Important: Implement this as a real 20-year interactive astronomical timeline, not just a decorative slider. Preserve all existing functionality and calculations.

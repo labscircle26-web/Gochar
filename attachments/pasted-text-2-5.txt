@@ -1,0 +1,22 @@
+Add these additional UX refinements to the existing Gochar landing page.
+
+1. Make individual planet labels in the Kundli interactive. Tapping a planet should open a compact, elegant detail panel with its exact degree, sign, Nakshatra, Pada, house placement, retrograde/combust status and Drishti information.
+
+2. Add a subtle viewing-state indicator. When the timeline moves into the past, show HISTORICAL VIEW; when it moves into the future, show FUTURE VIEW; when it returns to the present, restore LIVE.
+
+3. When a planet is selected, softly highlight its occupied house in the Kundli. Preserve the chart geometry and use restrained gold highlighting.
+
+4. Add compact retrograde and combustion indicators beside relevant planet labels. These must reflect actual calculated planetary states.
+
+5. Add an optional collapsed information strip below the Kundli showing Lagna, Moon sign, current Nakshatra and active transit.
+
+6. Improve mobile touch targets for planets and the timeline. Preserve smooth dragging and prevent accidental page scrolling during timeline interaction.
+
+IMPORTANT:
+
+- These features must use existing astronomical calculations and actual chart data.
+- Do not invent planetary states or placements.
+- Do not add clutter to the landing page.
+- Preserve the existing theme and visual identity.
+- Avoid changing existing functionality.
+- Inspect the existing implementation before making changes.

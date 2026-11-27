@@ -1,0 +1,20 @@
+UI Adjustment: Drishti Dropdown Placement
+
+Modify the existing Aspects / Drishti dropdown button.
+
+1. Reduce its width significantly. It currently stretches across the entire screen.
+2. Place it horizontally parallel to the Save Chart button, on the same row.
+3. Use a two-column responsive layout:
+   - Left: Save Chart button.
+   - Right: Aspects / Drishti dropdown.
+4. Both buttons should have balanced widths, consistent heights, and aligned vertical centres.
+5. Keep the Drishti button's existing golden styling.
+6. Ensure the dropdown menu opens correctly without being clipped by the chart or surrounding containers.
+7. On narrow mobile screens, maintain adequate spacing and prevent text or icons from overflowing.
+8. Preserve all existing planet selection, Apply, Clear All and Drishti overlay functionality.
+
+Expected layout:
+
+"[ Save Chart ]  [ Aspects / Drishti ▼ ]"
+
+Do not change anything else on the page.

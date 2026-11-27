@@ -1,0 +1,24 @@
+Upgrade the Gochar app's Developer → PDF Library upload system to support PDF files up to 30 MB per file.
+
+Requirements
+
+1. Set the maximum PDF upload size to 30 MB per file.
+2. Support uploading multiple PDFs, each independently allowed up to 30 MB.
+3. Ensure frontend and backend both enforce the 30 MB limit.
+4. Update API request limits, server upload middleware, storage configuration, and any applicable reverse-proxy limits.
+5. Use direct-to-storage or signed URL uploads where appropriate to avoid server request-size limitations.
+6. Show upload progress percentage and file size.
+7. Display clear errors if a PDF exceeds 30 MB or the upload fails.
+8. Support retrying interrupted or failed uploads.
+9. After successful upload, automatically trigger the existing PDF text extraction/OCR workflow.
+10. Preserve existing PDFs and their extracted content.
+
+Important
+
+- Do not reduce PDF quality or compress PDFs automatically.
+- Do not introduce a lower hidden limit in any backend or storage layer.
+- Ensure the 30 MB limit works in both staging and production.
+- Test uploads with PDFs of 5 MB, 15 MB, 29 MB, and files exceeding 30 MB.
+- Verify that large uploads complete successfully on mobile networks as well as desktop.
+
+Inspect the existing architecture before making changes. Implement this as an upgrade to the current PDF Library, without rebuilding or breaking existing functionality.

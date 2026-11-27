@@ -1,0 +1,54 @@
+The Developer section is still missing its actual login fields. Fix this before implementing anything else.
+
+I need a working Developer Login screen/modal. Not just a Developer button or an empty Developer page.
+
+1. Developer button
+
+When I click the Developer button in the Gochar header, it must open the Developer Login interface.
+
+2. Create these visible login fields
+
+Developer Login
+
+- Username / Email — visible text input.
+- Password — password input with show/hide toggle.
+- Remember me — checkbox.
+- Login — prominent gold button.
+- Forgot password — link, if a secure recovery mechanism is implemented.
+- Close button.
+
+Both input fields must be visibly rendered and editable.
+
+3. Login functionality
+
+- Validate that both fields are filled.
+- Authenticate against a secure server-side developer account.
+- Display a clear error for invalid credentials.
+- Show a loading state while authentication is processing.
+- On successful authentication, open the Developer Dashboard.
+- Provide a secure logout function.
+- Never store the password in localStorage or expose credentials in frontend code.
+- Do not create a hardcoded frontend password.
+
+4. Visual design
+
+- Use the existing midnight navy background.
+- Use champagne-gold borders and accents.
+- Use ivory input text.
+- Add clear labels above both fields.
+- Inputs must have visible backgrounds and borders.
+- Ensure placeholders are readable.
+- Make the login modal responsive on Android and desktop.
+
+5. Important implementation requirement
+
+Before finishing, actually open the Developer button and verify that I can see:
+
+1. Username / Email input.
+2. Password input.
+3. Remember me checkbox.
+4. Login button.
+
+Do not report completion merely because a Developer component or route exists. The visible login fields and working authentication must both be implemented and tested.
+
+Do this as the immediate priority. Do not proceed with PDF upload or Prediction Maker development until the Developer Login works.

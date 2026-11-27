@@ -1,0 +1,34 @@
+In the Upcoming Celestial Events popup, add a distinctive animated golden highlight to every event card where a planet enters a different zodiac sign.
+
+Examples:
+
+- Mars enters Leo
+- Jupiter enters Cancer
+- Saturn enters Pisces
+- Venus enters Libra
+
+Animation design
+
+- Add a subtle animated champagne-gold border around the entire event card.
+- Use a gentle golden glow that softly pulses.
+- Add a very subtle moving golden shimmer along the border.
+- Keep the animation elegant and premium, matching the existing dark celestial and gold theme.
+- Do not make the animation too bright, distracting or fast.
+
+Important conditions
+
+1. Apply this animation ONLY to planetary sign-entry events.
+2. Do not animate Nakshatra changes.
+3. Do not animate Pada changes.
+4. Do not animate conjunctions.
+5. Do not animate Drishti events.
+6. Do not animate retrograde or combustion events.
+
+Dynamic behaviour
+
+- Detect sign-entry events using the actual event type/data, not text matching alone.
+- Apply the animation automatically to every qualifying planet.
+- It must work regardless of which Graha is selected.
+- Preserve existing event calculations, sorting, countdowns and card layouts.
+
+The golden animation should immediately help users identify major zodiac sign transitions among all upcoming celestial events.

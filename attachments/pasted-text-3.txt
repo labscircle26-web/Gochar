@@ -1,0 +1,91 @@
+Drishti UI Enhancement — Apply Button, Gold Dropdown & Aspect Counters
+
+Please implement the following refinements to the Aspects / Drishti feature.
+
+1. Golden Drishti Dropdown
+
+- Change the Aspects / Drishti dropdown button to a premium golden colour.
+- Use a refined champagne-gold treatment consistent with the application's existing design.
+- Keep the text, border and dropdown icon clearly visible.
+- Maintain the golden appearance in both light and dark themes.
+
+2. Add an Apply Button
+
+Inside the expanded dropdown, add an Apply button beneath the planet selection list.
+
+Expected behaviour:
+
+1. User opens Aspects / Drishti.
+2. Selects one or multiple planets.
+3. Presses Apply.
+4. Only then should the selected planets' Drishti lines and receiving-house indicators appear.
+
+Important interaction rules:
+
+- Selecting or deselecting planets must not immediately change the chart.
+- Apply commits the current selection.
+- Until Apply is pressed, the previously applied Drishti overlay should remain unchanged.
+- Provide a Clear All option.
+- Clear All followed by Apply must remove all Drishti lines and indicators.
+- Show a small indication if the selection has unapplied changes.
+
+3. Drishti Receiving-House Eye Indicator
+
+At every house receiving one or more selected planetary Drishtis, display a small eye indicator with a numerical count.
+
+Examples:
+
+- One selected planet aspects House 7: Eye icon + 1.
+- Two selected planets aspect House 7: Eye icon + 2.
+- Three selected planets aspect House 7: Eye icon + 3.
+
+The number must represent the actual number of distinct selected planets casting valid Drishti on that particular house.
+
+4. Multiple Drishti Counting Rules
+
+This counting logic is critical.
+
+- Count only planets currently selected AND applied through the Apply button.
+- If one selected planet aspects a house, display 1.
+- If two selected planets aspect the same house, display 2.
+- If three selected planets aspect the same house, display 3.
+- Increase the count only when additional selected planets actually cast valid Drishti on that house.
+- Never increase the count merely because one planet has multiple aspect rules or multiple lines reaching the same house.
+- Count each distinct aspecting planet once per receiving house.
+- Do not count unselected planets.
+- Do not count unapplied selections.
+- Remove or update counts immediately when a new selection is applied.
+
+For example, if Jupiter and Saturn both aspect the 10th house, show Eye + 2 in the 10th house. If only Jupiter aspects the 7th house, show Eye + 1 there.
+
+5. Eye Indicator Interaction
+
+- Make the eye indicator clickable.
+- Clicking it should highlight or reveal the Drishti lines affecting that particular house.
+- If multiple planets aspect that house, allow the user to identify each contributing planet.
+- Clicking again should collapse the expanded information.
+- Keep the indicator compact so it does not obstruct planetary symbols, house numbers or chart labels.
+
+6. Synchronization
+
+The same functionality must work in:
+
+- Live Transit chart.
+- Birth Chart.
+
+Switching birth charts or updating live transit positions must recalculate the receiving-house counts correctly.
+
+7. Final Verification
+
+Test:
+
+- One planet selected and applied.
+- Multiple planets selected and applied.
+- Unapplied changes.
+- Clear All and Apply.
+- Multiple planets aspecting the same house.
+- One planet aspecting multiple houses.
+- Eye indicator expansion and collapse.
+- Live Transit and Birth Chart consistency.
+
+The final result should feel polished, intuitive and premium. Do not compromise chart readability to accommodate the new controls.
