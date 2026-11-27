@@ -892,7 +892,7 @@ function SkyScreen() {
             <h2 className="mt-1 break-words font-display text-4xl leading-none">{rashi.sanskrit}</h2>
             <p className="mt-2 break-words">
               {rashi.name}
-              <span className="tabular-nums"> · {formatDms(degInSign(sky.lagna), true)}</span>
+              <span className="tabular-nums"> · {formatDms(degInSign(displaySky.lagna), true)}</span>
             </p>
             <p className="mt-1 break-words text-sm text-muted">
               {NAKSHATRAS[nakshatraIndex(displaySky.lagna)]} · pada {padaOf(displaySky.lagna)} · lord {GRAHA_NAME[SIGN_LORD[lagnaSign]!]}
@@ -919,7 +919,7 @@ function SkyScreen() {
                 void copyText(
                   [
                     "Graha\tRashi\tDegree\tNakshatra\tPada",
-                    `Lagna\t${RASHIS[signIndex(displaySky.lagna)]?.name}\t${formatDms(degInSign(sky.lagna), true)}\t${NAKSHATRAS[nakshatraIndex(displaySky.lagna)]}\t${padaOf(displaySky.lagna)}`,
+                    `Lagna\t${RASHIS[signIndex(displaySky.lagna)]?.name}\t${formatDms(degInSign(displaySky.lagna), true)}\t${NAKSHATRAS[nakshatraIndex(displaySky.lagna)]}\t${padaOf(displaySky.lagna)}`,
                     ...displaySky.grahas.map(
                       (graha) =>
                         `${GRAHA_NAME[graha.id]}\t${RASHIS[signIndex(graha.lon)]?.name}\t${formatDms(degInSign(graha.lon), true)}\t${NAKSHATRAS[nakshatraIndex(graha.lon)]}\t${padaOf(graha.lon)}`,
@@ -946,7 +946,7 @@ function SkyScreen() {
             chart={ashtakavarga(displaySky.grahas, displaySky.lagna)}
             lagnaSign={lagnaSign}
             transits={SAPTA.flatMap((id) => {
-              const graha = sky.grahas.find((item) => item.id === id);
+              const graha = displaySky.grahas.find((item) => item.id === id);
               return graha ? [{ id, sign: signIndex(graha.lon) }] : [];
             })}
             note="These bindus belong to the chart at the time above. Move the time to read an earlier or later transit."
@@ -1090,7 +1090,7 @@ function SkyFacts({
       </button>
       {open ? (
         <div className="grid grid-cols-2 gap-x-3 gap-y-1 border border-t-0 border-line bg-card px-3 py-2 text-sm">
-          <p>Lagna {formatDms(degInSign(sky.lagna), true)}</p>
+          <p>Lagna {formatDms(degInSign(displaySky.lagna), true)}</p>
           <p>Moon {formatDms(degInSign(moon.lon), true)}</p>
           <p>
             {NAKSHATRAS[nak]} · pada {padaOf(moon.lon)}
