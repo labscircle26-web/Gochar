@@ -1104,7 +1104,7 @@ function PlanetPanel({
   nodes: NodeDrishti;
   onClose: () => void;
 }) {
-  const graha = displaySky.grahas.find((item) => item.id === id);
+  const graha = sky.grahas.find((item) => item.id === id);
   const sun = sky.grahas.find((item) => item.id === "sun");
   if (!graha) return null;
   const rashi = signIndex(graha.lon);
