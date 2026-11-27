@@ -110,8 +110,6 @@ function PlanetMarks({
   size,
   selected,
   onPlanet,
-  sign,
-  lagnaSign,
 }: {
   planets: ChartPlanet[];
   x: number;
@@ -120,14 +118,10 @@ function PlanetMarks({
   size: number;
   selected: GrahaId | null;
   onPlanet?: (id: GrahaId) => void;
-  sign: number;
-  lagnaSign: number;
 }) {
   return planets.map((planet, index) => {
     const y = top + index * step;
     const markX = x + size * 0.85;
-    const isNode = planet.id === "rahu" || planet.id === "ketu";
-    const house = ((sign - lagnaSign + 12) % 12) + 1;
     return (
       <g
         key={planet.id}
@@ -170,20 +164,6 @@ function PlanetMarks({
             C
           </text>
         ) : null}
-        {isNode ? (
-          <text
-            x={x}
-            y={y + Math.min(7, step * 0.35)}
-            textAnchor="middle"
-            dominantBaseline="hanging"
-            fontSize={Math.max(6, size * 0.46)}
-            fontWeight={700}
-            fontFamily="var(--font-sans)"
-            fill="#e7c36a"
-          >
-            H{house}
-          </text>
-        ) : null}
       </g>
     );
   });
@@ -191,6 +171,10 @@ function PlanetMarks({
 
 function rashiMark(sign: number, lagna: boolean): string {
   return `${sign + 1}${lagna ? " Lg" : ""}`;
+}
+
+function signAtHouse(lagnaSign: number, houseIndex: number): number {
+  return (lagnaSign + houseIndex) % 12;
 }
 
 function lineFill(lagnaLine: boolean): string {
@@ -616,7 +600,7 @@ export function KundliChart({
           const step = 18;
           const start = row * 100 + (100 - stack * step) / 2 + 14;
           return (
-            <g key={sign} onClick={() => onPick?.(sign)} style={{ cursor: onPick ? "pointer" : undefined }}>
+            <g key={sign} data-house={((sign - lagnaSign + 12) % 12) + 1} data-sign={sign + 1} onClick={() => onPick?.(sign)} style={{ cursor: onPick ? "pointer" : undefined }}>
               <clipPath id={`${mark}-south-${sign}`}>
                 <rect x={col * 100 + 2} y={row * 100 + 2} width="96" height="96" />
               </clipPath>
@@ -644,7 +628,7 @@ export function KundliChart({
                   </text>
                 ))}
                 {interactive ? (
-                  <PlanetMarks planets={planets} x={col * 100 + 50} top={start + step} step={step} size={size} selected={selectedPlanet} onPlanet={onPlanet} sign={sign} lagnaSign={lagnaSign} />
+                  <PlanetMarks planets={planets} x={col * 100 + 50} top={start + step} step={step} size={size} selected={selectedPlanet} onPlanet={onPlanet} />
                 ) : null}
               </g>
               <EclipseMarks dots={(eclipses ?? []).filter((dot) => dot.sign === sign)} x={col * 100 + 26} y={row * 100 + 88} />
@@ -706,7 +690,9 @@ export function KundliChart({
       />
       {NORTH.map((points, index) => {
         const scaled = points.map(([x, y]) => [x * 4, y * 4] as [number, number]);
-        const sign = (lagnaSign + index) % 12;
+        // North Indian cells are fixed houses: derive the rashi occupying
+        // each house from the current live/selected Lagna.
+        const sign = signAtHouse(lagnaSign, index);
         const planets = bySign[sign] ?? [];
         const [cx, cy] = centroid(scaled);
         const lit = selectedSign === sign || planets.some((planet) => planet.id === selectedPlanet);
@@ -720,7 +706,7 @@ export function KundliChart({
         const step = transit ? (crowded ? 15.5 : 20) : 20;
         const top = cy - ((stack - 1) * step) / 2;
         return (
-          <g key={index} onClick={() => onPick?.(sign)} style={{ cursor: onPick ? "pointer" : undefined }}>
+          <g key={index} data-house={index + 1} data-sign={sign + 1} onClick={() => onPick?.(sign)} style={{ cursor: onPick ? "pointer" : undefined }}>
             <clipPath id={`${mark}-north-${index}`}>
               <polygon points={scaled.map((point) => point.join(",")).join(" ")} />
             </clipPath>
@@ -754,7 +740,7 @@ export function KundliChart({
                   {line}
                 </text>
               ))}
-              {interactive ? <PlanetMarks planets={planets} x={cx} top={top + step} step={step} size={size} selected={selectedPlanet} onPlanet={onPlanet} sign={sign} lagnaSign={lagnaSign} /> : null}
+              {interactive ? <PlanetMarks planets={planets} x={cx} top={top + step} step={step} size={size} selected={selectedPlanet} onPlanet={onPlanet} /> : null}
             </g>
             <EclipseMarks dots={(eclipses ?? []).filter((dot) => dot.sign === sign)} x={spot.x} y={spot.y} compact={spot.compact} />
           </g>
