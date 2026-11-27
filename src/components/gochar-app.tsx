@@ -69,6 +69,7 @@ import {
 
 const PLACE_KEY = "gochar-place";
 const SETTINGS_KEY = "gochar-settings";
+const NODE_DEFAULT_MIGRATION_KEY = "gochar-node-default-mean-v1";
 
 type Settings = {
   ayanamsa: AyanamsaId;
@@ -135,6 +136,29 @@ function isSettings(value: unknown): value is Settings {
     (settings.chart === "north" || settings.chart === "south") &&
     (settings.division === "rashi" || settings.division === "navamsa")
   );
+}
+
+function initialSettings(): Settings {
+  let saved = readJson(SETTINGS_KEY, isSettings);
+  try {
+    // Earlier builds defaulted new users to True Rahu. Migrate that implicit
+    // default once so the live transit follows the standard mean-node ingress.
+    if (localStorage.getItem(NODE_DEFAULT_MIGRATION_KEY) !== "1") {
+      if (saved?.node === "true") {
+        saved = { ...saved, node: "mean" };
+        localStorage.setItem(SETTINGS_KEY, JSON.stringify(saved));
+      }
+      localStorage.setItem(NODE_DEFAULT_MIGRATION_KEY, "1");
+    }
+  } catch {
+    // Continue with the in-memory default when browser storage is unavailable.
+  }
+  return saved ?? {
+    ayanamsa: "lahiri",
+    node: "mean",
+    chart: "north",
+    division: "rashi",
+  };
 }
 
 function initialPlace(): { place: PlaceValue; guessed: boolean; saved: boolean } {
@@ -241,10 +265,10 @@ function SkyScreen() {
   const [sky, setSky] = useState<SkySnapshot | null>(() => {
     const cached = loadCachedSky();
     if (!cached) return null;
-    const saved = readJson(SETTINGS_KEY, isSettings);
+    const saved = initialSettings();
     const query = readShareQuery(window.location.search);
-    const node = query?.node ?? saved?.node ?? "true";
-    const ayanamsa = query?.ayanamsa ?? saved?.ayanamsa ?? "lahiri";
+    const node = query?.node ?? saved.node;
+    const ayanamsa = query?.ayanamsa ?? saved.ayanamsa;
     if (cached.nodeMode !== node || cached.ayanamsaId !== ayanamsa) return null;
     return cached;
   });
@@ -252,16 +276,7 @@ function SkyScreen() {
   const [skyError, setSkyError] = useState<string | null>(null);
   const [jplNode, setJplNode] = useState<LiveNodeEphemeris | null>(null);
   const [jplNodeStatus, setJplNodeStatus] = useState<"loading" | "ready" | "offline" | "not-applicable">("loading");
-  const [settings, setSettings] = useState<Settings>(() => {
-    return (
-      readJson(SETTINGS_KEY, isSettings) ?? {
-        ayanamsa: "lahiri" as const,
-        node: "true" as const,
-        chart: "north" as const,
-        division: "rashi" as const,
-      }
-    );
-  });
+  const [settings, setSettings] = useState<Settings>(() => initialSettings());
   const viewAyanamsa = shared?.ayanamsa ?? settings.ayanamsa;
   const viewNode = shared?.node ?? settings.node;
   const jplBucket = Math.floor(instant.getTime() / (5 * 60_000)) * (5 * 60_000);
