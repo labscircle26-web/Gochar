@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.WindowInsets;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,24 @@ public final class MainActivity extends Activity {
         FrameLayout root = new FrameLayout(this);
         root.setBackgroundColor(Color.rgb(9, 0, 31));
 
+        // Android 15 enforces edge-to-edge for apps targeting SDK 35.
+        // Keep the web content and loading/error overlays below system bars
+        // and clear of display cutouts while preserving the purple status area.
+        if (Build.VERSION.SDK_INT >= 35) {
+            root.setOnApplyWindowInsetsListener((view, insets) -> {
+                android.graphics.Insets safeInsets = insets.getInsets(
+                        WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout()
+                );
+                view.setPadding(
+                        safeInsets.left,
+                        safeInsets.top,
+                        safeInsets.right,
+                        safeInsets.bottom
+                );
+                return insets;
+            });
+        }
+
         webView = new WebView(this);
         webView.setBackgroundColor(Color.rgb(9, 0, 31));
         WebSettings settings = webView.getSettings();
@@ -48,7 +68,7 @@ public final class MainActivity extends Activity {
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
-        settings.setUserAgentString(settings.getUserAgentString() + " GocharAndroid/1.0");
+        settings.setUserAgentString(settings.getUserAgentString() + " GocharAndroid/1.0.1");
 
         CookieManager cookies = CookieManager.getInstance();
         cookies.setAcceptCookie(true);
