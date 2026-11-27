@@ -68,8 +68,9 @@ test("speed cache is not reused when the selected date moves backwards", () => {
 });
 
 test("mean Rahu and Ketu move from Aquarius/Leo to Capricorn/Cancer on the December 2026 ingress", () => {
-  const beforeIngress = new Date("2026-12-05T00:00:00.000Z");
-  const afterIngress = new Date("2026-12-06T00:00:00.000Z");
+  // The published Lahiri mean-node ingress is about 22:32 IST on Dec 5.
+  const beforeIngress = new Date("2026-12-05T17:00:00.000Z"); // 22:30 IST
+  const afterIngress = new Date("2026-12-05T17:05:00.000Z"); // 22:35 IST
 
   const rahuBefore = bodyLongitude("rahu", beforeIngress, "lahiri", "mean");
   const ketuBefore = bodyLongitude("ketu", beforeIngress, "lahiri", "mean");
