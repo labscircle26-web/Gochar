@@ -1,0 +1,372 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant Garamond", "Palatino Linotype", Palatino, serif;
+  --font-sans: "Source Sans 3", "Segoe UI", sans-serif;
+  --color-paper: #070910;
+  --color-paper-2: #171e30;
+  --color-card: #101624;
+  --color-ink: #efe6d6;
+  --color-muted: #a3988c;
+  --color-line: #2c3548;
+  --color-seal: #f0c14e;
+  --color-seal-ink: #1c1406;
+  --color-veil: #03040a;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  html {
+    background: var(--color-paper);
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: transparent;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-seal);
+    outline-offset: 2px;
+  }
+
+  @keyframes live-beacon {
+    0%,
+    100% {
+      box-shadow:
+        inset 0 1px 0 rgb(255 244 210 / 75%),
+        0 0 16px rgb(240 193 78 / 95%),
+        0 0 34px rgb(240 193 78 / 55%);
+      filter: brightness(1.25);
+    }
+    50% {
+      box-shadow:
+        inset 0 1px 0 rgb(255 244 210 / 25%),
+        0 0 2px rgb(240 193 78 / 20%);
+      filter: brightness(0.7);
+    }
+  }
+
+  .live-beacon {
+    animation: live-beacon 1.6s ease-out infinite;
+  }
+
+  a.bg-seal,
+  button.bg-seal {
+    box-shadow:
+      inset 0 1px 0 rgb(255 244 210 / 55%),
+      0 0 14px rgb(240 193 78 / 55%),
+      0 0 28px rgb(240 193 78 / 24%);
+  }
+
+  .text-seal {
+    text-shadow: 0 0 12px rgb(240 193 78 / 45%);
+  }
+
+  @keyframes panchang-orbit {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes panchang-drift {
+    from { transform: translateX(0); }
+    to { transform: translateX(-12px); }
+  }
+
+  @keyframes panchang-pulse {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes panchang-rise {
+    0%, 100% { transform: translateY(1px); }
+    50% { transform: translateY(-2px); }
+  }
+
+  .panchang-orbit { transform-origin: center; animation: panchang-orbit 28s linear infinite; }
+  .panchang-orbit-slow { transform-origin: center; animation: panchang-orbit 46s linear infinite reverse; }
+  .panchang-drift { animation: panchang-drift 18s linear infinite; }
+  .panchang-pulse { animation: panchang-pulse 4.5s ease-in-out infinite; }
+  .panchang-rise { animation: panchang-rise 5s ease-in-out infinite; }
+
+  @keyframes drishti-flow {
+    to { stroke-dashoffset: -48; }
+  }
+
+  .drishti-flow {
+    stroke-dasharray: 2 8;
+    animation: drishti-flow 2.6s linear infinite;
+  }
+
+  button.sign-entry {
+    position: relative;
+    isolation: isolate;
+    border: 1px solid rgb(176 132 52 / 0.55);
+    animation: sign-glow 3.6s ease-in-out infinite;
+  }
+
+  button.sign-entry::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    padding: 1.5px;
+    pointer-events: none;
+    background: linear-gradient(
+      105deg,
+      transparent 0%,
+      transparent 38%,
+      rgb(255 236 190 / 0.95) 50%,
+      transparent 62%,
+      transparent 100%
+    );
+    background-size: 220% 100%;
+    animation: sign-shimmer 3.6s linear infinite;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+
+  @keyframes sign-glow {
+    0%,
+    100% {
+      border-color: rgb(150 108 40 / 0.45);
+      box-shadow: 0 0 4px rgb(196 150 64 / 0.12);
+    }
+    50% {
+      border-color: rgb(255 226 150 / 0.95);
+      box-shadow: 0 0 12px rgb(236 196 96 / 0.42);
+    }
+  }
+
+  @keyframes sign-shimmer {
+    from { background-position: 130% 0; }
+    to { background-position: -130% 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+
+  .gochar-mark {
+    position: relative;
+    display: flex;
+    width: max-content;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.28rem;
+  }
+
+  .gochar-word {
+    font-family: var(--font-display);
+    font-size: clamp(2.35rem, 10vw, 2.85rem);
+    font-weight: 600;
+    line-height: 0.85;
+    letter-spacing: 0.055em;
+    background-image: linear-gradient(105deg, #f7f1e4 0%, #f7f1e4 36%, #fff8e6 48%, #e7c36a 54%, #f7f1e4 66%, #f3e6c4 100%);
+    background-size: 240% 100%;
+    background-position: 30% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 8px rgb(240 193 78 / 22%));
+    animation: gochar-sheen 11s ease-in-out infinite;
+  }
+
+  .gochar-rule {
+    display: flex;
+    width: 72%;
+    min-width: 4.5rem;
+    align-items: center;
+    gap: 0.35rem;
+    margin-left: 0.12rem;
+  }
+
+  .gochar-rule i {
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(90deg, transparent, rgb(240 193 78 / 85%), transparent);
+  }
+
+  .gochar-star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 999px;
+    background: #fff6d8;
+    box-shadow: 0 0 6px rgb(240 193 78 / 80%);
+    animation: panchang-pulse 5.5s ease-in-out infinite;
+  }
+
+  .gochar-star-a {
+    top: 0.05rem;
+    right: -0.15rem;
+  }
+
+  .gochar-star-b {
+    top: 1.15rem;
+    left: -0.35rem;
+    width: 2px;
+    height: 2px;
+    animation-delay: -2.4s;
+  }
+
+  @keyframes gochar-sheen {
+    0%,
+    62% {
+      background-position: 80% 0;
+    }
+    82% {
+      background-position: 0% 0;
+    }
+    100% {
+      background-position: 80% 0;
+    }
+  }
+}
+
+.gochar-page .gochar-word {
+  letter-spacing: 0.068em;
+  filter: drop-shadow(0 0 6px rgb(240 193 78 / 0.16));
+}
+
+.gochar-page .gochar-star {
+  opacity: 0.4;
+}
+
+.gochar-page .developer-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: auto;
+  min-width: max-content;
+  max-width: none;
+  margin-top: 0.35rem;
+  padding: 8px 13px;
+  overflow: visible;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border: 1px solid rgb(237 196 81 / 0.45);
+  border-radius: 0.375rem;
+  background: rgb(12 17 30 / 0.72);
+  color: #edc451;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.gochar-page .developer-button__label {
+  display: inline-block;
+  visibility: visible;
+  opacity: 1;
+  overflow: visible;
+  white-space: nowrap;
+  color: #edc451;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.gochar-page .gochar-edit {
+  border-color: rgb(237 196 81 / 0.28);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05);
+}
+
+.gochar-page .gochar-controls a.bg-seal,
+.gochar-page .gochar-gold-control > button {
+  background-image: linear-gradient(180deg, #f8dc86 0%, #e8bc4e 58%, #d7a63a 100%);
+  border: 1px solid rgb(255 235 171 / 0.4);
+  box-shadow:
+    0 2px 8px rgb(0 0 0 / 0.22),
+    inset 0 1px 0 rgb(255 255 255 / 0.28);
+}
+
+.gochar-page .gochar-controls a.bg-seal {
+  color: #1c1406;
+}
+
+.gochar-page .gochar-section-label {
+  letter-spacing: 0.28em;
+  color: var(--color-seal);
+}
+
+.gochar-page .kundli-frame {
+  border: 1px solid rgb(237 196 81 / 0.24);
+  background: linear-gradient(145deg, rgb(18 24 40 / 0.88), rgb(8 13 25 / 0.96));
+}
+
+.gochar-page .gochar-date-time {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin: 0;
+  color: var(--color-ink);
+  font-size: clamp(15px, 3.8vw, 17px);
+  line-height: 1.4;
+}
+
+.gochar-page .gochar-date-time__time {
+  color: var(--color-seal);
+}
+
+.gochar-page .gochar-timeline-thumb {
+  box-shadow:
+    0 0 9px rgb(237 196 81 / 0.36),
+    inset 0 1px 2px rgb(255 255 255 / 0.65);
+}
+
+.gochar-page .upcoming-transits-card {
+  border: 1px solid rgb(237 196 81 / 0.45);
+  background: rgb(12 17 30 / 0.94);
+  box-shadow: 0 3px 12px rgb(0 0 0 / 0.18);
+  border-radius: 9px;
+}
+
+@media (max-width: 480px) {
+  .gochar-page .gochar-date-time {
+    font-size: 15px;
+  }
+
+  .gochar-page .gochar-timeline-range {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gochar-page .gochar-gold-control > button,
+  .gochar-page .gochar-controls a.bg-seal {
+    transition: none;
+  }
+}
