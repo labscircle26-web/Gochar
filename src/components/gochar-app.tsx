@@ -53,6 +53,7 @@ import { PanchangStrip } from "@/components/panchang-strip";
 import { DrishtiMenu, useDrishti } from "@/components/drishti-menu";
 import { UpcomingTransits } from "@/components/upcoming-panel";
 import { PersonalTransitAlerts } from "@/components/personal-transit-alerts";
+import { DesktopSidebar } from "@/components/desktop-sidebar";
 import { TransitTimeline } from "@/components/transit-timeline";
 import { GoldMenu } from "@/components/gold-menu";
 import { KundliChart, type ChartPlanet } from "@/components/kundli-chart";
@@ -572,7 +573,9 @@ function SkyScreen() {
   }
 
   return (
-    <main className="gochar-page mx-auto min-h-screen w-full max-w-3xl px-4 pb-8 pt-4 sm:pt-6">
+    <>
+    <DesktopSidebar active="sky" />
+    <main className="gochar-page min-h-screen w-full px-4 pb-8 pt-4 sm:pt-6">
       <header className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex min-w-max flex-col items-start">
           <GocharMark />
@@ -603,6 +606,7 @@ function SkyScreen() {
       </header>
       {board?.notice ? <p className="mt-4 border border-line bg-card px-4 py-3 text-sm">{board.notice}</p> : null}
 
+      <div className="gochar-toolbar">
       <div className="gochar-controls mt-4 grid grid-cols-2 items-center gap-2">
         <GoldChoice
           label="Chart Style"
@@ -642,7 +646,10 @@ function SkyScreen() {
           note={settings.division === "navamsa" ? "Shown on the rashi chart. Navamsa houses are not the houses of this drishti." : null}
         />
       </div>
+      </div>
 
+      <div className="gochar-dashboard-grid">
+      <section className="gochar-dashboard-primary" id="transit-chart">
       <p className="gochar-section-label mx-auto mt-3 flex max-w-xl items-center gap-3 text-[10px] font-semibold uppercase">
         <span className="h-px min-w-0 flex-1 bg-gradient-to-r from-transparent to-[rgb(240_193_78_/_0.4)]" />
         Transit / Gochar
@@ -693,6 +700,10 @@ function SkyScreen() {
       ) : null}
       {displaySky && planetId && <PlanetPanel sky={displaySky} id={planetId} division={settings.division} lagnaSign={viewLagna ?? chart?.lagnaSign ?? lagnaSign} nodes={drishti.nodes} onClose={() => setPlanetId(null)} />}
       {displaySky && chart && <SkyFacts sky={displaySky} division={settings.division} lagnaSign={viewLagna ?? chart.lagnaSign} open={factsOpen} onToggle={() => setFactsOpen((current) => !current)} />}
+      </section>
+      <aside className="gochar-dashboard-secondary" aria-label="Transit tools">
+        <section id="transit-timeline" className="gochar-dashboard-panel">
+          <p className="gochar-desktop-kicker">Time explorer</p>
       <TransitTimeline
         instant={instant}
         now={now}
@@ -705,8 +716,16 @@ function SkyScreen() {
           setPicked(null);
         }}
       />
-      <UpcomingTransits from={horizon} now={now} timeZone={place.tz} ayanamsa={viewAyanamsa} node={viewNode} nodes={drishti.nodes} />
-      <PersonalTransitAlerts />
+        </section>
+        <section id="upcoming-transits" className="gochar-dashboard-panel">
+          <p className="gochar-desktop-kicker">Coming up</p>
+          <UpcomingTransits from={horizon} now={now} timeZone={place.tz} ayanamsa={viewAyanamsa} node={viewNode} nodes={drishti.nodes} />
+        </section>
+        <section className="gochar-dashboard-panel gochar-alerts-panel">
+          <PersonalTransitAlerts />
+        </section>
+      </aside>
+      </div>
       {eclipses.length > 0 && (
         <div className="mx-auto mt-2 flex max-w-xl flex-col items-center gap-1 text-center text-[11px] leading-snug text-muted">
           <p className="inline-flex items-center gap-2">
@@ -1000,6 +1019,7 @@ function SkyScreen() {
         </div>
       )}
     </main>
+    </>
   );
 }
 
