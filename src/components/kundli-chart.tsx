@@ -110,6 +110,8 @@ function PlanetMarks({
   size,
   selected,
   onPlanet,
+  sign,
+  lagnaSign,
 }: {
   planets: ChartPlanet[];
   x: number;
@@ -118,10 +120,14 @@ function PlanetMarks({
   size: number;
   selected: GrahaId | null;
   onPlanet?: (id: GrahaId) => void;
+  sign: number;
+  lagnaSign: number;
 }) {
   return planets.map((planet, index) => {
     const y = top + index * step;
     const markX = x + size * 0.85;
+    const isNode = planet.id === "rahu" || planet.id === "ketu";
+    const house = ((sign - lagnaSign + 12) % 12) + 1;
     return (
       <g
         key={planet.id}
@@ -162,6 +168,20 @@ function PlanetMarks({
             fill="#e07050"
           >
             C
+          </text>
+        ) : null}
+        {isNode ? (
+          <text
+            x={x}
+            y={y + Math.min(7, step * 0.35)}
+            textAnchor="middle"
+            dominantBaseline="hanging"
+            fontSize={Math.max(6, size * 0.46)}
+            fontWeight={700}
+            fontFamily="var(--font-sans)"
+            fill="#e7c36a"
+          >
+            H{house}
           </text>
         ) : null}
       </g>
@@ -624,7 +644,7 @@ export function KundliChart({
                   </text>
                 ))}
                 {interactive ? (
-                  <PlanetMarks planets={planets} x={col * 100 + 50} top={start + step} step={step} size={size} selected={selectedPlanet} onPlanet={onPlanet} />
+                  <PlanetMarks planets={planets} x={col * 100 + 50} top={start + step} step={step} size={size} selected={selectedPlanet} onPlanet={onPlanet} sign={sign} lagnaSign={lagnaSign} />
                 ) : null}
               </g>
               <EclipseMarks dots={(eclipses ?? []).filter((dot) => dot.sign === sign)} x={col * 100 + 26} y={row * 100 + 88} />
@@ -734,7 +754,7 @@ export function KundliChart({
                   {line}
                 </text>
               ))}
-              {interactive ? <PlanetMarks planets={planets} x={cx} top={top + step} step={step} size={size} selected={selectedPlanet} onPlanet={onPlanet} /> : null}
+              {interactive ? <PlanetMarks planets={planets} x={cx} top={top + step} step={step} size={size} selected={selectedPlanet} onPlanet={onPlanet} sign={sign} lagnaSign={lagnaSign} /> : null}
             </g>
             <EclipseMarks dots={(eclipses ?? []).filter((dot) => dot.sign === sign)} x={spot.x} y={spot.y} compact={spot.compact} />
           </g>
