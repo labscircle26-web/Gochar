@@ -684,7 +684,7 @@ function SkyScreen() {
           ayanamsa={viewAyanamsa}
           node={viewNode}
           navamsa={settings.division === "navamsa"}
-          lagnaSign={chart?.lagnaSign ?? lagnaSign}
+          lagnaSign={viewLagna ?? chart?.lagnaSign ?? lagnaSign}
           source={viewNode === "mean" ? "Calculated mean lunar node" : jplNodeStatus === "ready" ? "NASA/JPL Horizons true-node reference" : jplNodeStatus === "offline" ? "Astronomy Engine fallback · Horizons unavailable" : "Astronomy Engine · checking NASA/JPL Horizons"}
           updatedAt={viewNode === "true" ? jplNode?.retrievedAt ?? null : null}
         />
@@ -943,7 +943,7 @@ function SkyScreen() {
             chart={ashtakavarga(displaySky.grahas, displaySky.lagna)}
             lagnaSign={lagnaSign}
             transits={SAPTA.flatMap((id) => {
-              const graha = displaySky.grahas.find((item) => item.id === id);
+              const graha = sky.grahas.find((item) => item.id === id);
               return graha ? [{ id, sign: signIndex(graha.lon) }] : [];
             })}
             note="These bindus belong to the chart at the time above. Move the time to read an earlier or later transit."
