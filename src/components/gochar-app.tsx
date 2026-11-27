@@ -1090,7 +1090,7 @@ function SkyFacts({
       </button>
       {open ? (
         <div className="grid grid-cols-2 gap-x-3 gap-y-1 border border-t-0 border-line bg-card px-3 py-2 text-sm">
-          <p>Lagna {formatDms(degInSign(displaySky.lagna), true)}</p>
+          <p>Lagna {formatDms(degInSign(sky.lagna), true)}</p>
           <p>Moon {formatDms(degInSign(moon.lon), true)}</p>
           <p>
             {NAKSHATRAS[nak]} · pada {padaOf(moon.lon)}
