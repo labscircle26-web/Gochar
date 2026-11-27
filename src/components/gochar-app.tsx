@@ -575,13 +575,7 @@ function SkyScreen() {
       <header className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex min-w-max flex-col items-start">
           <GocharMark />
-          <Link to="/developer" className="developer-button">
-            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">
-              <circle cx="8" cy="8" r="2.2" fill="none" stroke="currentColor" strokeWidth="1.2" />
-              <path d="M8 1.5 V4 M8 12 V14.5 M1.5 8 H4 M12 8 H14.5 M3.4 3.4 L5.1 5.1 M10.9 10.9 L12.6 12.6 M12.6 3.4 L10.9 5.1 M5.1 10.9 L3.4 12.6" fill="none" stroke="currentColor" strokeWidth="1.2" />
-            </svg>
-            <span className="developer-button__label">Developer</span>
-          </Link>
+
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
           <button
@@ -967,6 +961,16 @@ function SkyScreen() {
         </a>
       </footer>
       <FeedbackBox page="gochar" />
+
+      <div className="mt-6 flex justify-end border-t border-line pt-4">
+        <Link to="/developer" className="developer-button">
+          <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">
+            <circle cx="8" cy="8" r="2.2" fill="none" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M8 1.5 V4 M8 12 V14.5 M1.5 8 H4 M12 8 H14.5 M3.4 3.4 L5.1 5.1 M10.9 10.9 L12.6 12.6 M12.6 3.4 L10.9 5.1 M5.1 10.9 L3.4 12.6" fill="none" stroke="currentColor" strokeWidth="1.2" />
+          </svg>
+          <span className="developer-button__label">Developer</span>
+        </Link>
+      </div>
 
       {chartFile && (
         <div className="fixed inset-0 z-40 flex items-end justify-center bg-veil/80 p-4 sm:items-center" role="dialog" aria-modal="true" aria-labelledby="save-chart-title">
