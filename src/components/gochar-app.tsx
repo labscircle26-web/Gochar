@@ -206,16 +206,8 @@ function EclipseSwatch({ color }: { color: string }) {
 function GocharMark() {
   return (
     <h1 className="gochar-mark">
+      <img src="/gochar-icon-192.png" alt="" aria-hidden="true" className="gochar-logo" />
       <span className="gochar-word">Gochar</span>
-      <span className="gochar-rule" aria-hidden="true">
-        <i />
-        <svg viewBox="0 0 10 10" width="8" height="8">
-          <path d="M5 0 L6.05 3.95 L10 5 L6.05 6.05 L5 10 L3.95 6.05 L0 5 L3.95 3.95 Z" fill="#f0c14e" />
-        </svg>
-        <i />
-      </span>
-      <span className="gochar-star gochar-star-a" aria-hidden="true" />
-      <span className="gochar-star gochar-star-b" aria-hidden="true" />
     </h1>
   );
 }
