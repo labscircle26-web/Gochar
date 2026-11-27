@@ -78,7 +78,7 @@ export function ayanamsaDegrees(date: Date, id: AyanamsaId): number {
   const t2 = t * t;
   if (id === "raman") return 22.37778 + 1.3825 * t + 0.00015 * t2;
   if (id === "kp") return 23.76056 + 1.39722 * t + 0.00018 * t2;
-  return 23.85306 + 1.39722 * t + 0.00018 * t2;
+  return 23.85701 + 1.39722 * t + 0.00018 * t2;
 }
 
 function tropicalPlace(body: Body, date: Date): { lon: number; lat: number } {
