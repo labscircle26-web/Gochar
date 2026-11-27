@@ -11,6 +11,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.CookieManager;
+import android.webkit.JavascriptInterface;
+import android.content.pm.PackageManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -35,6 +37,7 @@ public final class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         getWindow().setStatusBarColor(Color.rgb(25, 0, 68));
         getWindow().setNavigationBarColor(Color.rgb(9, 0, 31));
+        AlertScheduler.ensureNotificationChannel(this);
 
         FrameLayout root = new FrameLayout(this);
         root.setBackgroundColor(Color.rgb(9, 0, 31));
@@ -68,7 +71,7 @@ public final class MainActivity extends Activity {
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
-        settings.setUserAgentString(settings.getUserAgentString() + " GocharAndroid/1.0.1");
+        settings.setUserAgentString(settings.getUserAgentString() + " GocharAndroid/1.0.2");
 
         CookieManager cookies = CookieManager.getInstance();
         cookies.setAcceptCookie(true);
@@ -123,6 +126,8 @@ public final class MainActivity extends Activity {
             }
         });
 
+        webView.addJavascriptInterface(new GocharNativeBridge(), "GocharNative");
+
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -150,7 +155,63 @@ public final class MainActivity extends Activity {
         if (savedInstanceState != null) {
             webView.restoreState(savedInstanceState);
         } else {
-            webView.loadUrl(APP_URL);
+            Uri launchData = getIntent() == null ? null : getIntent().getData();
+            String launchUrl = launchData != null && "personal-transit-alerts".equals(launchData.getFragment())
+                    ? APP_URL + "#personal-transit-alerts"
+                    : APP_URL;
+            webView.loadUrl(launchUrl);
+        }
+    }
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        Uri data = intent == null ? null : intent.getData();
+        if (webView != null && data != null && "personal-transit-alerts".equals(data.getFragment())) {
+            webView.evaluateJavascript("window.location.hash='personal-transit-alerts';", null);
+        }
+    }
+
+    public final class GocharNativeBridge {
+        @JavascriptInterface
+        public boolean hasNotificationPermission() {
+            return AlertScheduler.hasPermission(MainActivity.this);
+        }
+
+        @JavascriptInterface
+        public void requestNotificationPermission() {
+            runOnUiThread(() -> {
+                if (Build.VERSION.SDK_INT < 33 || AlertScheduler.hasPermission(MainActivity.this)) {
+                    dispatchNotificationPermission(true);
+                    return;
+                }
+                requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"}, 903);
+            });
+        }
+
+        @JavascriptInterface
+        public void scheduleNotifications(String eventsJson) {
+            AlertScheduler.schedule(MainActivity.this, eventsJson);
+        }
+    }
+
+    private void dispatchNotificationPermission(boolean granted) {
+        if (webView == null) return;
+        webView.post(() -> webView.evaluateJavascript(
+                "window.dispatchEvent(new CustomEvent('gochar-notification-permission',{detail:{granted:"
+                        + (granted ? "true" : "false") + "}}));",
+                null
+        ));
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 903) {
+            boolean granted = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
+            dispatchNotificationPermission(granted);
         }
     }
 

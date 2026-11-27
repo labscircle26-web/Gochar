@@ -52,6 +52,7 @@ import { ashtakavarga, SAPTA } from "@/lib/astro/ashtakavarga";
 import { PanchangStrip } from "@/components/panchang-strip";
 import { DrishtiMenu, useDrishti } from "@/components/drishti-menu";
 import { UpcomingTransits } from "@/components/upcoming-panel";
+import { PersonalTransitAlerts } from "@/components/personal-transit-alerts";
 import { TransitTimeline } from "@/components/transit-timeline";
 import { GoldMenu } from "@/components/gold-menu";
 import { KundliChart, type ChartPlanet } from "@/components/kundli-chart";
@@ -705,6 +706,7 @@ function SkyScreen() {
         }}
       />
       <UpcomingTransits from={horizon} now={now} timeZone={place.tz} ayanamsa={viewAyanamsa} node={viewNode} nodes={drishti.nodes} />
+      <PersonalTransitAlerts />
       {eclipses.length > 0 && (
         <div className="mx-auto mt-2 flex max-w-xl flex-col items-center gap-1 text-center text-[11px] leading-snug text-muted">
           <p className="inline-flex items-center gap-2">
